@@ -58,21 +58,130 @@
     <style>
         body {
             font-family: 'Playfair Display', serif;
+            overflow-x: hidden;
         }
         
-        /* Animated gradient background */
+        /* Enhanced animated gradient background */
         .gradient-bg {
-            background: linear-gradient(-45deg, #FEFCF8, #F8F6F0, #F0F4F0, #E8F0E8, #FEFCF8);
-            background-size: 400% 400%;
-            animation: gradient 15s ease infinite;
+            background: linear-gradient(-45deg, #FEFCF8, #F8F6F0, #F0F4F0, #E8F0E8, #FEFCF8, #F5F2E8);
+            background-size: 600% 600%;
+            animation: gradient 20s ease infinite;
         }
         
-        /* Subtle wave animation overlay */
+        /* Dynamic wave animation overlay */
         .wave-overlay {
-            background: radial-gradient(circle at 20% 50%, rgba(107, 142, 107, 0.03) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(156, 175, 156, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 80%, rgba(107, 142, 107, 0.02) 0%, transparent 50%);
-            animation: wave 12s ease-in-out infinite;
+            background: radial-gradient(circle at 20% 50%, rgba(107, 142, 107, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(156, 175, 156, 0.06) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(107, 142, 107, 0.04) 0%, transparent 50%),
+                        radial-gradient(circle at 60% 40%, rgba(156, 175, 156, 0.05) 0%, transparent 50%);
+            animation: wave 18s ease-in-out infinite;
+        }
+        
+        /* Floating particles container */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(107, 142, 107, 0.1);
+            border-radius: 50%;
+            animation: float-particle 25s infinite linear;
+        }
+        
+        .particle:nth-child(1) { width: 8px; height: 8px; left: 10%; animation-delay: 0s; animation-duration: 30s; }
+        .particle:nth-child(2) { width: 12px; height: 12px; left: 20%; animation-delay: 5s; animation-duration: 25s; }
+        .particle:nth-child(3) { width: 6px; height: 6px; left: 30%; animation-delay: 10s; animation-duration: 35s; }
+        .particle:nth-child(4) { width: 10px; height: 10px; left: 40%; animation-delay: 15s; animation-duration: 28s; }
+        .particle:nth-child(5) { width: 14px; height: 14px; left: 50%; animation-delay: 20s; animation-duration: 32s; }
+        .particle:nth-child(6) { width: 7px; height: 7px; left: 60%; animation-delay: 25s; animation-duration: 27s; }
+        .particle:nth-child(7) { width: 11px; height: 11px; left: 70%; animation-delay: 30s; animation-duration: 29s; }
+        .particle:nth-child(8) { width: 9px; height: 9px; left: 80%; animation-delay: 35s; animation-duration: 26s; }
+        .particle:nth-child(9) { width: 13px; height: 13px; left: 90%; animation-delay: 40s; animation-duration: 31s; }
+        
+        /* Animated geometric shapes */
+        .geometric-shapes {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .shape {
+            position: absolute;
+            background: rgba(156, 175, 156, 0.08);
+            animation: geometric-float 40s infinite ease-in-out;
+        }
+        
+        .shape:nth-child(1) {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            left: 15%;
+            border-radius: 20px;
+            animation-delay: 0s;
+            animation-duration: 45s;
+        }
+        
+        .shape:nth-child(2) {
+            width: 40px;
+            height: 40px;
+            top: 60%;
+            right: 20%;
+            border-radius: 50%;
+            animation-delay: 10s;
+            animation-duration: 35s;
+        }
+        
+        .shape:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            top: 40%;
+            right: 10%;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            animation-delay: 20s;
+            animation-duration: 50s;
+        }
+        
+        .shape:nth-child(4) {
+            width: 50px;
+            height: 50px;
+            top: 80%;
+            left: 25%;
+            border-radius: 10px;
+            animation-delay: 30s;
+            animation-duration: 40s;
+        }
+        
+        .shape:nth-child(5) {
+            width: 70px;
+            height: 70px;
+            top: 10%;
+            right: 30%;
+            border-radius: 50%;
+            animation-delay: 40s;
+            animation-duration: 38s;
+        }
+        
+        /* Mouse follower effect */
+        .mouse-follower {
+            position: fixed;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(107, 142, 107, 0.03) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 1;
+            transition: all 0.1s ease-out;
         }
         
         /* Custom form styling */
@@ -100,11 +209,69 @@
         .success-message {
             animation: slideUp 0.5s ease-out;
         }
+        
+        /* Enhanced animations */
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) translateX(0px) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) translateX(50px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        @keyframes geometric-float {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+            }
+            25% {
+                transform: translate(30px, -20px) rotate(90deg) scale(1.1);
+            }
+            50% {
+                transform: translate(-20px, 30px) rotate(180deg) scale(0.9);
+            }
+            75% {
+                transform: translate(20px, 20px) rotate(270deg) scale(1.05);
+            }
+        }
     </style>
 </head>
 <body class="gradient-bg wave-overlay min-h-screen flex flex-col">
+    <!-- Floating particles -->
+    <div class="particles-container">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
+    
+    <!-- Animated geometric shapes -->
+    <div class="geometric-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+    
+    <!-- Mouse follower effect -->
+    <div class="mouse-follower" id="mouseFollower"></div>
+    
     <!-- Main content container -->
-    <div class="flex-1 flex items-center justify-center px-4 py-8">
+    <div class="flex-1 flex items-center justify-center px-4 py-8 relative z-10">
         <div class="text-center max-w-2xl mx-auto">
             <!-- Main heading with fade-in animation -->
             <h1 class="text-5xl md:text-7xl font-semibold text-soft-green mb-6 tracking-wide animate-fade-in hover:animate-float">
@@ -222,6 +389,17 @@
             }, 3000);
         });
         
+        // Mouse follower effect
+        const mouseFollower = document.getElementById('mouseFollower');
+        
+        document.addEventListener('mousemove', function(e) {
+            const x = e.clientX;
+            const y = e.clientY;
+            
+            mouseFollower.style.left = x - 100 + 'px';
+            mouseFollower.style.top = y - 100 + 'px';
+        });
+        
         // Add subtle hover effects to interactive elements
         document.querySelectorAll('a, button').forEach(element => {
             element.addEventListener('mouseenter', function() {
@@ -230,6 +408,23 @@
             
             element.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Add parallax effect to particles on scroll (if any)
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const particles = document.querySelectorAll('.particle');
+            const shapes = document.querySelectorAll('.shape');
+            
+            particles.forEach((particle, index) => {
+                const speed = 0.5 + (index * 0.1);
+                particle.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+            
+            shapes.forEach((shape, index) => {
+                const speed = 0.3 + (index * 0.05);
+                shape.style.transform = `translateY(${scrolled * speed}px)`;
             });
         });
     </script>
