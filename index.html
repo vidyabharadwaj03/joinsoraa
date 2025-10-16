@@ -20,54 +20,64 @@
                         'sage': '#87A96B',
                         'sage-light': '#A8C090',
                         'sage-pale': '#E8F0E8',
-                        'soft-pink': '#F4A6A6',
+                        'blush': '#F4A6A6',
+                        'blush-light': '#F7C5C5',
                         'lavender': '#C8A2C8',
+                        'lavender-light': '#D4B5D4',
                         'mint': '#A8E6CF',
+                        'mint-light': '#C5F0E0',
                         'cream': '#FFF8F0',
                         'cream-warm': '#FEFCF8',
-                        'text-primary': '#2D3748',
-                        'text-secondary': '#4A5568',
-                        'text-muted': '#718096',
+                        'text-primary': '#1A202C',
+                        'text-secondary': '#2D3748',
+                        'text-muted': '#4A5568',
                     },
                     animation: {
-                        'gradient': 'gradient 20s ease infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'fade-in': 'fadeIn 1.2s ease-out',
-                        'slide-up': 'slideUp 0.8s ease-out',
-                        'pulse-gentle': 'pulseGentle 4s ease-in-out infinite',
-                        'dot-float': 'dotFloat 15s linear infinite',
-                        'scale-hover': 'scaleHover 0.3s ease-out',
+                        'gradient': 'gradient 25s ease infinite',
+                        'float': 'float 8s ease-in-out infinite',
+                        'fade-up': 'fadeUp 1.5s ease-out',
+                        'slide-in': 'slideIn 1s ease-out',
+                        'glow': 'glow 3s ease-in-out infinite',
+                        'orb-float': 'orbFloat 20s linear infinite',
+                        'pulse-soft': 'pulseSoft 4s ease-in-out infinite',
+                        'bounce-gentle': 'bounceGentle 2s ease-in-out infinite',
                     },
                     keyframes: {
                         gradient: {
                             '0%, 100%': { 'background-position': '0% 50%' },
-                            '50%': { 'background-position': '100% 50%' }
+                            '25%': { 'background-position': '100% 50%' },
+                            '50%': { 'background-position': '50% 100%' },
+                            '75%': { 'background-position': '0% 100%' }
                         },
                         float: {
                             '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-15px)' }
+                            '50%': { transform: 'translateY(-20px)' }
                         },
-                        fadeIn: {
-                            '0%': { opacity: '0' },
-                            '100%': { opacity: '1' }
-                        },
-                        slideUp: {
-                            '0%': { opacity: '0', transform: 'translateY(40px)' },
+                        fadeUp: {
+                            '0%': { opacity: '0', transform: 'translateY(60px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' }
                         },
-                        pulseGentle: {
-                            '0%, 100%': { opacity: '0.4' },
-                            '50%': { opacity: '0.8' }
+                        slideIn: {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
                         },
-                        dotFloat: {
+                        glow: {
+                            '0%, 100%': { opacity: '0.3', transform: 'scale(1)' },
+                            '50%': { opacity: '0.7', transform: 'scale(1.1)' }
+                        },
+                        orbFloat: {
                             '0%': { transform: 'translateY(100vh) translateX(0px)', opacity: '0' },
                             '10%': { opacity: '0.6' },
                             '90%': { opacity: '0.6' },
-                            '100%': { transform: 'translateY(-100px) translateX(30px)', opacity: '0' }
+                            '100%': { transform: 'translateY(-100px) translateX(50px)', opacity: '0' }
                         },
-                        scaleHover: {
-                            '0%': { transform: 'scale(1)' },
-                            '100%': { transform: 'scale(1.05)' }
+                        pulseSoft: {
+                            '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
+                            '50%': { opacity: '0.8', transform: 'scale(1.05)' }
+                        },
+                        bounceGentle: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
                         }
                     }
                 }
@@ -84,16 +94,17 @@
         .gradient-bg {
             background: linear-gradient(-45deg, 
                 #FFF8F0 0%, 
-                #FEFCF8 25%, 
-                #E8F0E8 50%, 
-                #F4A6A6 75%, 
-                #C8A2C8 100%);
+                #FEFCF8 20%, 
+                #E8F0E8 40%, 
+                #F4A6A6 60%, 
+                #C8A2C8 80%, 
+                #A8E6CF 100%);
             background-size: 400% 400%;
-            animation: gradient 20s ease infinite;
+            animation: gradient 25s ease infinite;
         }
         
-        /* Floating dots container */
-        .dots-container {
+        /* Floating orbs container */
+        .orbs-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -104,26 +115,34 @@
             overflow: hidden;
         }
         
-        .floating-dot {
+        .floating-orb {
             position: absolute;
             border-radius: 50%;
-            opacity: 0.4;
-            animation: dotFloat 15s linear infinite;
+            filter: blur(1px);
+            animation: orbFloat 20s linear infinite;
         }
         
-        /* Individual dot styling with random sizes and positions */
-        .dot-1 { width: 8px; height: 8px; background: #87A96B; left: 10%; animation-delay: 0s; animation-duration: 18s; }
-        .dot-2 { width: 12px; height: 12px; background: #F4A6A6; left: 25%; animation-delay: 3s; animation-duration: 22s; }
-        .dot-3 { width: 6px; height: 6px; background: #C8A2C8; left: 40%; animation-delay: 6s; animation-duration: 16s; }
-        .dot-4 { width: 10px; height: 10px; background: #A8E6CF; left: 55%; animation-delay: 9s; animation-duration: 20s; }
-        .dot-5 { width: 14px; height: 14px; background: #A8C090; left: 70%; animation-delay: 12s; animation-duration: 24s; }
-        .dot-6 { width: 7px; height: 7px; background: #F4A6A6; left: 85%; animation-delay: 15s; animation-duration: 19s; }
-        .dot-7 { width: 11px; height: 11px; background: #C8A2C8; left: 15%; animation-delay: 18s; animation-duration: 21s; }
-        .dot-8 { width: 9px; height: 9px; background: #A8E6CF; left: 35%; animation-delay: 21s; animation-duration: 17s; }
-        .dot-9 { width: 13px; height: 13px; background: #87A96B; left: 60%; animation-delay: 24s; animation-duration: 23s; }
-        .dot-10 { width: 5px; height: 5px; background: #F4A6A6; left: 80%; animation-delay: 27s; animation-duration: 15s; }
+        /* Glassmorphism layer */
+        .glass-layer {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
         
-        /* Form styling */
+        /* Enhanced button styling */
+        .btn-waitlist {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, #87A96B, #A8C090);
+            box-shadow: 0 10px 30px rgba(135, 169, 107, 0.2);
+        }
+        
+        .btn-waitlist:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(135, 169, 107, 0.4);
+            background: linear-gradient(135deg, #A8C090, #87A96B);
+        }
+        
+        /* Form input styling */
         .form-input {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid transparent;
@@ -136,94 +155,74 @@
             transform: translateY(-2px);
         }
         
-        .btn-primary {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            background: linear-gradient(135deg, #87A96B, #A8C090);
-            backdrop-filter: blur(10px);
+        /* Gradient text effect */
+        .gradient-text {
+            background: linear-gradient(135deg, #87A96B, #C8A2C8, #F4A6A6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
         
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(135, 169, 107, 0.3);
-            background: linear-gradient(135deg, #A8C090, #87A96B);
+        /* Floating confirmation message */
+        .floating-message {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 1000;
+            animation: bounceGentle 0.8s ease-out;
         }
         
-        .btn-primary:active {
-            transform: translateY(-1px);
-        }
-        
-        /* Interactive elements */
-        .interactive-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .interactive-hover:hover {
-            transform: translateY(-2px);
-            filter: brightness(1.1);
-        }
-        
-        /* Success message animation */
-        .success-message {
-            animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        /* Glassmorphism effect */
-        .glass {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        /* Subtle gradient overlay */
+        .gradient-overlay {
+            background: linear-gradient(to bottom, transparent 0%, rgba(255, 248, 240, 0.8) 100%);
         }
     </style>
 </head>
 <body class="gradient-bg min-h-screen flex flex-col">
-    <!-- Floating dots background -->
-    <div class="dots-container">
-        <div class="floating-dot dot-1"></div>
-        <div class="floating-dot dot-2"></div>
-        <div class="floating-dot dot-3"></div>
-        <div class="floating-dot dot-4"></div>
-        <div class="floating-dot dot-5"></div>
-        <div class="floating-dot dot-6"></div>
-        <div class="floating-dot dot-7"></div>
-        <div class="floating-dot dot-8"></div>
-        <div class="floating-dot dot-9"></div>
-        <div class="floating-dot dot-10"></div>
+    <!-- Floating orbs background -->
+    <div class="orbs-container" id="orbsContainer">
+        <!-- Orbs will be generated dynamically by JavaScript -->
     </div>
+    
+    <!-- Gradient overlay at bottom -->
+    <div class="fixed bottom-0 left-0 right-0 h-32 gradient-overlay pointer-events-none z-2"></div>
     
     <!-- Main content container -->
     <div class="flex-1 flex items-center justify-center px-6 py-12 relative z-10">
-        <div class="text-center max-w-3xl mx-auto">
-            <!-- Main heading with enhanced typography -->
-            <h1 class="text-6xl md:text-8xl font-serif font-semibold text-text-primary mb-8 tracking-tight animate-fade-in hover:animate-float interactive-hover">
-                COMING SOON
-            </h1>
-            
-            <!-- Subheading with modern sans-serif -->
-            <h2 class="text-2xl md:text-4xl font-sans font-medium text-sage mb-6 tracking-wide animate-slide-up interactive-hover" style="animation-delay: 0.2s;">
-                STAY TUNED
-            </h2>
-            
-            <!-- Enhanced tagline -->
-            <p class="text-xl md:text-2xl text-text-secondary mb-10 leading-relaxed max-w-2xl mx-auto font-sans animate-slide-up" style="animation-delay: 0.4s;">
-                The AI Matchmaker connecting micro-influencers and creators with local brands through intelligent, authentic partnerships.
-            </p>
-            
-            <!-- Mission statement with improved contrast -->
-            <div class="mb-14 space-y-4 text-text-muted animate-slide-up" style="animation-delay: 0.6s;">
-                <p class="text-lg md:text-xl italic font-sans">
-                    "Empower creators to build careers, and empower small brands to grow communities"
+        <div class="text-center max-w-4xl mx-auto">
+            <!-- Glassmorphism layer behind content -->
+            <div class="glass-layer rounded-3xl p-12 md:p-16 mb-8">
+                <!-- Main headline with gradient text -->
+                <h1 class="text-7xl md:text-9xl font-serif font-bold gradient-text mb-8 tracking-tight animate-fade-up hover:animate-float">
+                    COMING SOON
+                </h1>
+                
+                <!-- Subheading -->
+                <h2 class="text-3xl md:text-5xl font-sans font-medium text-sage mb-6 tracking-wide animate-fade-up" style="animation-delay: 0.2s;">
+                    STAY TUNED
+                </h2>
+                
+                <!-- Tagline -->
+                <p class="text-xl md:text-2xl text-text-secondary mb-10 leading-relaxed max-w-3xl mx-auto font-sans animate-fade-up" style="animation-delay: 0.4s;">
+                    The AI Matchmaker connecting micro-influencers and creators with local brands through intelligent, authentic partnerships.
                 </p>
-                <p class="text-base md:text-lg font-sans">
-                    — through intelligent, human-centered connections
-                </p>
-            </div>
-            
-            <!-- Enhanced email waitlist form -->
-            <div class="mb-16 animate-slide-up" style="animation-delay: 0.8s;">
-                <div class="max-w-lg mx-auto">
-                    <form id="waitlistForm" class="space-y-6">
-                        <div class="space-y-3">
-                            <label for="email" class="block text-lg font-sans font-medium text-text-primary">
+                
+                <!-- Mission statement -->
+                <div class="mb-12 space-y-4 text-text-muted animate-fade-up" style="animation-delay: 0.6s;">
+                    <p class="text-lg md:text-xl italic font-sans">
+                        "Empower creators to build careers, and empower small brands to grow communities"
+                    </p>
+                    <p class="text-base md:text-lg font-sans">
+                        — through intelligent, human-centered connections
+                    </p>
+                </div>
+                
+                <!-- Email waitlist form -->
+                <div class="animate-fade-up" style="animation-delay: 0.8s;">
+                    <form id="waitlistForm" class="space-y-6 max-w-lg mx-auto">
+                        <div class="space-y-4">
+                            <label for="email" class="block text-xl font-sans font-medium text-text-primary">
                                 Join the waitlist
                             </label>
                             <input 
@@ -232,28 +231,21 @@
                                 name="email" 
                                 required
                                 placeholder="Enter your email address"
-                                class="form-input w-full px-6 py-4 rounded-2xl bg-white/60 text-text-primary placeholder-text-muted focus:outline-none focus:bg-white/80 text-lg font-sans"
+                                class="form-input w-full px-6 py-4 rounded-2xl bg-white/70 text-text-primary placeholder-text-muted focus:outline-none focus:bg-white/90 text-lg font-sans"
                             >
                         </div>
                         <button 
                             type="submit"
-                            class="btn-primary w-full px-8 py-4 rounded-2xl text-white font-sans font-semibold text-lg hover:bg-opacity-90 focus:outline-none focus:ring-4 focus:ring-sage/20 shadow-lg"
+                            class="btn-waitlist w-full px-8 py-4 rounded-2xl text-white font-sans font-semibold text-lg hover:bg-opacity-90 focus:outline-none focus:ring-4 focus:ring-sage/20"
                         >
                             Get Early Access
                         </button>
                     </form>
-                    
-                    <!-- Enhanced success message -->
-                    <div id="successMessage" class="hidden success-message mt-6 p-6 glass rounded-2xl border border-white/20">
-                        <p class="text-lg font-sans font-medium text-text-primary">
-                            🎉 You're in! We'll keep you posted 💌
-                        </p>
-                    </div>
                 </div>
             </div>
             
-            <!-- Domain with enhanced styling -->
-            <div class="border-t border-sage/30 pt-8 animate-slide-up" style="animation-delay: 1s;">
+            <!-- Domain -->
+            <div class="border-t border-sage/30 pt-8 animate-fade-up" style="animation-delay: 1s;">
                 <p class="text-lg md:text-xl text-sage font-sans font-medium tracking-wide">
                     joinsoraa.com
                 </p>
@@ -261,32 +253,106 @@
         </div>
     </div>
     
-    <!-- Enhanced footer -->
+    <!-- Footer -->
     <footer class="py-8 px-6 border-t border-sage/20 relative z-10">
         <div class="text-center text-base text-text-muted space-y-3 font-sans">
             <p class="font-medium">© 2025 Soraa. All rights reserved.</p>
             <p>
-                <a href="mailto:joinsoraa@gmail.com" class="text-sage hover:text-sage-light transition-colors duration-300 interactive-hover font-medium">
+                <a href="mailto:joinsoraa@gmail.com" class="text-sage hover:text-sage-light transition-colors duration-300 font-medium">
                     joinsoraa@gmail.com
                 </a>
             </p>
         </div>
     </footer>
 
+    <!-- Floating confirmation message (hidden by default) -->
+    <div id="floatingMessage" class="hidden floating-message">
+        <div class="glass-layer rounded-2xl px-8 py-6 text-center">
+            <p class="text-2xl font-sans font-semibold text-text-primary">
+                ✨ You're on the list!
+            </p>
+        </div>
+    </div>
+
     <script>
-        // Enhanced email form handling with smooth animations
+        // Floating orbs system
+        class FloatingOrbs {
+            constructor() {
+                this.orbsContainer = document.getElementById('orbsContainer');
+                this.orbs = [];
+                this.maxOrbs = 25; // Performance optimization
+                this.colors = ['#87A96B', '#F4A6A6', '#C8A2C8', '#A8E6CF', '#A8C090'];
+                this.init();
+            }
+            
+            init() {
+                // Create initial orbs
+                for (let i = 0; i < this.maxOrbs; i++) {
+                    this.createOrb();
+                }
+                
+                // Add mouse parallax effect
+                this.addParallaxEffect();
+            }
+            
+            createOrb() {
+                const orb = document.createElement('div');
+                orb.className = 'floating-orb';
+                
+                // Random properties
+                const size = Math.random() * 20 + 8; // 8-28px
+                const color = this.colors[Math.floor(Math.random() * this.colors.length)];
+                const left = Math.random() * 100;
+                const duration = Math.random() * 15 + 15; // 15-30s
+                const delay = Math.random() * 20;
+                
+                orb.style.width = size + 'px';
+                orb.style.height = size + 'px';
+                orb.style.background = `radial-gradient(circle, ${color} 0%, ${color}40 100%)`;
+                orb.style.left = left + '%';
+                orb.style.animationDuration = duration + 's';
+                orb.style.animationDelay = delay + 's';
+                orb.style.filter = `blur(${Math.random() * 2 + 1}px)`;
+                
+                this.orbsContainer.appendChild(orb);
+                this.orbs.push(orb);
+                
+                // Remove orb after animation completes
+                setTimeout(() => {
+                    orb.remove();
+                    this.orbs = this.orbs.filter(o => o !== orb);
+                }, (duration + delay) * 1000);
+            }
+            
+            addParallaxEffect() {
+                document.addEventListener('mousemove', (e) => {
+                    const x = e.clientX / window.innerWidth;
+                    const y = e.clientY / window.innerHeight;
+                    
+                    this.orbs.forEach((orb, index) => {
+                        const speed = (index + 1) * 0.3;
+                        const xOffset = (x - 0.5) * speed;
+                        const yOffset = (y - 0.5) * speed;
+                        
+                        orb.style.transform += ` translate(${xOffset}px, ${yOffset}px)`;
+                    });
+                });
+            }
+        }
+        
+        // Email form handling
         document.getElementById('waitlistForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const email = document.getElementById('email').value;
             const form = document.getElementById('waitlistForm');
-            const successMessage = document.getElementById('successMessage');
+            const floatingMessage = document.getElementById('floatingMessage');
             const submitButton = form.querySelector('button[type="submit"]');
             
             // Enhanced email validation
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             if (!email || !emailRegex.test(email)) {
-                // Add shake animation for invalid input
+                // Shake animation for invalid input
                 const input = document.getElementById('email');
                 input.style.animation = 'shake 0.5s ease-in-out';
                 setTimeout(() => {
@@ -296,90 +362,41 @@
             }
             
             // Show loading state
+            const originalText = submitButton.textContent;
             submitButton.textContent = 'Joining...';
             submitButton.disabled = true;
             
             // Simulate API call (replace with actual endpoint)
             console.log('Email submitted:', email);
             
-            // Simulate network delay for realistic feel
+            // Simulate network delay
             setTimeout(() => {
-                // Hide form with fade out
+                // Hide form
                 form.style.transition = 'all 0.5s ease-out';
                 form.style.opacity = '0';
                 form.style.transform = 'translateY(20px)';
                 
-                // Show success message after form fades
+                // Show floating message
                 setTimeout(() => {
                     form.style.display = 'none';
-                    successMessage.classList.remove('hidden');
+                    floatingMessage.classList.remove('hidden');
                     
-                    // Add confetti effect (simple version)
-                    createConfetti();
-                    
+                    // Hide message after 3 seconds
+                    setTimeout(() => {
+                        floatingMessage.classList.add('hidden');
+                        form.style.display = 'block';
+                        form.style.opacity = '1';
+                        form.style.transform = 'translateY(0)';
+                        submitButton.textContent = originalText;
+                        submitButton.disabled = false;
+                        document.getElementById('email').value = '';
+                    }, 3000);
                 }, 500);
-                
             }, 1000);
         });
         
-        // Simple confetti effect
-        function createConfetti() {
-            const colors = ['#87A96B', '#F4A6A6', '#C8A2C8', '#A8E6CF', '#A8C090'];
-            
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                confetti.style.position = 'fixed';
-                confetti.style.width = '6px';
-                confetti.style.height = '6px';
-                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-                confetti.style.left = Math.random() * window.innerWidth + 'px';
-                confetti.style.top = '-10px';
-                confetti.style.zIndex = '9999';
-                confetti.style.borderRadius = '50%';
-                confetti.style.pointerEvents = 'none';
-                
-                document.body.appendChild(confetti);
-                
-                // Animate confetti falling
-                const animation = confetti.animate([
-                    { transform: 'translateY(0px) rotate(0deg)', opacity: 1 },
-                    { transform: `translateY(${window.innerHeight + 50}px) rotate(360deg)`, opacity: 0 }
-                ], {
-                    duration: 3000 + Math.random() * 2000,
-                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
-                });
-                
-                animation.onfinish = () => {
-                    confetti.remove();
-                };
-            }
-        }
-        
-        // Enhanced interactive hover effects
-        document.querySelectorAll('.interactive-hover').forEach(element => {
-            element.addEventListener('mouseenter', function() {
-                this.style.filter = 'brightness(1.1) saturate(1.1)';
-            });
-            
-            element.addEventListener('mouseleave', function() {
-                this.style.filter = 'brightness(1) saturate(1)';
-            });
-        });
-        
-        // Add subtle parallax effect to dots on mouse move
-        document.addEventListener('mousemove', function(e) {
-            const dots = document.querySelectorAll('.floating-dot');
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-            
-            dots.forEach((dot, index) => {
-                const speed = (index + 1) * 0.5;
-                const xOffset = (x - 0.5) * speed;
-                const yOffset = (y - 0.5) * speed;
-                
-                dot.style.transform += ` translate(${xOffset}px, ${yOffset}px)`;
-            });
-        });
+        // Initialize floating orbs
+        const orbs = new FloatingOrbs();
         
         // Add shake animation keyframes
         const style = document.createElement('style');
@@ -391,6 +408,21 @@
             }
         `;
         document.head.appendChild(style);
+        
+        // Performance optimization: Limit orbs based on screen size
+        function optimizeOrbs() {
+            const screenWidth = window.innerWidth;
+            const isMobile = screenWidth < 768;
+            
+            if (isMobile && orbs.maxOrbs > 15) {
+                orbs.maxOrbs = 15;
+            } else if (!isMobile && orbs.maxOrbs < 25) {
+                orbs.maxOrbs = 25;
+            }
+        }
+        
+        window.addEventListener('resize', optimizeOrbs);
+        optimizeOrbs();
     </script>
 </body>
 </html>
