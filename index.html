@@ -17,67 +17,43 @@
                         'sans': ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        'sage': '#87A96B',
-                        'sage-light': '#A8C090',
-                        'sage-pale': '#E8F0E8',
-                        'blush': '#F4A6A6',
-                        'blush-light': '#F7C5C5',
-                        'lavender': '#C8A2C8',
-                        'lavender-light': '#D4B5D4',
-                        'mint': '#A8E6CF',
-                        'mint-light': '#C5F0E0',
-                        'cream': '#FFF8F0',
-                        'cream-warm': '#FEFCF8',
-                        'text-primary': '#1A202C',
-                        'text-secondary': '#2D3748',
-                        'text-muted': '#4A5568',
+                        'cream': '#FEFCF8',
+                        'soft-green': '#6B8E6B',
+                        'sage': '#9CAF9C',
+                        'sage-light': '#E8F0E8',
                     },
                     animation: {
-                        'gradient': 'gradient 25s ease infinite',
-                        'float': 'float 8s ease-in-out infinite',
-                        'fade-up': 'fadeUp 1.5s ease-out',
-                        'slide-in': 'slideIn 1s ease-out',
-                        'glow': 'glow 3s ease-in-out infinite',
-                        'orb-float': 'orbFloat 20s linear infinite',
-                        'pulse-soft': 'pulseSoft 4s ease-in-out infinite',
-                        'bounce-gentle': 'bounceGentle 2s ease-in-out infinite',
+                        'gradient': 'gradient 15s ease infinite',
+                        'wave': 'wave 12s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                        'drift': 'drift 20s linear infinite',
                     },
                     keyframes: {
                         gradient: {
                             '0%, 100%': { 'background-position': '0% 50%' },
-                            '25%': { 'background-position': '100% 50%' },
-                            '50%': { 'background-position': '50% 100%' },
-                            '75%': { 'background-position': '0% 100%' }
+                            '50%': { 'background-position': '100% 50%' }
                         },
-                        float: {
+                        wave: {
                             '0%, 100%': { transform: 'translateY(0px)' },
                             '50%': { transform: 'translateY(-20px)' }
                         },
-                        fadeUp: {
-                            '0%': { opacity: '0', transform: 'translateY(60px)' },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' }
                         },
-                        slideIn: {
-                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
-                            '100%': { opacity: '1', transform: 'translateX(0)' }
-                        },
-                        glow: {
-                            '0%, 100%': { opacity: '0.3', transform: 'scale(1)' },
-                            '50%': { opacity: '0.7', transform: 'scale(1.1)' }
-                        },
-                        orbFloat: {
-                            '0%': { transform: 'translateY(100vh) translateX(0px)', opacity: '0' },
-                            '10%': { opacity: '0.6' },
-                            '90%': { opacity: '0.6' },
-                            '100%': { transform: 'translateY(-100px) translateX(50px)', opacity: '0' }
-                        },
-                        pulseSoft: {
-                            '0%, 100%': { opacity: '0.4', transform: 'scale(1)' },
-                            '50%': { opacity: '0.8', transform: 'scale(1.05)' }
-                        },
-                        bounceGentle: {
+                        float: {
                             '0%, 100%': { transform: 'translateY(0px)' },
                             '50%': { transform: 'translateY(-10px)' }
+                        },
+                        drift: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(100%)' }
                         }
                     }
                 }
@@ -90,21 +66,23 @@
             overflow-x: hidden;
         }
         
-        /* Dynamic pastel gradient background */
+        /* Animated gradient background */
         .gradient-bg {
-            background: linear-gradient(-45deg, 
-                #FFF8F0 0%, 
-                #FEFCF8 20%, 
-                #E8F0E8 40%, 
-                #F4A6A6 60%, 
-                #C8A2C8 80%, 
-                #A8E6CF 100%);
+            background: linear-gradient(-45deg, #FEFCF8, #F8F6F0, #F0F4F0, #E8F0E8, #FEFCF8);
             background-size: 400% 400%;
-            animation: gradient 25s ease infinite;
+            animation: gradient 15s ease infinite;
         }
         
-        /* Floating orbs container */
-        .orbs-container {
+        /* Subtle wave animation overlay */
+        .wave-overlay {
+            background: radial-gradient(circle at 20% 50%, rgba(107, 142, 107, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(156, 175, 156, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(107, 142, 107, 0.02) 0%, transparent 50%);
+            animation: wave 12s ease-in-out infinite;
+        }
+        
+        /* Moving background elements */
+        .moving-bg {
             position: fixed;
             top: 0;
             left: 0;
@@ -115,114 +93,115 @@
             overflow: hidden;
         }
         
-        .floating-orb {
+        .drift-element {
             position: absolute;
+            background: rgba(107, 142, 107, 0.02);
             border-radius: 50%;
-            filter: blur(1px);
-            animation: orbFloat 20s linear infinite;
+            animation: drift 20s linear infinite;
         }
         
-        /* Glassmorphism layer */
-        .glass-layer {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+        .drift-element:nth-child(1) {
+            width: 60px;
+            height: 60px;
+            top: 20%;
+            animation-delay: 0s;
+            animation-duration: 25s;
         }
         
-        /* Enhanced button styling */
-        .btn-waitlist {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            background: linear-gradient(135deg, #87A96B, #A8C090);
-            box-shadow: 0 10px 30px rgba(135, 169, 107, 0.2);
+        .drift-element:nth-child(2) {
+            width: 40px;
+            height: 40px;
+            top: 60%;
+            animation-delay: 5s;
+            animation-duration: 30s;
         }
         
-        .btn-waitlist:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(135, 169, 107, 0.4);
-            background: linear-gradient(135deg, #A8C090, #87A96B);
+        .drift-element:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            top: 40%;
+            animation-delay: 10s;
+            animation-duration: 35s;
         }
         
-        /* Form input styling */
+        .drift-element:nth-child(4) {
+            width: 50px;
+            height: 50px;
+            top: 80%;
+            animation-delay: 15s;
+            animation-duration: 28s;
+        }
+        
+        /* Form styling */
         .form-input {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             border: 2px solid transparent;
-            backdrop-filter: blur(10px);
         }
         
         .form-input:focus {
-            border-color: #87A96B;
-            box-shadow: 0 0 0 4px rgba(135, 169, 107, 0.1);
+            border-color: #6B8E6B;
+            box-shadow: 0 0 0 3px rgba(107, 142, 107, 0.1);
+        }
+        
+        .btn-primary {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #6B8E6B, #9CAF9C);
+        }
+        
+        .btn-primary:hover {
             transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(107, 142, 107, 0.2);
         }
         
-        /* Gradient text effect */
-        .gradient-text {
-            background: linear-gradient(135deg, #87A96B, #C8A2C8, #F4A6A6);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        /* Floating confirmation message */
-        .floating-message {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 1000;
-            animation: bounceGentle 0.8s ease-out;
-        }
-        
-        /* Subtle gradient overlay */
-        .gradient-overlay {
-            background: linear-gradient(to bottom, transparent 0%, rgba(255, 248, 240, 0.8) 100%);
+        /* Success message animation */
+        .success-message {
+            animation: slideUp 0.5s ease-out;
         }
     </style>
 </head>
-<body class="gradient-bg min-h-screen flex flex-col">
-    <!-- Floating orbs background -->
-    <div class="orbs-container" id="orbsContainer">
-        <!-- Orbs will be generated dynamically by JavaScript -->
+<body class="gradient-bg wave-overlay min-h-screen flex flex-col">
+    <!-- Moving background elements -->
+    <div class="moving-bg">
+        <div class="drift-element"></div>
+        <div class="drift-element"></div>
+        <div class="drift-element"></div>
+        <div class="drift-element"></div>
     </div>
     
-    <!-- Gradient overlay at bottom -->
-    <div class="fixed bottom-0 left-0 right-0 h-32 gradient-overlay pointer-events-none z-2"></div>
-    
     <!-- Main content container -->
-    <div class="flex-1 flex items-center justify-center px-6 py-12 relative z-10">
-        <div class="text-center max-w-4xl mx-auto">
-            <!-- Glassmorphism layer behind content -->
-            <div class="glass-layer rounded-3xl p-12 md:p-16 mb-8">
-                <!-- Main headline with gradient text -->
-                <h1 class="text-7xl md:text-9xl font-serif font-bold gradient-text mb-8 tracking-tight animate-fade-up hover:animate-float">
-                    COMING SOON
-                </h1>
-                
-                <!-- Subheading -->
-                <h2 class="text-3xl md:text-5xl font-sans font-medium text-sage mb-6 tracking-wide animate-fade-up" style="animation-delay: 0.2s;">
-                    STAY TUNED
-                </h2>
-                
-                <!-- Tagline -->
-                <p class="text-xl md:text-2xl text-text-secondary mb-10 leading-relaxed max-w-3xl mx-auto font-sans animate-fade-up" style="animation-delay: 0.4s;">
-                    The AI Matchmaker connecting micro-influencers and creators with local brands through intelligent, authentic partnerships.
+    <div class="flex-1 flex items-center justify-center px-4 py-8 relative z-10">
+        <div class="text-center max-w-2xl mx-auto">
+            <!-- Main heading with fade-in animation -->
+            <h1 class="text-5xl md:text-7xl font-serif font-semibold text-soft-green mb-6 tracking-wide animate-fade-in hover:animate-float">
+                COMING SOON
+            </h1>
+            
+            <!-- Subheading with slide-up animation -->
+            <h2 class="text-2xl md:text-3xl font-sans font-medium text-sage mb-8 tracking-wide animate-slide-up" style="animation-delay: 0.2s;">
+                STAY TUNED
+            </h2>
+            
+            <!-- Tagline with slide-up animation -->
+            <p class="text-lg md:text-xl text-soft-green/80 mb-8 leading-relaxed max-w-lg mx-auto animate-slide-up" style="animation-delay: 0.4s;">
+                The AI Matchmaker connecting micro-influencers and creators with local brands through intelligent, authentic partnerships.
+            </p>
+            
+            <!-- Mission statement with slide-up animation -->
+            <div class="mb-12 space-y-4 text-soft-green/70 animate-slide-up" style="animation-delay: 0.6s;">
+                <p class="text-base md:text-lg italic font-sans">
+                    "Empower creators to build careers, and empower small brands to grow communities"
                 </p>
-                
-                <!-- Mission statement -->
-                <div class="mb-12 space-y-4 text-text-muted animate-fade-up" style="animation-delay: 0.6s;">
-                    <p class="text-lg md:text-xl italic font-sans">
-                        "Empower creators to build careers, and empower small brands to grow communities"
-                    </p>
-                    <p class="text-base md:text-lg font-sans">
-                        — through intelligent, human-centered connections
-                    </p>
-                </div>
-                
-                <!-- Email waitlist form -->
-                <div class="animate-fade-up" style="animation-delay: 0.8s;">
-                    <form id="waitlistForm" class="space-y-6 max-w-lg mx-auto">
-                        <div class="space-y-4">
-                            <label for="email" class="block text-xl font-sans font-medium text-text-primary">
+                <p class="text-sm md:text-base font-sans">
+                    — through intelligent, human-centered connections
+                </p>
+            </div>
+            
+            <!-- Email waitlist form -->
+            <div class="mb-12 animate-slide-up" style="animation-delay: 0.8s;">
+                <div class="max-w-md mx-auto">
+                    <form id="waitlistForm" class="space-y-4">
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-soft-green mb-2 font-sans">
                                 Join the waitlist
                             </label>
                             <input 
@@ -231,22 +210,27 @@
                                 name="email" 
                                 required
                                 placeholder="Enter your email address"
-                                class="form-input w-full px-6 py-4 rounded-2xl bg-white/70 text-text-primary placeholder-text-muted focus:outline-none focus:bg-white/90 text-lg font-sans"
+                                class="form-input w-full px-4 py-3 rounded-lg bg-white/50 backdrop-blur-sm text-soft-green placeholder-sage/60 focus:outline-none focus:bg-white/70 font-sans"
                             >
                         </div>
                         <button 
                             type="submit"
-                            class="btn-waitlist w-full px-8 py-4 rounded-2xl text-white font-sans font-semibold text-lg hover:bg-opacity-90 focus:outline-none focus:ring-4 focus:ring-sage/20"
+                            class="btn-primary w-full px-6 py-3 rounded-lg text-white font-medium hover:bg-opacity-90 focus:outline-none focus:ring-4 focus:ring-soft-green/20 font-sans"
                         >
                             Get Early Access
                         </button>
                     </form>
+                    
+                    <!-- Success message (hidden by default) -->
+                    <div id="successMessage" class="hidden success-message mt-4 p-4 bg-sage-light/50 rounded-lg border border-sage/20">
+                        <p class="text-soft-green font-medium font-sans">🎉 Thanks for joining! We'll be in touch soon.</p>
+                    </div>
                 </div>
             </div>
             
             <!-- Domain -->
-            <div class="border-t border-sage/30 pt-8 animate-fade-up" style="animation-delay: 1s;">
-                <p class="text-lg md:text-xl text-sage font-sans font-medium tracking-wide">
+            <div class="border-t border-sage/30 pt-8 animate-slide-up" style="animation-delay: 1s;">
+                <p class="text-sm md:text-base text-sage font-medium tracking-wider font-sans">
                     joinsoraa.com
                 </p>
             </div>
@@ -254,175 +238,98 @@
     </div>
     
     <!-- Footer -->
-    <footer class="py-8 px-6 border-t border-sage/20 relative z-10">
-        <div class="text-center text-base text-text-muted space-y-3 font-sans">
-            <p class="font-medium">© 2025 Soraa. All rights reserved.</p>
+    <footer class="py-6 px-4 border-t border-sage/20 relative z-10">
+        <div class="text-center text-sm text-sage/80 space-y-2 font-sans">
+            <p>© 2025 Soraa. All rights reserved.</p>
             <p>
-                <a href="mailto:joinsoraa@gmail.com" class="text-sage hover:text-sage-light transition-colors duration-300 font-medium">
+                <a href="mailto:joinsoraa@gmail.com" class="hover:text-soft-green transition-colors duration-200 font-sans">
                     joinsoraa@gmail.com
                 </a>
             </p>
         </div>
     </footer>
 
-    <!-- Floating confirmation message (hidden by default) -->
-    <div id="floatingMessage" class="hidden floating-message">
-        <div class="glass-layer rounded-2xl px-8 py-6 text-center">
-            <p class="text-2xl font-sans font-semibold text-text-primary">
-                ✨ You're on the list!
-            </p>
-        </div>
-    </div>
-
     <script>
-        // Floating orbs system
-        class FloatingOrbs {
-            constructor() {
-                this.orbsContainer = document.getElementById('orbsContainer');
-                this.orbs = [];
-                this.maxOrbs = 25; // Performance optimization
-                this.colors = ['#87A96B', '#F4A6A6', '#C8A2C8', '#A8E6CF', '#A8C090'];
-                this.init();
-            }
-            
-            init() {
-                // Create initial orbs
-                for (let i = 0; i < this.maxOrbs; i++) {
-                    this.createOrb();
-                }
-                
-                // Add mouse parallax effect
-                this.addParallaxEffect();
-            }
-            
-            createOrb() {
-                const orb = document.createElement('div');
-                orb.className = 'floating-orb';
-                
-                // Random properties
-                const size = Math.random() * 20 + 8; // 8-28px
-                const color = this.colors[Math.floor(Math.random() * this.colors.length)];
-                const left = Math.random() * 100;
-                const duration = Math.random() * 15 + 15; // 15-30s
-                const delay = Math.random() * 20;
-                
-                orb.style.width = size + 'px';
-                orb.style.height = size + 'px';
-                orb.style.background = `radial-gradient(circle, ${color} 0%, ${color}40 100%)`;
-                orb.style.left = left + '%';
-                orb.style.animationDuration = duration + 's';
-                orb.style.animationDelay = delay + 's';
-                orb.style.filter = `blur(${Math.random() * 2 + 1}px)`;
-                
-                this.orbsContainer.appendChild(orb);
-                this.orbs.push(orb);
-                
-                // Remove orb after animation completes
-                setTimeout(() => {
-                    orb.remove();
-                    this.orbs = this.orbs.filter(o => o !== orb);
-                }, (duration + delay) * 1000);
-            }
-            
-            addParallaxEffect() {
-                document.addEventListener('mousemove', (e) => {
-                    const x = e.clientX / window.innerWidth;
-                    const y = e.clientY / window.innerHeight;
-                    
-                    this.orbs.forEach((orb, index) => {
-                        const speed = (index + 1) * 0.3;
-                        const xOffset = (x - 0.5) * speed;
-                        const yOffset = (y - 0.5) * speed;
-                        
-                        orb.style.transform += ` translate(${xOffset}px, ${yOffset}px)`;
-                    });
-                });
-            }
-        }
-        
-        // Email form handling
+        // Email form handling with Gmail integration
         document.getElementById('waitlistForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const email = document.getElementById('email').value;
             const form = document.getElementById('waitlistForm');
-            const floatingMessage = document.getElementById('floatingMessage');
+            const successMessage = document.getElementById('successMessage');
             const submitButton = form.querySelector('button[type="submit"]');
             
-            // Enhanced email validation
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!email || !emailRegex.test(email)) {
-                // Shake animation for invalid input
-                const input = document.getElementById('email');
-                input.style.animation = 'shake 0.5s ease-in-out';
-                setTimeout(() => {
-                    input.style.animation = '';
-                }, 500);
+            // Basic email validation
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address.');
                 return;
             }
             
             // Show loading state
-            const originalText = submitButton.textContent;
             submitButton.textContent = 'Joining...';
             submitButton.disabled = true;
             
-            // Simulate API call (replace with actual endpoint)
+            // Send email using EmailJS
             console.log('Email submitted:', email);
+            sendEmailToGmail(email);
             
-            // Simulate network delay
+            // Simulate API delay
             setTimeout(() => {
-                // Hide form
-                form.style.transition = 'all 0.5s ease-out';
-                form.style.opacity = '0';
-                form.style.transform = 'translateY(20px)';
+                // Hide form and show success message
+                form.style.display = 'none';
+                successMessage.classList.remove('hidden');
                 
-                // Show floating message
+                // Optional: Reset form after 3 seconds for demo purposes
                 setTimeout(() => {
-                    form.style.display = 'none';
-                    floatingMessage.classList.remove('hidden');
-                    
-                    // Hide message after 3 seconds
-                    setTimeout(() => {
-                        floatingMessage.classList.add('hidden');
-                        form.style.display = 'block';
-                        form.style.opacity = '1';
-                        form.style.transform = 'translateY(0)';
-                        submitButton.textContent = originalText;
-                        submitButton.disabled = false;
-                        document.getElementById('email').value = '';
-                    }, 3000);
-                }, 500);
+                    form.style.display = 'block';
+                    successMessage.classList.add('hidden');
+                    document.getElementById('email').value = '';
+                    submitButton.textContent = 'Get Early Access';
+                    submitButton.disabled = false;
+                }, 3000);
             }, 1000);
         });
         
-        // Initialize floating orbs
-        const orbs = new FloatingOrbs();
-        
-        // Add shake animation keyframes
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes shake {
-                0%, 100% { transform: translateX(0); }
-                25% { transform: translateX(-5px); }
-                75% { transform: translateX(5px); }
-            }
-        `;
-        document.head.appendChild(style);
-        
-        // Performance optimization: Limit orbs based on screen size
-        function optimizeOrbs() {
-            const screenWidth = window.innerWidth;
-            const isMobile = screenWidth < 768;
+        // Add subtle hover effects to interactive elements
+        document.querySelectorAll('a, button').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-1px)';
+            });
             
-            if (isMobile && orbs.maxOrbs > 15) {
-                orbs.maxOrbs = 15;
-            } else if (!isMobile && orbs.maxOrbs < 25) {
-                orbs.maxOrbs = 25;
-            }
-        }
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+    
+    <!-- EmailJS Integration -->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            // Initialize EmailJS with your public key
+            emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+        })();
         
-        window.addEventListener('resize', optimizeOrbs);
-        optimizeOrbs();
+        function sendEmailToGmail(email) {
+            // EmailJS template configuration
+            const templateParams = {
+                to_email: "joinsoraa@gmail.com",
+                from_email: email,
+                subject: "New Soraa Waitlist Signup",
+                message: `New waitlist signup from: ${email}\n\nTimestamp: ${new Date().toLocaleString()}\n\nUser wants early access to Soraa - the AI Matchmaker for creators and brands.`
+            };
+            
+            // Send email using EmailJS
+            emailjs.send("service_joinsoraa", "template_waitlist", templateParams)
+                .then(function(response) {
+                    console.log('Email sent successfully!', response.status, response.text);
+                }, function(error) {
+                    console.log('Failed to send email:', error);
+                    // Fallback: open mailto link
+                    const mailtoLink = `mailto:joinsoraa@gmail.com?subject=New Waitlist Signup&body=New email signup: ${email}`;
+                    window.open(mailtoLink);
+                });
+        }
     </script>
 </body>
 </html>
