@@ -5,50 +5,69 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soraa - Coming Soon</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/framer-motion@10/dist/framer-motion.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
                         'serif': ['Playfair Display', 'serif'],
+                        'sans': ['Inter', 'sans-serif'],
                     },
                     colors: {
-                        'cream': '#FEFCF8',
-                        'soft-green': '#6B8E6B',
-                        'sage': '#9CAF9C',
-                        'sage-light': '#E8F0E8',
+                        'sage': '#87A96B',
+                        'sage-light': '#A8C090',
+                        'sage-pale': '#E8F0E8',
+                        'soft-pink': '#F4A6A6',
+                        'lavender': '#C8A2C8',
+                        'mint': '#A8E6CF',
+                        'cream': '#FFF8F0',
+                        'cream-warm': '#FEFCF8',
+                        'text-primary': '#2D3748',
+                        'text-secondary': '#4A5568',
+                        'text-muted': '#718096',
                     },
                     animation: {
-                        'gradient': 'gradient 15s ease infinite',
-                        'wave': 'wave 12s ease-in-out infinite',
-                        'fade-in': 'fadeIn 1s ease-out',
-                        'slide-up': 'slideUp 0.8s ease-out',
+                        'gradient': 'gradient 20s ease infinite',
                         'float': 'float 6s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1.2s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'pulse-gentle': 'pulseGentle 4s ease-in-out infinite',
+                        'dot-float': 'dotFloat 15s linear infinite',
+                        'scale-hover': 'scaleHover 0.3s ease-out',
                     },
                     keyframes: {
                         gradient: {
                             '0%, 100%': { 'background-position': '0% 50%' },
                             '50%': { 'background-position': '100% 50%' }
                         },
-                        wave: {
+                        float: {
                             '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-20px)' }
+                            '50%': { transform: 'translateY(-15px)' }
                         },
                         fadeIn: {
                             '0%': { opacity: '0' },
                             '100%': { opacity: '1' }
                         },
                         slideUp: {
-                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '0%': { opacity: '0', transform: 'translateY(40px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' }
                         },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-10px)' }
+                        pulseGentle: {
+                            '0%, 100%': { opacity: '0.4' },
+                            '50%': { opacity: '0.8' }
+                        },
+                        dotFloat: {
+                            '0%': { transform: 'translateY(100vh) translateX(0px)', opacity: '0' },
+                            '10%': { opacity: '0.6' },
+                            '90%': { opacity: '0.6' },
+                            '100%': { transform: 'translateY(-100px) translateX(30px)', opacity: '0' }
+                        },
+                        scaleHover: {
+                            '0%': { transform: 'scale(1)' },
+                            '100%': { transform: 'scale(1.05)' }
                         }
                     }
                 }
@@ -57,28 +76,24 @@
     </script>
     <style>
         body {
-            font-family: 'Playfair Display', serif;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
         }
         
-        /* Enhanced animated gradient background */
+        /* Dynamic pastel gradient background */
         .gradient-bg {
-            background: linear-gradient(-45deg, #FEFCF8, #F8F6F0, #F0F4F0, #E8F0E8, #FEFCF8, #F5F2E8);
-            background-size: 600% 600%;
+            background: linear-gradient(-45deg, 
+                #FFF8F0 0%, 
+                #FEFCF8 25%, 
+                #E8F0E8 50%, 
+                #F4A6A6 75%, 
+                #C8A2C8 100%);
+            background-size: 400% 400%;
             animation: gradient 20s ease infinite;
         }
         
-        /* Dynamic wave animation overlay */
-        .wave-overlay {
-            background: radial-gradient(circle at 20% 50%, rgba(107, 142, 107, 0.08) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(156, 175, 156, 0.06) 0%, transparent 50%),
-                        radial-gradient(circle at 40% 80%, rgba(107, 142, 107, 0.04) 0%, transparent 50%),
-                        radial-gradient(circle at 60% 40%, rgba(156, 175, 156, 0.05) 0%, transparent 50%);
-            animation: wave 18s ease-in-out infinite;
-        }
-        
-        /* Floating particles container */
-        .particles-container {
+        /* Floating dots container */
+        .dots-container {
             position: fixed;
             top: 0;
             left: 0;
@@ -86,224 +101,129 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
+            overflow: hidden;
         }
         
-        .particle {
+        .floating-dot {
             position: absolute;
-            background: rgba(107, 142, 107, 0.1);
             border-radius: 50%;
-            animation: float-particle 25s infinite linear;
+            opacity: 0.4;
+            animation: dotFloat 15s linear infinite;
         }
         
-        .particle:nth-child(1) { width: 8px; height: 8px; left: 10%; animation-delay: 0s; animation-duration: 30s; }
-        .particle:nth-child(2) { width: 12px; height: 12px; left: 20%; animation-delay: 5s; animation-duration: 25s; }
-        .particle:nth-child(3) { width: 6px; height: 6px; left: 30%; animation-delay: 10s; animation-duration: 35s; }
-        .particle:nth-child(4) { width: 10px; height: 10px; left: 40%; animation-delay: 15s; animation-duration: 28s; }
-        .particle:nth-child(5) { width: 14px; height: 14px; left: 50%; animation-delay: 20s; animation-duration: 32s; }
-        .particle:nth-child(6) { width: 7px; height: 7px; left: 60%; animation-delay: 25s; animation-duration: 27s; }
-        .particle:nth-child(7) { width: 11px; height: 11px; left: 70%; animation-delay: 30s; animation-duration: 29s; }
-        .particle:nth-child(8) { width: 9px; height: 9px; left: 80%; animation-delay: 35s; animation-duration: 26s; }
-        .particle:nth-child(9) { width: 13px; height: 13px; left: 90%; animation-delay: 40s; animation-duration: 31s; }
+        /* Individual dot styling with random sizes and positions */
+        .dot-1 { width: 8px; height: 8px; background: #87A96B; left: 10%; animation-delay: 0s; animation-duration: 18s; }
+        .dot-2 { width: 12px; height: 12px; background: #F4A6A6; left: 25%; animation-delay: 3s; animation-duration: 22s; }
+        .dot-3 { width: 6px; height: 6px; background: #C8A2C8; left: 40%; animation-delay: 6s; animation-duration: 16s; }
+        .dot-4 { width: 10px; height: 10px; background: #A8E6CF; left: 55%; animation-delay: 9s; animation-duration: 20s; }
+        .dot-5 { width: 14px; height: 14px; background: #A8C090; left: 70%; animation-delay: 12s; animation-duration: 24s; }
+        .dot-6 { width: 7px; height: 7px; background: #F4A6A6; left: 85%; animation-delay: 15s; animation-duration: 19s; }
+        .dot-7 { width: 11px; height: 11px; background: #C8A2C8; left: 15%; animation-delay: 18s; animation-duration: 21s; }
+        .dot-8 { width: 9px; height: 9px; background: #A8E6CF; left: 35%; animation-delay: 21s; animation-duration: 17s; }
+        .dot-9 { width: 13px; height: 13px; background: #87A96B; left: 60%; animation-delay: 24s; animation-duration: 23s; }
+        .dot-10 { width: 5px; height: 5px; background: #F4A6A6; left: 80%; animation-delay: 27s; animation-duration: 15s; }
         
-        /* Animated geometric shapes */
-        .geometric-shapes {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-        
-        .shape {
-            position: absolute;
-            background: rgba(156, 175, 156, 0.08);
-            animation: geometric-float 40s infinite ease-in-out;
-        }
-        
-        .shape:nth-child(1) {
-            width: 60px;
-            height: 60px;
-            top: 20%;
-            left: 15%;
-            border-radius: 20px;
-            animation-delay: 0s;
-            animation-duration: 45s;
-        }
-        
-        .shape:nth-child(2) {
-            width: 40px;
-            height: 40px;
-            top: 60%;
-            right: 20%;
-            border-radius: 50%;
-            animation-delay: 10s;
-            animation-duration: 35s;
-        }
-        
-        .shape:nth-child(3) {
-            width: 80px;
-            height: 80px;
-            top: 40%;
-            right: 10%;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-            animation-delay: 20s;
-            animation-duration: 50s;
-        }
-        
-        .shape:nth-child(4) {
-            width: 50px;
-            height: 50px;
-            top: 80%;
-            left: 25%;
-            border-radius: 10px;
-            animation-delay: 30s;
-            animation-duration: 40s;
-        }
-        
-        .shape:nth-child(5) {
-            width: 70px;
-            height: 70px;
-            top: 10%;
-            right: 30%;
-            border-radius: 50%;
-            animation-delay: 40s;
-            animation-duration: 38s;
-        }
-        
-        /* Mouse follower effect */
-        .mouse-follower {
-            position: fixed;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(107, 142, 107, 0.03) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            z-index: 1;
-            transition: all 0.1s ease-out;
-        }
-        
-        /* Custom form styling */
+        /* Form styling */
         .form-input {
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border: 2px solid transparent;
+            backdrop-filter: blur(10px);
         }
         
         .form-input:focus {
-            border-color: #6B8E6B;
-            box-shadow: 0 0 0 3px rgba(107, 142, 107, 0.1);
+            border-color: #87A96B;
+            box-shadow: 0 0 0 4px rgba(135, 169, 107, 0.1);
+            transform: translateY(-2px);
         }
         
         .btn-primary {
-            transition: all 0.3s ease;
-            background: linear-gradient(135deg, #6B8E6B, #9CAF9C);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, #87A96B, #A8C090);
+            backdrop-filter: blur(10px);
         }
         
         .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(135, 169, 107, 0.3);
+            background: linear-gradient(135deg, #A8C090, #87A96B);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(-1px);
+        }
+        
+        /* Interactive elements */
+        .interactive-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .interactive-hover:hover {
             transform: translateY(-2px);
-            box-shadow: 0 10px 25px rgba(107, 142, 107, 0.2);
+            filter: brightness(1.1);
         }
         
         /* Success message animation */
         .success-message {
-            animation: slideUp 0.5s ease-out;
+            animation: slideUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        /* Enhanced animations */
-        @keyframes float-particle {
-            0% {
-                transform: translateY(100vh) translateX(0px) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.3;
-            }
-            90% {
-                opacity: 0.3;
-            }
-            100% {
-                transform: translateY(-100px) translateX(50px) rotate(360deg);
-                opacity: 0;
-            }
-        }
-        
-        @keyframes geometric-float {
-            0%, 100% {
-                transform: translate(0, 0) rotate(0deg) scale(1);
-            }
-            25% {
-                transform: translate(30px, -20px) rotate(90deg) scale(1.1);
-            }
-            50% {
-                transform: translate(-20px, 30px) rotate(180deg) scale(0.9);
-            }
-            75% {
-                transform: translate(20px, 20px) rotate(270deg) scale(1.05);
-            }
+        /* Glassmorphism effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
     </style>
 </head>
-<body class="gradient-bg wave-overlay min-h-screen flex flex-col">
-    <!-- Floating particles -->
-    <div class="particles-container">
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
-        <div class="particle"></div>
+<body class="gradient-bg min-h-screen flex flex-col">
+    <!-- Floating dots background -->
+    <div class="dots-container">
+        <div class="floating-dot dot-1"></div>
+        <div class="floating-dot dot-2"></div>
+        <div class="floating-dot dot-3"></div>
+        <div class="floating-dot dot-4"></div>
+        <div class="floating-dot dot-5"></div>
+        <div class="floating-dot dot-6"></div>
+        <div class="floating-dot dot-7"></div>
+        <div class="floating-dot dot-8"></div>
+        <div class="floating-dot dot-9"></div>
+        <div class="floating-dot dot-10"></div>
     </div>
-    
-    <!-- Animated geometric shapes -->
-    <div class="geometric-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-    
-    <!-- Mouse follower effect -->
-    <div class="mouse-follower" id="mouseFollower"></div>
     
     <!-- Main content container -->
-    <div class="flex-1 flex items-center justify-center px-4 py-8 relative z-10">
-        <div class="text-center max-w-2xl mx-auto">
-            <!-- Main heading with fade-in animation -->
-            <h1 class="text-5xl md:text-7xl font-semibold text-soft-green mb-6 tracking-wide animate-fade-in hover:animate-float">
+    <div class="flex-1 flex items-center justify-center px-6 py-12 relative z-10">
+        <div class="text-center max-w-3xl mx-auto">
+            <!-- Main heading with enhanced typography -->
+            <h1 class="text-6xl md:text-8xl font-serif font-semibold text-text-primary mb-8 tracking-tight animate-fade-in hover:animate-float interactive-hover">
                 COMING SOON
             </h1>
             
-            <!-- Subheading with slide-up animation -->
-            <h2 class="text-2xl md:text-3xl font-medium text-sage mb-8 tracking-wide animate-slide-up" style="animation-delay: 0.2s;">
+            <!-- Subheading with modern sans-serif -->
+            <h2 class="text-2xl md:text-4xl font-sans font-medium text-sage mb-6 tracking-wide animate-slide-up interactive-hover" style="animation-delay: 0.2s;">
                 STAY TUNED
             </h2>
             
-            <!-- Tagline with slide-up animation -->
-            <p class="text-lg md:text-xl text-soft-green/80 mb-8 leading-relaxed max-w-lg mx-auto animate-slide-up" style="animation-delay: 0.4s;">
+            <!-- Enhanced tagline -->
+            <p class="text-xl md:text-2xl text-text-secondary mb-10 leading-relaxed max-w-2xl mx-auto font-sans animate-slide-up" style="animation-delay: 0.4s;">
                 The AI Matchmaker connecting micro-influencers and creators with local brands through intelligent, authentic partnerships.
             </p>
             
-            <!-- Mission statement with slide-up animation -->
-            <div class="mb-12 space-y-4 text-soft-green/70 animate-slide-up" style="animation-delay: 0.6s;">
-                <p class="text-base md:text-lg italic">
+            <!-- Mission statement with improved contrast -->
+            <div class="mb-14 space-y-4 text-text-muted animate-slide-up" style="animation-delay: 0.6s;">
+                <p class="text-lg md:text-xl italic font-sans">
                     "Empower creators to build careers, and empower small brands to grow communities"
                 </p>
-                <p class="text-sm md:text-base">
+                <p class="text-base md:text-lg font-sans">
                     — through intelligent, human-centered connections
                 </p>
             </div>
             
-            <!-- Email waitlist form -->
-            <div class="mb-12 animate-slide-up" style="animation-delay: 0.8s;">
-                <div class="max-w-md mx-auto">
-                    <form id="waitlistForm" class="space-y-4">
-                        <div>
-                            <label for="email" class="block text-sm font-medium text-soft-green mb-2">
+            <!-- Enhanced email waitlist form -->
+            <div class="mb-16 animate-slide-up" style="animation-delay: 0.8s;">
+                <div class="max-w-lg mx-auto">
+                    <form id="waitlistForm" class="space-y-6">
+                        <div class="space-y-3">
+                            <label for="email" class="block text-lg font-sans font-medium text-text-primary">
                                 Join the waitlist
                             </label>
                             <input 
@@ -312,39 +232,41 @@
                                 name="email" 
                                 required
                                 placeholder="Enter your email address"
-                                class="form-input w-full px-4 py-3 rounded-lg bg-white/50 backdrop-blur-sm text-soft-green placeholder-sage/60 focus:outline-none focus:bg-white/70"
+                                class="form-input w-full px-6 py-4 rounded-2xl bg-white/60 text-text-primary placeholder-text-muted focus:outline-none focus:bg-white/80 text-lg font-sans"
                             >
                         </div>
                         <button 
                             type="submit"
-                            class="btn-primary w-full px-6 py-3 rounded-lg text-white font-medium hover:bg-opacity-90 focus:outline-none focus:ring-4 focus:ring-soft-green/20"
+                            class="btn-primary w-full px-8 py-4 rounded-2xl text-white font-sans font-semibold text-lg hover:bg-opacity-90 focus:outline-none focus:ring-4 focus:ring-sage/20 shadow-lg"
                         >
                             Get Early Access
                         </button>
                     </form>
                     
-                    <!-- Success message (hidden by default) -->
-                    <div id="successMessage" class="hidden success-message mt-4 p-4 bg-sage-light/50 rounded-lg border border-sage/20">
-                        <p class="text-soft-green font-medium">🎉 Thanks for joining! We'll be in touch soon.</p>
+                    <!-- Enhanced success message -->
+                    <div id="successMessage" class="hidden success-message mt-6 p-6 glass rounded-2xl border border-white/20">
+                        <p class="text-lg font-sans font-medium text-text-primary">
+                            🎉 You're in! We'll keep you posted 💌
+                        </p>
                     </div>
                 </div>
             </div>
             
-            <!-- Domain -->
+            <!-- Domain with enhanced styling -->
             <div class="border-t border-sage/30 pt-8 animate-slide-up" style="animation-delay: 1s;">
-                <p class="text-sm md:text-base text-sage font-medium tracking-wider">
+                <p class="text-lg md:text-xl text-sage font-sans font-medium tracking-wide">
                     joinsoraa.com
                 </p>
             </div>
         </div>
     </div>
     
-    <!-- Footer -->
-    <footer class="py-6 px-4 border-t border-sage/20">
-        <div class="text-center text-sm text-sage/80 space-y-2">
-            <p>© 2025 Soraa. All rights reserved.</p>
+    <!-- Enhanced footer -->
+    <footer class="py-8 px-6 border-t border-sage/20 relative z-10">
+        <div class="text-center text-base text-text-muted space-y-3 font-sans">
+            <p class="font-medium">© 2025 Soraa. All rights reserved.</p>
             <p>
-                <a href="mailto:joinsoraa@gmail.com" class="hover:text-soft-green transition-colors duration-200">
+                <a href="mailto:joinsoraa@gmail.com" class="text-sage hover:text-sage-light transition-colors duration-300 interactive-hover font-medium">
                     joinsoraa@gmail.com
                 </a>
             </p>
@@ -352,81 +274,123 @@
     </footer>
 
     <script>
-        // Email form handling
+        // Enhanced email form handling with smooth animations
         document.getElementById('waitlistForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const email = document.getElementById('email').value;
             const form = document.getElementById('waitlistForm');
             const successMessage = document.getElementById('successMessage');
+            const submitButton = form.querySelector('button[type="submit"]');
             
-            // Basic email validation
-            if (!email || !email.includes('@')) {
-                alert('Please enter a valid email address.');
+            // Enhanced email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email || !emailRegex.test(email)) {
+                // Add shake animation for invalid input
+                const input = document.getElementById('email');
+                input.style.animation = 'shake 0.5s ease-in-out';
+                setTimeout(() => {
+                    input.style.animation = '';
+                }, 500);
                 return;
             }
             
-            // Simulate form submission (replace with actual endpoint)
+            // Show loading state
+            submitButton.textContent = 'Joining...';
+            submitButton.disabled = true;
+            
+            // Simulate API call (replace with actual endpoint)
             console.log('Email submitted:', email);
             
-            // For now, we'll just show a success message
-            // In production, you would send this to your backend:
-            // fetch('/api/waitlist', {
-            //     method: 'POST',
-            //     headers: { 'Content-Type': 'application/json' },
-            //     body: JSON.stringify({ email: email })
-            // })
-            
-            // Hide form and show success message
-            form.style.display = 'none';
-            successMessage.classList.remove('hidden');
-            
-            // Optional: Reset form after 3 seconds for demo purposes
+            // Simulate network delay for realistic feel
             setTimeout(() => {
-                form.style.display = 'block';
-                successMessage.classList.add('hidden');
-                document.getElementById('email').value = '';
-            }, 3000);
+                // Hide form with fade out
+                form.style.transition = 'all 0.5s ease-out';
+                form.style.opacity = '0';
+                form.style.transform = 'translateY(20px)';
+                
+                // Show success message after form fades
+                setTimeout(() => {
+                    form.style.display = 'none';
+                    successMessage.classList.remove('hidden');
+                    
+                    // Add confetti effect (simple version)
+                    createConfetti();
+                    
+                }, 500);
+                
+            }, 1000);
         });
         
-        // Mouse follower effect
-        const mouseFollower = document.getElementById('mouseFollower');
-        
-        document.addEventListener('mousemove', function(e) {
-            const x = e.clientX;
-            const y = e.clientY;
+        // Simple confetti effect
+        function createConfetti() {
+            const colors = ['#87A96B', '#F4A6A6', '#C8A2C8', '#A8E6CF', '#A8C090'];
             
-            mouseFollower.style.left = x - 100 + 'px';
-            mouseFollower.style.top = y - 100 + 'px';
-        });
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.position = 'fixed';
+                confetti.style.width = '6px';
+                confetti.style.height = '6px';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = '-10px';
+                confetti.style.zIndex = '9999';
+                confetti.style.borderRadius = '50%';
+                confetti.style.pointerEvents = 'none';
+                
+                document.body.appendChild(confetti);
+                
+                // Animate confetti falling
+                const animation = confetti.animate([
+                    { transform: 'translateY(0px) rotate(0deg)', opacity: 1 },
+                    { transform: `translateY(${window.innerHeight + 50}px) rotate(360deg)`, opacity: 0 }
+                ], {
+                    duration: 3000 + Math.random() * 2000,
+                    easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+                });
+                
+                animation.onfinish = () => {
+                    confetti.remove();
+                };
+            }
+        }
         
-        // Add subtle hover effects to interactive elements
-        document.querySelectorAll('a, button').forEach(element => {
+        // Enhanced interactive hover effects
+        document.querySelectorAll('.interactive-hover').forEach(element => {
             element.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-1px)';
+                this.style.filter = 'brightness(1.1) saturate(1.1)';
             });
             
             element.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
+                this.style.filter = 'brightness(1) saturate(1)';
             });
         });
         
-        // Add parallax effect to particles on scroll (if any)
-        window.addEventListener('scroll', function() {
-            const scrolled = window.pageYOffset;
-            const particles = document.querySelectorAll('.particle');
-            const shapes = document.querySelectorAll('.shape');
+        // Add subtle parallax effect to dots on mouse move
+        document.addEventListener('mousemove', function(e) {
+            const dots = document.querySelectorAll('.floating-dot');
+            const x = e.clientX / window.innerWidth;
+            const y = e.clientY / window.innerHeight;
             
-            particles.forEach((particle, index) => {
-                const speed = 0.5 + (index * 0.1);
-                particle.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-            
-            shapes.forEach((shape, index) => {
-                const speed = 0.3 + (index * 0.05);
-                shape.style.transform = `translateY(${scrolled * speed}px)`;
+            dots.forEach((dot, index) => {
+                const speed = (index + 1) * 0.5;
+                const xOffset = (x - 0.5) * speed;
+                const yOffset = (y - 0.5) * speed;
+                
+                dot.style.transform += ` translate(${xOffset}px, ${yOffset}px)`;
             });
         });
+        
+        // Add shake animation keyframes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes shake {
+                0%, 100% { transform: translateX(0); }
+                25% { transform: translateX(-5px); }
+                75% { transform: translateX(5px); }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
