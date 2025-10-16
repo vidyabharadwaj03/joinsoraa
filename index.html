@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soraa - Coming Soon</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/framer-motion@10/dist/framer-motion.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -19,6 +20,36 @@
                         'cream': '#FEFCF8',
                         'soft-green': '#6B8E6B',
                         'sage': '#9CAF9C',
+                        'sage-light': '#E8F0E8',
+                    },
+                    animation: {
+                        'gradient': 'gradient 15s ease infinite',
+                        'wave': 'wave 12s ease-in-out infinite',
+                        'fade-in': 'fadeIn 1s ease-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        gradient: {
+                            '0%, 100%': { 'background-position': '0% 50%' },
+                            '50%': { 'background-position': '100% 50%' }
+                        },
+                        wave: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' }
+                        },
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        }
                     }
                 }
             }
@@ -28,41 +59,179 @@
         body {
             font-family: 'Playfair Display', serif;
         }
+        
+        /* Animated gradient background */
+        .gradient-bg {
+            background: linear-gradient(-45deg, #FEFCF8, #F8F6F0, #F0F4F0, #E8F0E8, #FEFCF8);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+        }
+        
+        /* Subtle wave animation overlay */
+        .wave-overlay {
+            background: radial-gradient(circle at 20% 50%, rgba(107, 142, 107, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, rgba(156, 175, 156, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, rgba(107, 142, 107, 0.02) 0%, transparent 50%);
+            animation: wave 12s ease-in-out infinite;
+        }
+        
+        /* Custom form styling */
+        .form-input {
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .form-input:focus {
+            border-color: #6B8E6B;
+            box-shadow: 0 0 0 3px rgba(107, 142, 107, 0.1);
+        }
+        
+        .btn-primary {
+            transition: all 0.3s ease;
+            background: linear-gradient(135deg, #6B8E6B, #9CAF9C);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(107, 142, 107, 0.2);
+        }
+        
+        /* Success message animation */
+        .success-message {
+            animation: slideUp 0.5s ease-out;
+        }
     </style>
 </head>
-<body class="bg-cream min-h-screen flex items-center justify-center px-4">
-    <div class="text-center max-w-2xl mx-auto">
-        <!-- Main heading -->
-        <h1 class="text-5xl md:text-7xl font-semibold text-soft-green mb-6 tracking-wide">
-            COMING SOON
-        </h1>
-        
-        <!-- Subheading -->
-        <h2 class="text-2xl md:text-3xl font-medium text-sage mb-8 tracking-wide">
-            STAY TUNED
-        </h2>
-        
-        <!-- Tagline -->
-        <p class="text-lg md:text-xl text-soft-green/80 mb-12 leading-relaxed max-w-lg mx-auto">
-            The AI Matchmaker connecting micro-influencers and creators with local brands through intelligent, authentic partnerships.
-        </p>
-        
-        <!-- Mission statement -->
-        <div class="mb-16 space-y-4 text-soft-green/70">
-            <p class="text-base md:text-lg italic">
-                "Empower creators to build careers, and empower small brands to grow communities"
+<body class="gradient-bg wave-overlay min-h-screen flex flex-col">
+    <!-- Main content container -->
+    <div class="flex-1 flex items-center justify-center px-4 py-8">
+        <div class="text-center max-w-2xl mx-auto">
+            <!-- Main heading with fade-in animation -->
+            <h1 class="text-5xl md:text-7xl font-semibold text-soft-green mb-6 tracking-wide animate-fade-in hover:animate-float">
+                COMING SOON
+            </h1>
+            
+            <!-- Subheading with slide-up animation -->
+            <h2 class="text-2xl md:text-3xl font-medium text-sage mb-8 tracking-wide animate-slide-up" style="animation-delay: 0.2s;">
+                STAY TUNED
+            </h2>
+            
+            <!-- Tagline with slide-up animation -->
+            <p class="text-lg md:text-xl text-soft-green/80 mb-8 leading-relaxed max-w-lg mx-auto animate-slide-up" style="animation-delay: 0.4s;">
+                The AI Matchmaker connecting micro-influencers and creators with local brands through intelligent, authentic partnerships.
             </p>
-            <p class="text-sm md:text-base">
-                — through intelligent, human-centered connections
-            </p>
-        </div>
-        
-        <!-- Domain -->
-        <div class="border-t border-sage/30 pt-8">
-            <p class="text-sm md:text-base text-sage font-medium tracking-wider">
-                joinsoraa.ai
-            </p>
+            
+            <!-- Mission statement with slide-up animation -->
+            <div class="mb-12 space-y-4 text-soft-green/70 animate-slide-up" style="animation-delay: 0.6s;">
+                <p class="text-base md:text-lg italic">
+                    "Empower creators to build careers, and empower small brands to grow communities"
+                </p>
+                <p class="text-sm md:text-base">
+                    — through intelligent, human-centered connections
+                </p>
+            </div>
+            
+            <!-- Email waitlist form -->
+            <div class="mb-12 animate-slide-up" style="animation-delay: 0.8s;">
+                <div class="max-w-md mx-auto">
+                    <form id="waitlistForm" class="space-y-4">
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-soft-green mb-2">
+                                Join the waitlist
+                            </label>
+                            <input 
+                                type="email" 
+                                id="email" 
+                                name="email" 
+                                required
+                                placeholder="Enter your email address"
+                                class="form-input w-full px-4 py-3 rounded-lg bg-white/50 backdrop-blur-sm text-soft-green placeholder-sage/60 focus:outline-none focus:bg-white/70"
+                            >
+                        </div>
+                        <button 
+                            type="submit"
+                            class="btn-primary w-full px-6 py-3 rounded-lg text-white font-medium hover:bg-opacity-90 focus:outline-none focus:ring-4 focus:ring-soft-green/20"
+                        >
+                            Get Early Access
+                        </button>
+                    </form>
+                    
+                    <!-- Success message (hidden by default) -->
+                    <div id="successMessage" class="hidden success-message mt-4 p-4 bg-sage-light/50 rounded-lg border border-sage/20">
+                        <p class="text-soft-green font-medium">🎉 Thanks for joining! We'll be in touch soon.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Domain -->
+            <div class="border-t border-sage/30 pt-8 animate-slide-up" style="animation-delay: 1s;">
+                <p class="text-sm md:text-base text-sage font-medium tracking-wider">
+                    joinsoraa.com
+                </p>
+            </div>
         </div>
     </div>
+    
+    <!-- Footer -->
+    <footer class="py-6 px-4 border-t border-sage/20">
+        <div class="text-center text-sm text-sage/80 space-y-2">
+            <p>© 2025 Soraa. All rights reserved.</p>
+            <p>
+                <a href="mailto:joinsoraa@gmail.com" class="hover:text-soft-green transition-colors duration-200">
+                    joinsoraa@gmail.com
+                </a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Email form handling
+        document.getElementById('waitlistForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const form = document.getElementById('waitlistForm');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Basic email validation
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+            
+            // Simulate form submission (replace with actual endpoint)
+            console.log('Email submitted:', email);
+            
+            // For now, we'll just show a success message
+            // In production, you would send this to your backend:
+            // fetch('/api/waitlist', {
+            //     method: 'POST',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify({ email: email })
+            // })
+            
+            // Hide form and show success message
+            form.style.display = 'none';
+            successMessage.classList.remove('hidden');
+            
+            // Optional: Reset form after 3 seconds for demo purposes
+            setTimeout(() => {
+                form.style.display = 'block';
+                successMessage.classList.add('hidden');
+                document.getElementById('email').value = '';
+            }, 3000);
+        });
+        
+        // Add subtle hover effects to interactive elements
+        document.querySelectorAll('a, button').forEach(element => {
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-1px)';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
 </body>
 </html>
