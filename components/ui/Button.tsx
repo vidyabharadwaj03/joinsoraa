@@ -1,34 +1,36 @@
-'use client';
+"use client";
 
-import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import { motion, type HTMLMotionProps } from "framer-motion";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'ghost';
-  children: React.ReactNode;
-}
+// If I have a utility to join class names, import it; otherwise define a tiny one.
+let cn = (...cls: Array<string | false | null | undefined>) =>
+  cls.filter(Boolean).join(" ");
 
-export default function Button({
-  variant = 'primary',
+type ButtonProps = HTMLMotionProps<"button"> & {
+  variant?: "primary" | "ghost";
+};
+
+export function Button({
   className,
-  children,
+  variant = "primary",
+  whileHover = { scale: 1.03 },
+  whileTap = { scale: 0.98 },
   ...props
 }: ButtonProps) {
   return (
     <motion.button
-      whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.98 }}
+      whileHover={whileHover}
+      whileTap={whileTap}
       className={cn(
-        'px-8 py-4 rounded-2xl font-display text-lg uppercase tracking-[0.06em] transition-colors',
-        variant === 'primary' &&
-          'bg-brand-red text-brand-bone hover:bg-brand-rose',
-        variant === 'ghost' &&
-          'border-2 border-brand-red text-brand-red hover:bg-brand-red hover:text-brand-bone',
-        className
+        "rounded-2xl px-6 py-4 uppercase tracking-wide transition",
+        variant === "primary"
+          ? "bg-brand-red text-brand-bone hover:bg-brand-rose"
+          : "bg-transparent ring-1 ring-white/15 text-brand-bone hover:ring-brand-rose/60",
+        className || ""
       )}
       {...props}
-    >
-      {children}
-    </motion.button>
+    />
   );
 }
+
+export default Button;

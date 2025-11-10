@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, type HTMLMotionProps } from 'framer-motion';
 import Input from './ui/Input';
 import Button from './ui/Button';
 
@@ -50,12 +50,13 @@ export default function WaitlistForm() {
   };
 
   if (status === 'success') {
+    const divProps: HTMLMotionProps<'div'> = {
+      initial: { opacity: 0, y: 20 },
+      animate: { opacity: 1, y: 0 },
+      className: "text-center"
+    };
     return (
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="text-center"
-      >
+      <motion.div {...divProps}>
         <p className="text-brand-bone text-lg font-sans">
           ✨ You&apos;re on the list!
         </p>

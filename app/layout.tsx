@@ -1,9 +1,12 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
   title: 'SORAA — join the collective. skip the pitch.',
   description: 'AI-powered matchmaking for micro-influencers and ambitious local brands.',
+};
+
+export const viewport: Viewport = {
   themeColor: '#110607',
 };
 
