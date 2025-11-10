@@ -8,44 +8,45 @@ import Button from './ui/Button';
 export default function WaitlistForm() {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  const [error, setError] = useState('');
+  const [message, setMessage] = useState('');
 
-  const validateEmail = (email: string) => {
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-  };
+  const endpoint = process.env.NEXT_PUBLIC_WAITLIST_ENDPOINT;
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
+    if (status === 'loading') return;
 
-    if (!email) {
-      setError('Please enter your email');
+    if (!/.+@.+\..+/.test(email)) {
       setStatus('error');
+      setMessage('Please enter a valid email.');
+      return;
+    }
+    if (!endpoint) {
+      setStatus('error');
+      setMessage('Temporarily unavailable. Please try again soon.');
       return;
     }
 
-    if (!validateEmail(email)) {
-      setError('Please enter a valid email address');
-      setStatus('error');
-      return;
-    }
-
-    setStatus('loading');
-
-    // TODO: Replace with actual endpoint
     try {
-      console.log('Email submitted:', email);
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      
-      // For now, just log - replace with actual API call
-      // await fetch('/api/waitlist', { method: 'POST', body: JSON.stringify({ email }) });
-      
+      setStatus('loading');
+      setMessage('');
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const data = await res.json().catch(() => ({} as any));
+      if (data?.ok === false) throw new Error(data?.error || 'Unknown error');
+
       setStatus('success');
+      setMessage("You're on the list! 🎉");
       setEmail('');
     } catch (err) {
+      console.error(err);
       setStatus('error');
-      setError('Something went wrong. Please try again.');
+      setMessage('Something went wrong. Please try again.');
     }
   };
 
@@ -53,46 +54,73 @@ export default function WaitlistForm() {
     const divProps: HTMLMotionProps<'div'> = {
       initial: { opacity: 0, y: 20 },
       animate: { opacity: 1, y: 0 },
-      className: "text-center"
+      className: 'text-center',
     };
     return (
       <motion.div {...divProps}>
         <p className="text-brand-bone text-lg font-sans">
-          ✨ You&apos;re on the list!
+          ✨ {message || "You're on the list! 🎉"}
         </p>
       </motion.div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={onSubmit} className="space-y-6">
       <div className="space-y-4">
         <Input
           type="email"
-          placeholder="Enter your email"
+          name="email"
           value={email}
           onChange={(e) => {
             setEmail(e.target.value);
-            if (status === 'error') setStatus('idle');
+            if (status === 'error') {
+              setStatus('idle');
+              setMessage('');
+            }
           }}
+          placeholder="Enter your email address"
           required
+          aria-invalid={status === 'error' ? true : undefined}
         />
-        {error && (
+        {message && (
           <motion.p
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
-            className="text-brand-red text-sm font-sans"
+            className={`text-sm font-sans ${
+              status === 'error' ? 'text-brand-red' : 'text-brand-haze'
+            }`}
+            role="status"
+            aria-live="polite"
           >
-            {error}
+            {message}
           </motion.p>
         )}
       </div>
-      <Button type="submit" disabled={status === 'loading'}>
-        {status === 'loading' ? 'Joining...' : 'Get Early Access'}
+      <Button type="submit" disabled={status === 'loading'} aria-busy={status === 'loading'}>
+        {status === 'loading' ? 'Submitting...' : 'Get Early Access'}
       </Button>
       <p className="text-brand-haze text-sm font-sans italic text-center">
         — one authentic connection at a time
       </p>
+
+      {process.env.NODE_ENV !== 'production' && (
+        <button
+          type="button"
+          onClick={async () => {
+            if (!endpoint) return console.warn('No endpoint set');
+            const r = await fetch(endpoint, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ email: 'healthcheck@example.com' }),
+            });
+            console.log('Healthcheck status:', r.status);
+          }}
+          className="mt-2 text-xs opacity-60 underline text-brand-haze"
+        >
+          Dev: Healthcheck
+        </button>
+      )}
     </form>
   );
 }
