@@ -31,29 +31,46 @@ export default function WaitlistForm() {
       setStatus('loading');
       setMessage('');
       
-      // Google Apps Script web apps require special handling for CORS
-      // Using FormData or URL-encoded format works better than JSON
+      // Try with CORS first to get response
+      // Google Apps Script web apps should handle CORS if deployed correctly
       const formData = new URLSearchParams();
       formData.append('email', email);
       
       const res = await fetch(endpoint, {
         method: 'POST',
-        mode: 'no-cors', // Google Apps Script web apps have CORS restrictions
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: formData.toString(),
       });
 
-      // With no-cors mode, we can't read the response, so assume success
-      // The script should handle the email submission
+      // Try to read the response
+      let responseData;
+      try {
+        const text = await res.text();
+        responseData = text ? JSON.parse(text) : {};
+      } catch (parseError) {
+        // If we can't parse, check status
+        if (res.ok) {
+          responseData = { ok: true };
+        } else {
+          throw new Error(`HTTP ${res.status}`);
+        }
+      }
+
+      // Check for errors in response
+      if (responseData.ok === false) {
+        throw new Error(responseData.error || responseData.message || 'Submission failed');
+      }
+
+      // Success!
       setStatus('success');
       setMessage("You're on the list! 🎉");
       setEmail('');
-    } catch (err) {
+    } catch (err: any) {
       console.error('Waitlist submission error:', err);
       setStatus('error');
-      setMessage('Something went wrong. Please try again.');
+      setMessage(err.message || 'Something went wrong. Please try again.');
     }
   };
 
