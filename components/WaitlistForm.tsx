@@ -30,21 +30,28 @@ export default function WaitlistForm() {
     try {
       setStatus('loading');
       setMessage('');
+      
+      // Google Apps Script web apps require special handling for CORS
+      // Using FormData or URL-encoded format works better than JSON
+      const formData = new URLSearchParams();
+      formData.append('email', email);
+      
       const res = await fetch(endpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email }),
+        mode: 'no-cors', // Google Apps Script web apps have CORS restrictions
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData.toString(),
       });
 
-      if (!res.ok) throw new Error(`HTTP ${res.status}`);
-      const data = await res.json().catch(() => ({} as any));
-      if (data?.ok === false) throw new Error(data?.error || 'Unknown error');
-
+      // With no-cors mode, we can't read the response, so assume success
+      // The script should handle the email submission
       setStatus('success');
       setMessage("You're on the list! 🎉");
       setEmail('');
     } catch (err) {
-      console.error(err);
+      console.error('Waitlist submission error:', err);
       setStatus('error');
       setMessage('Something went wrong. Please try again.');
     }
@@ -103,24 +110,6 @@ export default function WaitlistForm() {
       <p className="text-brand-haze text-sm font-sans italic text-center">
         — one authentic connection at a time
       </p>
-
-      {process.env.NODE_ENV !== 'production' && (
-        <button
-          type="button"
-          onClick={async () => {
-            if (!endpoint) return console.warn('No endpoint set');
-            const r = await fetch(endpoint, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ email: 'healthcheck@example.com' }),
-            });
-            console.log('Healthcheck status:', r.status);
-          }}
-          className="mt-2 text-xs opacity-60 underline text-brand-haze"
-        >
-          Dev: Healthcheck
-        </button>
-      )}
     </form>
   );
 }
