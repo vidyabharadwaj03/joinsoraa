@@ -45,9 +45,9 @@ export default function Home() {
             <Image
               src="/soraalogo.png"
               alt="SORAA"
-              width={120}
-              height={40}
-              className="h-8 w-auto"
+              width={300}
+              height={120}
+              className="h-16 md:h-20 w-auto object-contain"
               priority
             />
           </div>
@@ -231,9 +231,9 @@ export default function Home() {
             <Image
               src="/soraalogo.png"
               alt="SORAA"
-              width={200}
-              height={67}
-              className="h-12 md:h-16 w-auto"
+              width={400}
+              height={160}
+              className="h-20 md:h-28 w-auto object-contain"
             />
             <span className="font-display text-5xl md:text-6xl text-brand-bone tracking-tight">
               — COMING SOON
