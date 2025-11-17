@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
 import BackgroundFloaters from '@/components/BackgroundFloaters';
-import BuildStamp from '@/components/BuildStamp';
 
 export const metadata: Metadata = {
   title: 'SORAA — join the collective. skip the pitch.',
@@ -26,7 +25,6 @@ export default function RootLayout({
       <body className="min-h-screen">
         <BackgroundFloaters />
         <div className="relative z-10">{children}</div>
-        <BuildStamp />
       </body>
     </html>
   );
