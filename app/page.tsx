@@ -41,16 +41,20 @@ export default function Home() {
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-brand-bg/30 border-b border-brand-maroon/30">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center">
+          <button
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="flex items-center cursor-pointer hover:opacity-80 transition-opacity"
+            aria-label="Scroll to top"
+          >
             <Image
               src="/NewSoraaLogo.png"
               alt="SORAA"
-              width={200}
-              height={80}
-              className="h-12 md:h-16 w-auto object-contain"
+              width={150}
+              height={60}
+              className="h-10 md:h-12 w-auto object-contain"
               priority
             />
-          </div>
+          </button>
           <div className="hidden md:flex items-center gap-8 font-sans text-sm">
             <a href="#creators" className="text-brand-haze hover:text-brand-bone transition-colors">
               For Creators
