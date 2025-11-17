@@ -5,22 +5,32 @@
 @tailwind utilities;
 
 @layer base {
+  html, body, #__next, :root {
+    min-height: 100%;
+    background: #110607; /* solid base to prevent flash between frames */
+  }
+
   body {
     @apply bg-brand-bg text-brand-bone font-sans antialiased;
+  }
+
+  * {
+    backface-visibility: hidden;
   }
 }
 
 @layer utilities {
-  @keyframes noise {
-    0%, 100% { transform: translate(0, 0); }
-    10% { transform: translate(-5%, -10%); }
-    20% { transform: translate(-15%, 5%); }
-    30% { transform: translate(7%, -25%); }
-    40% { transform: translate(-5%, 25%); }
-    50% { transform: translate(-15%, 10%); }
-    60% { transform: translate(15%, 0%); }
-    70% { transform: translate(0%, 15%); }
-    80% { transform: translate(3%, 35%); }
-    90% { transform: translate(-10%, 10%); }
+  /* Optional super-slow grain drift if you enable it in NoiseOverlay.tsx */
+  @keyframes grain-slow {
+    0%   { transform: translate3d(0,0,0); }
+    100% { transform: translate3d(-200px,200px,0); }
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
   }
 }

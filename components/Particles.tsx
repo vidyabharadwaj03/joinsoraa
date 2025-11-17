@@ -41,6 +41,9 @@ export default function Particles() {
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // Use stable global alpha instead of per-particle opacity to prevent flashing
+      ctx.globalAlpha = 0.35;
 
       particles.forEach((particle) => {
         particle.y -= particle.speed;
@@ -49,7 +52,7 @@ export default function Particles() {
           particle.x = Math.random() * canvas.width;
         }
 
-        ctx.fillStyle = `rgba(246, 241, 234, ${particle.opacity})`;
+        ctx.fillStyle = 'rgba(246, 241, 234, 1)';
         ctx.beginPath();
         ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
         ctx.fill();

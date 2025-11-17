@@ -20,15 +20,22 @@ export default function Home() {
 
   return (
     <main className="relative min-h-screen overflow-x-hidden">
-      {/* Background layers */}
+      {/* Background layer - composited for stability */}
       <div
-        className="fixed inset-0 z-0"
-        style={{
-          background: 'radial-gradient(ellipse at center, #1d0a0c 0%, #110607 100%)',
-        }}
-      />
-      <Particles />
-      <NoiseOverlay />
+        className="
+          fixed inset-0 -z-10 will-change-transform
+          [transform:translateZ(0)]  /* force its own compositor layer */
+        "
+      >
+        <div
+          className="fixed inset-0"
+          style={{
+            background: 'radial-gradient(ellipse at center, #1d0a0c 0%, #110607 100%)',
+          }}
+        />
+        <Particles />
+        <NoiseOverlay />
+      </div>
 
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-brand-bg/30 border-b border-brand-maroon/30">
