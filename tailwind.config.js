@@ -20,9 +20,9 @@ module.exports = {
           500: '#ad3947',
           600: '#932a37',
           700: '#7b1f2c',
-          800: '#5a0f18',  // primary base
+          800: '#5a0f18', // primary brand maroon
           900: '#4b0c14',
-          950: '#38080f',
+          950: '#2b080d', // darker base for page background
           // Keep old names for backward compatibility
           bg: '#5a0f18',
           bg2: '#420b12',

@@ -178,3 +178,73 @@ body::after {
   background-size: 220px 220px;
   animation: grainPan 75s linear infinite;
 }
+
+/* ===== Brand background (dark maroon) ===== */
+:root{
+  --brand-maroon:       #5a0f18; /* anchor */
+  --brand-maroon-900:   #4b0c14;
+  --brand-maroon-950:   #2b080d; /* base sheet color (dark) */
+  --orb-dark-1:         #4a0e16; /* darker accents for orbs */
+  --orb-dark-2:         #3a0a11;
+}
+
+html, body { min-height: 100%; }
+
+body {
+  /* Darker maroon—NOT black. Vignette + gentle vertical gradient. */
+  background:
+    radial-gradient(1400px 1000px at 15% 12%, rgba(90,15,24,0.25), transparent 60%),
+    radial-gradient(1100px 800px at 85% 78%, rgba(90,15,24,0.18), transparent 65%),
+    linear-gradient(180deg, var(--brand-maroon-900) 0%, var(--brand-maroon-950) 100%);
+  color: #f2eae7; /* brand.bone for default text */
+}
+
+/* ===== Motion keyframes (transform-only; GPU-friendly) ===== */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes floatUpDown {
+    0% { transform: translate3d(0,0,0) }
+    50% { transform: translate3d(0,-16px,0) }
+    100% { transform: translate3d(0,0,0) }
+  }
+  @keyframes floatSide {
+    0% { transform: translate3d(0,0,0) }
+    50% { transform: translate3d(14px,0,0) }
+    100% { transform: translate3d(0,0,0) }
+  }
+}
+
+/* Root layer (behind everything) */
+.bg-floaters-root {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Orbs: darker maroon, subtle by default */
+.bg-orb {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(12px);
+  opacity: 0.18; /* tune 0.14–0.26 as needed */
+  background: radial-gradient(
+    closest-side,
+    rgba(74,14,22,0.6), /* var(--orb-dark-1) alpha */
+    rgba(74,14,22,0)
+  );
+}
+
+/* Camera glyphs: darker color + soft shadow */
+.bg-glyph {
+  position: absolute;
+  opacity: 0.16;
+  color: var(--orb-dark-2);
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,0.25));
+}
+
+/* Animation helpers (disabled if user prefers reduced motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .float-v { animation: floatUpDown var(--dur, 28s) ease-in-out var(--delay, 0s) infinite; }
+  .float-h { animation: floatSide   var(--dur, 36s) ease-in-out var(--delay, 0s) infinite; }
+}

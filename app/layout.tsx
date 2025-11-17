@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import BackgroundFloaters from '@/components/BackgroundFloaters';
 
 export const metadata: Metadata = {
   title: 'SORAA — join the collective. skip the pitch.',
@@ -22,9 +23,8 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
       <body className="min-h-screen">
-        {/* Subtle background grain behind all content */}
-        <div className="fx-grain" aria-hidden />
-        {children}
+        <BackgroundFloaters />
+        <div className="relative z-10">{children}</div>
       </body>
     </html>
   );
