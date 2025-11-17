@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useRef, useEffect } from 'react';
+import Image from 'next/image';
 import Particles from '@/components/Particles';
 import NoiseOverlay from '@/components/NoiseOverlay';
 import MarqueeStripe from '@/components/MarqueeStripe';
@@ -40,8 +41,15 @@ export default function Home() {
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-brand-bg/30 border-b border-brand-maroon/30">
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="font-display text-2xl text-brand-bone tracking-wider">
-            SORAA
+          <div className="flex items-center">
+            <Image
+              src="/soraalogo.png"
+              alt="SORAA"
+              width={120}
+              height={40}
+              className="h-8 w-auto"
+              priority
+            />
           </div>
           <div className="hidden md:flex items-center gap-8 font-sans text-sm">
             <a href="#creators" className="text-brand-haze hover:text-brand-bone transition-colors">
@@ -219,8 +227,17 @@ export default function Home() {
           <div className="font-display text-4xl md:text-5xl text-brand-red mb-4 tracking-tight">
             BREAKING NEWS:
           </div>
-          <div className="font-display text-5xl md:text-6xl text-brand-bone tracking-tight">
-            SORAA — COMING SOON
+          <div className="flex items-center gap-4 flex-wrap justify-center">
+            <Image
+              src="/soraalogo.png"
+              alt="SORAA"
+              width={200}
+              height={67}
+              className="h-12 md:h-16 w-auto"
+            />
+            <span className="font-display text-5xl md:text-6xl text-brand-bone tracking-tight">
+              — COMING SOON
+            </span>
           </div>
         </motion.div>
       </section>
