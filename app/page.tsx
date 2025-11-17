@@ -43,7 +43,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
           <div className="flex items-center">
             <Image
-              src="/soraalogo.png"
+              src="/NewSoraaLogo.png"
               alt="SORAA"
               width={400}
               height={160}
@@ -229,7 +229,7 @@ export default function Home() {
           </div>
           <div className="flex items-center gap-4 flex-wrap justify-center">
             <Image
-              src="/soraalogo.png"
+              src="/NewSoraaLogo.png"
               alt="SORAA"
               width={600}
               height={240}
