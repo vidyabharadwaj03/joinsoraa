@@ -7,7 +7,7 @@
 @layer base {
   html, body, #__next, :root {
     min-height: 100%;
-    background: #110607; /* solid base to prevent flash between frames */
+    background: #5a0f18; /* solid base to prevent flash between frames */
   }
 
   body {
@@ -24,6 +24,23 @@
   @keyframes grain-slow {
     0%   { transform: translate3d(0,0,0); }
     100% { transform: translate3d(-200px,200px,0); }
+  }
+
+  /* Subtle backdrop pan animation */
+  @keyframes bg-pan {
+    0%   { transform: translate3d(0,0,0) scale(1); }
+    50%  { transform: translate3d(-2%, 1%, 0) scale(1.02); }
+    100% { transform: translate3d(1%, -1%, 0) scale(1.01); }
+  }
+  
+  .animate-bg-pan {
+    animation: bg-pan 48s ease-in-out infinite alternate;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .animate-bg-pan {
+      animation: none;
+    }
   }
 }
 

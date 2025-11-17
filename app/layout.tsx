@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
+import SubtleBackdrop from '@/components/SubtleBackdrop';
 
 export const metadata: Metadata = {
   title: 'SORAA — join the collective. skip the pitch.',
@@ -21,7 +22,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body>{children}</body>
+      <body>
+        <SubtleBackdrop />
+        {children}
+      </body>
     </html>
   );
 }
