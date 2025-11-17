@@ -2,6 +2,20 @@
   "framework": "nextjs",
   "buildCommand": "npm run build",
   "installCommand": "npm install",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "joinsoraa.vercel.app" }],
+      "destination": "https://www.joinsoraa.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "joinsoraa.com" }],
+      "destination": "https://www.joinsoraa.com/:path*",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/",
