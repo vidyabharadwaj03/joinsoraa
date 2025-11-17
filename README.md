@@ -70,3 +70,37 @@ vercel
 ```
 
 Or connect your GitHub repository to Vercel for automatic deployments.
+
+## Verify a Deployment
+
+To verify that the latest commit is what Vercel deployed:
+
+1. Open `/api/health` in your browser or use curl:
+   ```bash
+   curl https://your-domain.vercel.app/api/health
+   ```
+
+2. Compare the `commit` field to your local commit SHA:
+   ```bash
+   git rev-parse HEAD
+   ```
+
+3. The build stamp in the footer (desktop only, bottom-right) also shows the commit SHA and build time.
+
+## Quick Redeploy Tricks
+
+**Trigger a redeploy:**
+```bash
+git commit --allow-empty -m "trigger vercel" && git push origin main
+```
+
+**Deploy a specific commit:**
+1. Go to Vercel dashboard
+2. Click "Create Deployment"
+3. Paste the commit SHA you want to deploy
+
+**Local development with build stamp:**
+```bash
+npm run dev:stamp
+```
+This sets the commit SHA and build time for local testing.

@@ -12,68 +12,123 @@ export default function WaitlistForm() {
 
   const endpoint = process.env.NEXT_PUBLIC_WAITLIST_ENDPOINT;
 
+  // const onSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   if (status === 'loading') return;
+
+  //   if (!/.+@.+\..+/.test(email)) {
+  //     setStatus('error');
+  //     setMessage('Please enter a valid email.');
+  //     return;
+  //   }
+  //   if (!endpoint) {
+  //     setStatus('error');
+  //     setMessage('Temporarily unavailable. Please try again soon.');
+  //     return;
+  //   }
+
+  //   try {
+  //     setStatus('loading');
+  //     setMessage('');
+      
+  //     // Try with CORS first to get response
+  //     // Google Apps Script web apps should handle CORS if deployed correctly
+  //     const formData = new URLSearchParams();
+  //     formData.append('email', email);
+      
+  //     const res = await fetch(endpoint, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/x-www-form-urlencoded',
+  //       },
+  //       body: formData.toString(),
+  //     });
+
+  //     // Try to read the response
+  //     let responseData;
+  //     try {
+  //       const text = await res.text();
+  //       responseData = text ? JSON.parse(text) : {};
+  //     } catch (parseError) {
+  //       // If we can't parse, check status
+  //       if (res.ok) {
+  //         responseData = { ok: true };
+  //       } else {
+  //         throw new Error(`HTTP ${res.status}`);
+  //       }
+  //     }
+
+  //     // Check for errors in response
+  //     if (responseData.ok === false) {
+  //       throw new Error(responseData.error || responseData.message || 'Submission failed');
+  //     }
+
+  //     // Success!
+  //     setStatus('success');
+  //     setMessage("You're on the list! 🎉");
+  //     setEmail('');
+  //   } catch (err: any) {
+  //     console.error('Waitlist submission error:', err);
+  //     setStatus('error');
+  //     setMessage(err.message || 'Something went wrong. Please try again.');
+  //   }
+  // };
+
+
   const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (status === 'loading') return;
-
+  
     if (!/.+@.+\..+/.test(email)) {
       setStatus('error');
       setMessage('Please enter a valid email.');
       return;
     }
+  
     if (!endpoint) {
       setStatus('error');
       setMessage('Temporarily unavailable. Please try again soon.');
       return;
     }
-
+  
     try {
       setStatus('loading');
       setMessage('');
-      
-      // Try with CORS first to get response
-      // Google Apps Script web apps should handle CORS if deployed correctly
+  
       const formData = new URLSearchParams();
       formData.append('email', email);
-      
+  
+      // IMPORTANT: no custom headers → keeps it a “simple” POST (no CORS preflight)
       const res = await fetch(endpoint, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: formData.toString(),
+        body: formData, // let the browser set Content-Type
       });
-
-      // Try to read the response
-      let responseData;
+  
+      // Apps Script often replies text/plain. Read as text, then try JSON.
+      const text = await res.text();
+      let data: any = {};
       try {
-        const text = await res.text();
-        responseData = text ? JSON.parse(text) : {};
-      } catch (parseError) {
-        // If we can't parse, check status
-        if (res.ok) {
-          responseData = { ok: true };
-        } else {
-          throw new Error(`HTTP ${res.status}`);
-        }
+        data = text ? JSON.parse(text) : {};
+      } catch {
+        // If parsing fails but HTTP is OK and body empty, treat as success
+        if (res.ok && !text) data = { ok: true };
       }
-
-      // Check for errors in response
-      if (responseData.ok === false) {
-        throw new Error(responseData.error || responseData.message || 'Submission failed');
+  
+      if (!res.ok || data?.ok === false) {
+        const reason = data?.error || data?.message || `HTTP ${res.status}`;
+        throw new Error(reason);
       }
-
-      // Success!
+  
       setStatus('success');
       setMessage("You're on the list! 🎉");
       setEmail('');
     } catch (err: any) {
       console.error('Waitlist submission error:', err);
       setStatus('error');
-      setMessage(err.message || 'Something went wrong. Please try again.');
+      setMessage(err?.message || 'Something went wrong. Please try again.');
     }
   };
-
+  
   if (status === 'success') {
     const divProps: HTMLMotionProps<'div'> = {
       initial: { opacity: 0, y: 20 },

@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:stamp": "NEXT_PUBLIC_COMMIT_SHA=$(npm run -s print:commit) NEXT_PUBLIC_BUILD_TIME=$(date -u +%Y-%m-%dT%H:%M:%SZ) next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "print:commit": "node -e \"console.log((process.env.VERCEL_GIT_COMMIT_SHA||'') || require('child_process').execSync('git rev-parse HEAD').toString().trim())\""
   },
   "dependencies": {
     "next": "14.0.0",
