@@ -250,8 +250,8 @@ html, body { min-height: 100%; }
 
 body {
   background:
-    radial-gradient(1400px 1000px at 15% 12%, rgba(90,15,24,0.25), transparent 60%),
-    radial-gradient(1100px 800px at 85% 78%, rgba(90,15,24,0.18), transparent 65%),
+    radial-gradient(1400px 1000px at 15% 12%, rgba(90,15,24,0.20), transparent 60%),
+    radial-gradient(1100px 800px at 85% 78%, rgba(90,15,24,0.15), transparent 65%),
     linear-gradient(180deg, var(--brand-maroon-900) 0%, var(--brand-maroon-950) 100%) !important;
   color: #f2eae7;
 }
