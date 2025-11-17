@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
-import BackgroundFX from '@/components/BackgroundFX';
 
 export const metadata: Metadata = {
   title: 'SORAA — join the collective. skip the pitch.',
@@ -22,9 +21,10 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className="relative min-h-screen">
-        <BackgroundFX />
-        <div className="relative z-10">{children}</div>
+      <body className="min-h-screen">
+        {/* Subtle background grain behind all content */}
+        <div className="fx-grain" aria-hidden />
+        {children}
       </body>
     </html>
   );
