@@ -1,8 +1,10 @@
 'use client';
+import { useEffect } from 'react';
 import React from 'react';
 
 /** Subtle floating orbs + tiny camera glyphs behind all content. */
 export default function BackgroundFloaters() {
+  useEffect(() => { console.log('[BG] floaters mounted'); }, []);
   const orbs = [
     { w: 300, h: 300, top: '8%',  left: '6%',  dur: '40s', delay: '0s' },
     { w: 380, h: 380, top: '20%', left: '66%', dur: '44s', delay: '2s' },
@@ -21,6 +23,11 @@ export default function BackgroundFloaters() {
 
   return (
     <div className="bg-floaters-root" aria-hidden>
+      {/* TEMP DEBUG DOT: remove after verifying */}
+      <div style={{
+        position:'absolute', top:16, left:16, width:18, height:18,
+        borderRadius:9999, background:'#c14d5f', boxShadow:'0 0 20px rgba(193,77,95,0.8)'
+      }} />
       {orbs.map((o, i) => (
         <div
           key={`orb-v-${i}`}

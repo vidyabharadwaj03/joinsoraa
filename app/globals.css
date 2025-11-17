@@ -213,15 +213,6 @@ body {
   }
 }
 
-/* Root layer (behind everything) */
-.bg-floaters-root {
-  position: fixed;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
-  overflow: hidden;
-}
-
 /* Orbs: darker maroon, subtle by default */
 .bg-orb {
   position: absolute;
@@ -247,4 +238,29 @@ body {
 @media (prefers-reduced-motion: no-preference) {
   .float-v { animation: floatUpDown var(--dur, 28s) ease-in-out var(--delay, 0s) infinite; }
   .float-h { animation: floatSide   var(--dur, 36s) ease-in-out var(--delay, 0s) infinite; }
+}
+
+/* --- DARK MAROON BACKGROUND (FORCE APPLIED) --- */
+:root{
+  --brand-maroon-900:#4b0c14;
+  --brand-maroon-950:#2b080d;
+}
+
+html, body { min-height: 100%; }
+
+body {
+  background:
+    radial-gradient(1400px 1000px at 15% 12%, rgba(90,15,24,0.25), transparent 60%),
+    radial-gradient(1100px 800px at 85% 78%, rgba(90,15,24,0.18), transparent 65%),
+    linear-gradient(180deg, var(--brand-maroon-900) 0%, var(--brand-maroon-950) 100%) !important;
+  color: #f2eae7;
+}
+
+/* Floater root must sit above the page background */
+.bg-floaters-root {
+  position: fixed;
+  inset: 0;
+  z-index: 0;            /* NOT -1 */
+  pointer-events: none;
+  overflow: hidden;
 }
