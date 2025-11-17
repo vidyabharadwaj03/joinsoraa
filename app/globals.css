@@ -249,11 +249,22 @@ body {
 html, body { min-height: 100%; }
 
 body {
+  /* Same background for mobile and desktop - scales with viewport */
   background:
-    radial-gradient(1400px 1000px at 15% 12%, rgba(90,15,24,0.12), transparent 60%),
-    radial-gradient(1100px 800px at 85% 78%, rgba(90,15,24,0.10), transparent 65%),
+    radial-gradient(closest-side at 15% 12%, rgba(90,15,24,0.12), transparent 60%),
+    radial-gradient(closest-side at 85% 78%, rgba(90,15,24,0.10), transparent 65%),
     linear-gradient(180deg, var(--brand-maroon-900) 0%, var(--brand-maroon-950) 100%) !important;
   color: #f2eae7;
+}
+
+/* Ensure background is consistent across all screen sizes */
+@media (min-width: 768px) {
+  body {
+    background:
+      radial-gradient(1400px 1000px at 15% 12%, rgba(90,15,24,0.12), transparent 60%),
+      radial-gradient(1100px 800px at 85% 78%, rgba(90,15,24,0.10), transparent 65%),
+      linear-gradient(180deg, var(--brand-maroon-900) 0%, var(--brand-maroon-950) 100%) !important;
+  }
 }
 
 /* Floater root must sit above the page background */
