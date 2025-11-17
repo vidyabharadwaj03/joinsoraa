@@ -1,10 +1,8 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useRef, useEffect } from 'react';
+import { useRef } from 'react';
 import Image from 'next/image';
-import Particles from '@/components/Particles';
-import NoiseOverlay from '@/components/NoiseOverlay';
 import MarqueeStripe from '@/components/MarqueeStripe';
 import WaitlistForm from '@/components/WaitlistForm';
 import Button from '@/components/ui/Button';
@@ -20,23 +18,7 @@ export default function Home() {
   };
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden">
-      {/* Background layer - composited for stability */}
-      <div
-        className="
-          fixed inset-0 -z-10 will-change-transform
-          [transform:translateZ(0)]  /* force its own compositor layer */
-        "
-      >
-        <div
-          className="fixed inset-0 opacity-60"
-          style={{
-            background: 'radial-gradient(ellipse at center, #2d1a1c 0%, #1d0f12 100%)',
-          }}
-        />
-        <Particles />
-        <NoiseOverlay />
-      </div>
+    <main className="relative min-h-screen overflow-x-hidden bg-transparent">
 
       {/* Navbar */}
       <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-brand-bg/30 border-b border-brand-maroon/30">

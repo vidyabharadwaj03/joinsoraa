@@ -9,13 +9,26 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          bg: '#110607',
-          bg2: '#1d0a0c',
-          maroon: '#2a0b0e',
-          red: '#5a0f18',
-          rose: '#e25b5b',
-          bone: '#f6f1ea',
-          haze: '#c9bebe',
+          // base palette centered on #5a0f18
+          50:  '#f9eaea',
+          100: '#f2d4d6',
+          200: '#e5aab0',
+          300: '#d87f8b',
+          400: '#c14d5f',
+          500: '#a83244',
+          600: '#8a2433',
+          700: '#741b28',
+          800: '#5a0f18',   // primary background
+          900: '#420b12',
+          950: '#2e070c',
+          bone:  '#f2eae7',
+          haze:  '#bbaead',
+          red:   '#d3505b',
+          // Keep old names for backward compatibility
+          bg: '#5a0f18',
+          bg2: '#420b12',
+          maroon: '#5a0f18',
+          rose: '#d3505b',
         },
       },
       fontFamily: {

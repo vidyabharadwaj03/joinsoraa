@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import './globals.css';
-import SubtleBackdrop from '@/components/SubtleBackdrop';
+import BackgroundFX from '@/components/BackgroundFX';
 
 export const metadata: Metadata = {
   title: 'SORAA — join the collective. skip the pitch.',
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#110607',
+  themeColor: '#5a0f18',
 };
 
 export default function RootLayout({
@@ -17,14 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className="bg-brand-800">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body>
-        <SubtleBackdrop />
-        {children}
+      <body className="relative min-h-screen">
+        <BackgroundFX />
+        <div className="relative z-10">{children}</div>
       </body>
     </html>
   );
