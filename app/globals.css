@@ -242,16 +242,16 @@ body {
 
 /* --- DARK MAROON BACKGROUND (FORCE APPLIED) --- */
 :root{
-  --brand-maroon-900:#3f0a11; /* Slightly darker */
-  --brand-maroon-950:#2b080d;
+  --brand-maroon-900:#2d080d; /* Much darker */
+  --brand-maroon-950:#1a0508; /* Very dark */
 }
 
 html, body { min-height: 100%; }
 
 body {
   background:
-    radial-gradient(1400px 1000px at 15% 12%, rgba(90,15,24,0.20), transparent 60%),
-    radial-gradient(1100px 800px at 85% 78%, rgba(90,15,24,0.15), transparent 65%),
+    radial-gradient(1400px 1000px at 15% 12%, rgba(90,15,24,0.12), transparent 60%),
+    radial-gradient(1100px 800px at 85% 78%, rgba(90,15,24,0.10), transparent 65%),
     linear-gradient(180deg, var(--brand-maroon-900) 0%, var(--brand-maroon-950) 100%) !important;
   color: #f2eae7;
 }
