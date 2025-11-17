@@ -242,7 +242,7 @@ body {
 
 /* --- DARK MAROON BACKGROUND (FORCE APPLIED) --- */
 :root{
-  --brand-maroon-900:#4b0c14;
+  --brand-maroon-900:#3f0a11; /* Slightly darker */
   --brand-maroon-950:#2b080d;
 }
 
