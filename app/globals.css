@@ -7,7 +7,7 @@
 @layer base {
   html, body, #__next, :root {
     min-height: 100%;
-    background: #5a0f18; /* solid base to prevent flash between frames */
+    background: #6a1f28; /* solid base to prevent flash between frames - lighter */
   }
 
   body {
@@ -29,8 +29,8 @@
   /* Subtle backdrop pan animation */
   @keyframes bg-pan {
     0%   { transform: translate3d(0,0,0) scale(1); }
-    50%  { transform: translate3d(-2%, 1%, 0) scale(1.02); }
-    100% { transform: translate3d(1%, -1%, 0) scale(1.01); }
+    50%  { transform: translate3d(-3%, 2%, 0) scale(1.03); }
+    100% { transform: translate3d(2%, -2%, 0) scale(1.02); }
   }
   
   .animate-bg-pan {

@@ -29,9 +29,9 @@ export default function Home() {
         "
       >
         <div
-          className="fixed inset-0"
+          className="fixed inset-0 opacity-60"
           style={{
-            background: 'radial-gradient(ellipse at center, #1d0a0c 0%, #110607 100%)',
+            background: 'radial-gradient(ellipse at center, #2d1a1c 0%, #1d0f12 100%)',
           }}
         />
         <Particles />
