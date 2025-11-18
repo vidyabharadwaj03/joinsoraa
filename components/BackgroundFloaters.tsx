@@ -12,13 +12,6 @@ export default function BackgroundFloaters() {
     { w: 280, h: 280, top: '34%', left: '32%', dur: '38s', delay: '4s' },
   ];
 
-  const glyphs = [
-    { top: '12%', left: '82%', scale: 1.2, dur: '32s', delay: '0s' },
-    { top: '72%', left: '8%',  scale: 1.0, dur: '28s', delay: '2s' },
-    { top: '28%', left: '12%', scale: 0.9, dur: '30s', delay: '3s' },
-    { top: '78%', left: '78%', scale: 1.1, dur: '35s', delay: '1s' },
-  ];
-
   return (
     <div className="bg-floaters-root" aria-hidden>
       {orbs.map((o, i) => (
@@ -45,31 +38,7 @@ export default function BackgroundFloaters() {
           }}
         />
       ))}
-      {glyphs.map((g, i) => (
-        <div
-          key={`glyph-${i}`}
-          className="bg-glyph float-v"
-          style={{
-            top: g.top, left: g.left, transform: `scale(${g.scale})`,
-            ['--dur' as any]: g.dur, ['--delay' as any]: g.delay,
-          }}
-        >
-          <CameraIcon />
-        </div>
-      ))}
     </div>
-  );
-}
-
-function CameraIcon() {
-  return (
-    <svg width="80" height="80" viewBox="0 0 64 64" fill="none" aria-hidden>
-      <rect x="8" y="18" width="48" height="32" rx="6" stroke="currentColor" strokeWidth="2.5"/>
-      <path d="M20 18l4-6h16l4 6" stroke="currentColor" strokeWidth="2.5" fill="none" />
-      <circle cx="32" cy="34" r="10" stroke="currentColor" strokeWidth="2.5"/>
-      <circle cx="32" cy="34" r="5" fill="currentColor" opacity="0.25"/>
-      <circle cx="48" cy="26" r="2" fill="currentColor" />
-    </svg>
   );
 }
 
