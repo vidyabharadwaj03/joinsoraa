@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import MarqueeStripe from '@/components/MarqueeStripe';
 import WaitlistForm from '@/components/WaitlistForm';
@@ -9,12 +9,14 @@ import Button from '@/components/ui/Button';
 
 export default function Home() {
   const howItWorksRef = useRef<HTMLDivElement>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+    setMobileMenuOpen(false);
   };
 
   return (
@@ -37,6 +39,7 @@ export default function Home() {
               priority
             />
           </button>
+          {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-8 font-sans text-sm">
             <a href="#creators" className="text-brand-haze hover:text-brand-bone transition-colors">
               For Creators
@@ -51,7 +54,48 @@ export default function Home() {
               Join Waitlist
             </button>
           </div>
+          {/* Mobile Menu Button */}
+          <button
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="md:hidden text-brand-bone p-2"
+            aria-label="Toggle menu"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {mobileMenuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
         </div>
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden border-t border-brand-maroon/30 bg-brand-bg/95 backdrop-blur-md">
+            <div className="px-6 py-4 flex flex-col gap-4 font-sans text-sm">
+              <a 
+                href="#creators" 
+                onClick={() => scrollToSection('creators')}
+                className="text-brand-haze hover:text-brand-bone transition-colors"
+              >
+                For Creators
+              </a>
+              <a 
+                href="#brands" 
+                onClick={() => scrollToSection('brands')}
+                className="text-brand-haze hover:text-brand-bone transition-colors"
+              >
+                For Brands
+              </a>
+              <button
+                onClick={() => scrollToSection('waitlist')}
+                className="text-brand-red hover:text-brand-rose transition-colors text-left"
+              >
+                Join Waitlist
+              </button>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
