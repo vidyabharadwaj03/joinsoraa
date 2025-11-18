@@ -17,13 +17,8 @@
     min-height: 100%;
   }
 
-  /* Page background: gentle vertical gradient */
+  /* Page background: removed - using dark maroon background at end of file */
   body {
-    /* rich maroon – not black */
-    background:
-      radial-gradient(1200px 900px at 20% 15%, var(--brand-800) 0%, var(--brand-900) 75%),
-      linear-gradient(180deg, var(--brand-800) 0%, var(--brand-900) 100%);
-    color: #f2eae7; /* brand.bone */
     @apply font-sans antialiased;
   }
 
@@ -246,7 +241,10 @@ body {
   --brand-maroon-950:#1a0508; /* Very dark */
 }
 
-html, body { min-height: 100%; }
+html, body, #__next { 
+  min-height: 100%;
+  background: var(--brand-maroon-950) !important; /* Base dark maroon */
+}
 
 body {
   /* Same background for mobile and desktop - scales with viewport */
@@ -254,11 +252,14 @@ body {
     radial-gradient(closest-side at 15% 12%, rgba(90,15,24,0.12), transparent 60%),
     radial-gradient(closest-side at 85% 78%, rgba(90,15,24,0.10), transparent 65%),
     linear-gradient(180deg, var(--brand-maroon-900) 0%, var(--brand-maroon-950) 100%) !important;
-  color: #f2eae7;
+  color: #f2eae7 !important;
 }
 
 /* Ensure background is consistent across all screen sizes */
 @media (min-width: 768px) {
+  html, body, #__next {
+    background: var(--brand-maroon-950) !important;
+  }
   body {
     background:
       radial-gradient(1400px 1000px at 15% 12%, rgba(90,15,24,0.12), transparent 60%),
