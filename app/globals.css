@@ -49,6 +49,26 @@
   animation: marquee 20s linear infinite;
 }
 
+/* Faster marquee animation */
+@keyframes marquee-fast {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee-fast {
+  animation: marquee-fast 15s linear infinite;
+}
+
+/* Float slow animation for newspaper clippings */
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
 /* Grain texture (SVG data URI) */
 @keyframes fx-grain {
   0% { transform: translate3d(0,0,0) }

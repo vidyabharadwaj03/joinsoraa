@@ -19,7 +19,7 @@ export default function Home() {
       <Navigation />
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center pt-32 pb-32 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
+      <section className="relative min-h-screen flex items-center justify-center pt-24 md:pt-32 pb-20 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
         <div className="max-w-7xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 60 }}
@@ -40,7 +40,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
-              className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed max-w-4xl"
+              className="text-xl md:text-2xl text-gray-300 mb-10 leading-relaxed max-w-4xl"
             >
               SORAA automatically matches your business with micro-creators and manages the entire collaboration using AI. No outreach. No guesswork. No huge budgets. Just results.
             </motion.p>
@@ -72,43 +72,57 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Ticker/Marquee Section */}
-      <section className="relative bg-black text-white py-4 overflow-hidden">
-        <div className="flex whitespace-nowrap">
-          <div className="text-lg tracking-wider uppercase animate-marquee flex-shrink-0">
-            {'MICROINFLUENCERS × SMALL BRANDS • '.repeat(10)}
-            {'MICROINFLUENCERS × SMALL BRANDS • '.repeat(10)}
-          </div>
+      {/* Enhanced Ticker/Marquee Section */}
+      <section className="relative bg-black py-8 md:py-12 overflow-hidden border-y border-red-900/30">
+        {/* Noise texture overlay */}
+        <div className="absolute inset-0 opacity-5 pointer-events-none">
+          <div className="w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOSIgbnVtT2N0YXZlcz0iNCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg==')] bg-repeat"></div>
+        </div>
+        
+        {/* Animated marquee */}
+        <div className="flex whitespace-nowrap animate-marquee-fast">
+          {[...Array(6)].map((_, i) => (
+            <span 
+              key={i} 
+              className="mx-12 text-2xl md:text-4xl font-bold tracking-wider text-white"
+              style={{ textShadow: '0 0 20px rgba(239, 68, 68, 0.5)' }}
+            >
+              MICROINFLUENCERS × SMALL BRANDS •
+            </span>
+          ))}
         </div>
       </section>
 
-      {/* WHAT IS SORAA Section */}
-      <section id="what-is-soraa" className="relative py-32 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
+      {/* WHAT IS SORAA Section - Fixed duplicate heading */}
+      <section id="what-is-soraa" className="relative py-16 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
         <div className="max-w-7xl mx-auto">
-          <motion.div
+          <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
+            viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="mb-20"
+            className="text-5xl md:text-6xl font-bold text-white mb-8 text-center"
           >
-            <p className="text-sm uppercase tracking-widest text-gray-400 mb-4">
-              WHAT IS SORAA
-            </p>
-            <h2 className="text-5xl md:text-6xl text-white font-bold mb-6">
-              What Is SORAA
-            </h2>
-            <p className="text-xl md:text-2xl text-gray-300 leading-relaxed max-w-3xl">
-              SORAA is the platform connecting local brands with micro-creators who actually influence their communities. We use AI to match the right creators to the right businesses, turning authentic content into real local growth.
-            </p>
-          </motion.div>
+            What Is SORAA
+          </motion.h2>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+            className="text-xl md:text-2xl text-gray-300 text-center max-w-4xl mx-auto mb-12 leading-relaxed"
+          >
+            The platform connecting local brands with micro-creators who actually influence their communities.{' '}
+            <span className="text-white font-semibold">AI-powered matching</span> turns authentic content into real local growth.
+          </motion.p>
 
-          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+          <div className="grid md:grid-cols-2 gap-8 mt-12">
             {/* For Creators Card */}
             <motion.div
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
+              viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.6, ease: 'easeOut' }}
               whileHover={{ y: -8, scale: 1.02 }}
               className="group relative bg-gradient-to-br from-[#3a1515] to-[#4a1f1f] p-12 rounded-3xl border border-[#5a2525] hover:border-[#7a3535] transition-all hover:shadow-2xl hover:shadow-red-900/30 cursor-pointer"
@@ -160,7 +174,7 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-100px' }}
+              viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
               whileHover={{ y: -8, scale: 1.02 }}
               className="group relative bg-gradient-to-br from-[#3a1515] to-[#4a1f1f] p-12 rounded-3xl border border-[#5a2525] hover:border-[#7a3535] transition-all hover:shadow-2xl hover:shadow-red-900/30 cursor-pointer"
@@ -211,23 +225,23 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How It Works Section */}
+      {/* How It Works Section - Center-aligned */}
       <section
         id="how-it-works"
-        className="relative py-32 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]"
+        className="relative py-16 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]"
       >
         <div className="max-w-7xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
+            viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="text-5xl md:text-6xl text-white mb-20 font-bold"
+            className="text-5xl md:text-6xl text-white mb-12 font-bold text-center"
           >
             How It Works
           </motion.h2>
 
-          <div className="grid md:grid-cols-3 gap-12">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               { step: '1', title: 'Connect Profiles', desc: 'Link your socials, set your rates, define your niche.' },
               { step: '2', title: 'Match + Brief', desc: 'AI finds perfect matches. Get briefs tailored to you.' },
@@ -235,22 +249,23 @@ export default function Home() {
             ].map((item, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-100px' }}
+                viewport={{ once: true, margin: '-50px' }}
                 transition={{ duration: 0.6, delay: index * 0.2, ease: 'easeOut' }}
-                className="text-center"
+                whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                className="text-center group cursor-pointer"
               >
                 <motion.div 
-                  initial={{ opacity: 0, scale: 0.8, rotate: -180 }}
+                  initial={{ opacity: 0, scale: 0, rotate: -180 }}
                   whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.2, type: 'spring', stiffness: 200, damping: 15 }}
-                  className="w-16 h-16 rounded-full bg-gradient-to-br from-red-600 to-red-700 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-6 shadow-lg shadow-red-600/50"
+                  transition={{ delay: index * 0.2 + 0.2, type: 'spring', stiffness: 200, damping: 15 }}
+                  className="w-20 h-20 bg-gradient-to-br from-red-600 to-red-800 text-white rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-6 shadow-2xl shadow-red-600/50 group-hover:shadow-red-600/80 transition-all"
                 >
                   {item.step}
                 </motion.div>
-                <h3 className="text-2xl text-white mb-4 tracking-tight font-bold">
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">
                   {item.title}
                 </h3>
                 <p className="text-gray-300 text-lg leading-relaxed">
@@ -262,42 +277,144 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Breaking News Banner */}
-      <section className="relative py-32 px-6 bg-black text-white">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
-          className="max-w-4xl mx-auto text-center"
-        >
-          <p className="text-sm uppercase tracking-widest font-bold mb-6">
-            BREAKING NEWS:
-          </p>
-          <div className="flex flex-col items-center gap-6">
-            <Image
-              src="/NewSoraaLogo.png"
-              alt="SORAA"
-              width={200}
-              height={80}
-              className="h-20 w-auto object-contain brightness-0 invert"
-            />
-            <p className="text-2xl font-bold tracking-tight">
+      {/* Enhanced Breaking News Banner */}
+      <section className="relative py-20 px-6 bg-black overflow-hidden">
+        {/* Animated newspaper clipping background */}
+        <div className="absolute inset-0 opacity-5 pointer-events-none">
+          <div className="grid grid-cols-3 gap-8 animate-float-slow">
+            {[...Array(12)].map((_, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, rotate: -5 }}
+                animate={{ 
+                  opacity: [0.3, 0.6, 0.3],
+                  rotate: [-5, 5, -5],
+                  y: [0, -20, 0]
+                }}
+                transition={{
+                  duration: 8,
+                  delay: i * 0.5,
+                  repeat: Infinity,
+                  ease: 'easeInOut'
+                }}
+                className="text-white/10 text-sm font-serif leading-tight p-4 border border-white/5 rotate-3"
+              >
+                <div className="font-bold mb-2 text-xs tracking-wider">BREAKING NEWS</div>
+                <div className="space-y-1">
+                  <div className="h-2 bg-white/10 rounded"></div>
+                  <div className="h-2 bg-white/10 rounded w-4/5"></div>
+                  <div className="h-2 bg-white/10 rounded w-3/5"></div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Main content */}
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
+          {/* Animated "BREAKING NEWS" label */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="inline-block mb-8"
+          >
+            <div className="relative inline-block">
+              {/* Glowing background */}
+              <div className="absolute inset-0 bg-red-600 blur-xl opacity-50 animate-pulse"></div>
+              
+              {/* Label */}
+              <div className="relative bg-red-600 px-8 py-3 rounded-full">
+                <span className="text-white text-sm font-bold tracking-widest uppercase">
+                  Breaking News
+                </span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Logo with serif font */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mb-6"
+          >
+            <h2 className="text-7xl md:text-8xl font-bold text-white tracking-wider" style={{ fontFamily: 'serif' }}>
+              SORAA
+            </h2>
+          </motion.div>
+
+          {/* Animated underline */}
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: '100%' }}
+            viewport={{ once: true }}
+            transition={{ duration: 1, delay: 0.6 }}
+            className="h-1 bg-gradient-to-r from-transparent via-red-600 to-transparent mx-auto mb-8 max-w-md"
+          />
+
+          {/* Coming Soon with pulse */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.9 }}
+            animate={{ scale: [1, 1.05, 1] }}
+            transition={{ duration: 2, repeat: Infinity }}
+          >
+            <p className="text-3xl md:text-4xl font-bold text-white tracking-wide">
               COMING SOON
             </p>
-          </div>
-        </motion.div>
+          </motion.div>
+
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 1.2 }}
+            className="text-gray-400 text-lg mt-4 italic"
+          >
+            The future of creator-brand collaboration
+          </motion.p>
+        </div>
+
+        {/* Animated particles/sparkles */}
+        <div className="absolute inset-0 pointer-events-none">
+          {[...Array(20)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute w-1 h-1 bg-red-500 rounded-full"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                opacity: [0, 1, 0],
+                scale: [0, 1.5, 0],
+              }}
+              transition={{
+                duration: 3,
+                delay: Math.random() * 2,
+                repeat: Infinity,
+                ease: 'easeInOut'
+              }}
+            />
+          ))}
+        </div>
       </section>
 
       {/* Waitlist Section */}
-      <section id="waitlist" className="relative py-32 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
+      <section id="waitlist" className="relative py-16 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
         <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-100px' }}
+            viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="text-center mb-12"
+            className="text-center mb-10"
           >
             <h2 className="text-5xl md:text-6xl text-white mb-8 font-bold">
               Join The Waitlist
