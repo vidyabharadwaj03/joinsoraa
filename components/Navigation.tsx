@@ -29,6 +29,12 @@ export default function Navigation() {
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8 text-sm text-white">
           <Link 
+            href="/what-we-are"
+            className="text-gray-300 hover:text-white transition-colors"
+          >
+            What We Are
+          </Link>
+          <Link 
             href="/creators"
             className="text-gray-300 hover:text-white transition-colors"
           >
@@ -81,6 +87,13 @@ export default function Navigation() {
             className="md:hidden border-t border-white/10 bg-[#1a0a0aff] backdrop-blur-lg overflow-hidden"
           >
             <div className="px-6 py-4 flex flex-col gap-4 text-sm text-white">
+              <Link 
+                href="/what-we-are"
+                onClick={() => setMobileMenuOpen(false)}
+                className="text-gray-300 hover:text-white transition-colors"
+              >
+                What We Are
+              </Link>
               <Link 
                 href="/creators"
                 onClick={() => setMobileMenuOpen(false)}
