@@ -179,8 +179,8 @@ export default function WaitlistForm() {
       <Button type="submit" disabled={status === 'loading'} aria-busy={status === 'loading'}>
         {status === 'loading' ? 'Submitting...' : 'Get Early Access'}
       </Button>
-      <p className="text-gray-600 text-sm font-sans italic text-center">
-        — one authentic connection at a time
+      <p className="text-gray-400 text-sm font-sans italic text-center">
+        one authentic connection at a time
       </p>
     </form>
   );
