@@ -216,7 +216,7 @@ body::after {
 html, body { min-height: 100%; }
 
 body {
-  /* Darker maroon—NOT black. Vignette + gentle vertical gradient. */
+  /* Darker maroon, not black. Vignette + gentle vertical gradient. */
   background:
     radial-gradient(1400px 1000px at 15% 12%, rgba(90,15,24,0.25), transparent 60%),
     radial-gradient(1100px 800px at 85% 78%, rgba(90,15,24,0.18), transparent 65%),

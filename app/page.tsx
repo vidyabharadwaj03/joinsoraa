@@ -277,95 +277,50 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Enhanced Breaking News Banner */}
-      <section className="relative py-20 px-6 bg-black overflow-hidden">
-        {/* Animated newspaper clipping background */}
-        <div className="absolute inset-0 opacity-5 pointer-events-none">
-          <div className="grid grid-cols-3 gap-8 animate-float-slow">
-            {[...Array(12)].map((_, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, rotate: -5 }}
-                animate={{ 
-                  opacity: [0.3, 0.6, 0.3],
-                  rotate: [-5, 5, -5],
-                  y: [0, -20, 0]
-                }}
-                transition={{
-                  duration: 8,
-                  delay: i * 0.5,
-                  repeat: Infinity,
-                  ease: 'easeInOut'
-                }}
-                className="text-white/10 text-sm font-serif leading-tight p-4 border border-white/5 rotate-3"
-              >
-                <div className="font-bold mb-2 text-xs tracking-wider">BREAKING NEWS</div>
-                <div className="space-y-1">
-                  <div className="h-2 bg-white/10 rounded"></div>
-                  <div className="h-2 bg-white/10 rounded w-4/5"></div>
-                  <div className="h-2 bg-white/10 rounded w-3/5"></div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* Main content */}
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          {/* Animated "BREAKING NEWS" label */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="inline-block mb-8"
-          >
-            <div className="relative inline-block">
-              {/* Glowing background */}
-              <div className="absolute inset-0 bg-red-600 blur-xl opacity-50 animate-pulse"></div>
-              
-              {/* Label */}
-              <div className="relative bg-red-600 px-8 py-3 rounded-full">
-                <span className="text-white text-sm font-bold tracking-widest uppercase">
-                  Breaking News
-                </span>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Logo with serif font */}
+      {/* Breaking News Banner (simplified, logo-based) */}
+      <section className="relative py-16 px-6 bg-black text-white">
+        <div className="max-w-4xl mx-auto text-center">
+          {/* Label */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="mb-6"
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="inline-block mb-6"
           >
-            <h2 className="text-7xl md:text-8xl font-bold text-white tracking-wider" style={{ fontFamily: 'serif' }}>
-              SORAA
-            </h2>
+            <span className="px-6 py-2 rounded-full bg-red-600 text-sm font-bold tracking-widest uppercase">
+              Breaking News
+            </span>
           </motion.div>
 
-          {/* Animated underline */}
+          {/* Logo */}
           <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: '100%' }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.6 }}
-            className="h-1 bg-gradient-to-r from-transparent via-red-600 to-transparent mx-auto mb-8 max-w-md"
-          />
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
+            className="mb-4 flex justify-center"
+          >
+            <Image
+              src="/NewSoraaLogo.png"
+              alt="SORAA logo"
+              width={220}
+              height={80}
+              className="h-16 md:h-20 w-auto object-contain"
+            />
+          </motion.div>
 
-          {/* Coming Soon with pulse */}
+          {/* Coming Soon with subtle pulse */}
           <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.9 }}
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
           >
             <motion.p
               className="text-3xl md:text-4xl font-bold text-white tracking-wide"
-              animate={{ scale: [1, 1.05, 1] }}
-              transition={{ duration: 2, repeat: Infinity }}
+              animate={{ scale: [1, 1.03, 1] }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
             >
               COMING SOON
             </motion.p>
@@ -375,36 +330,12 @@ export default function Home() {
           <motion.p
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 1.2 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
             className="text-gray-400 text-lg mt-4 italic"
           >
             The future of creator-brand collaboration
           </motion.p>
-        </div>
-
-        {/* Animated particles/sparkles */}
-        <div className="absolute inset-0 pointer-events-none">
-          {[...Array(20)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute w-1 h-1 bg-red-500 rounded-full"
-              style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-              }}
-              animate={{
-                opacity: [0, 1, 0],
-                scale: [0, 1.5, 0],
-              }}
-              transition={{
-                duration: 3,
-                delay: Math.random() * 2,
-                repeat: Infinity,
-                ease: 'easeInOut'
-              }}
-            />
-          ))}
         </div>
       </section>
 

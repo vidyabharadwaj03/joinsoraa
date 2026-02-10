@@ -15,6 +15,15 @@ export default function Footer() {
           <a href="mailto:joinsoraa@gmail.com" className="hover:text-gray-300 transition-colors">
             joinsoraa@gmail.com
           </a>
+          <span className="hidden md:inline">•</span>
+          <a
+            href="https://www.instagram.com/joinsoraa"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-gray-300 transition-colors"
+          >
+            @joinsoraa
+          </a>
         </div>
         <p className="text-sm text-gray-500">
           Copyright © 2025 SORAA

@@ -3,7 +3,7 @@ import './globals.css';
 import BackgroundFloaters from '@/components/BackgroundFloaters';
 
 export const metadata: Metadata = {
-  title: 'SORAA — join the collective. skip the pitch.',
+  title: 'SORAA, join the collective. skip the pitch.',
   description: 'AI-powered matchmaking for micro-influencers and ambitious local brands.',
 };
 

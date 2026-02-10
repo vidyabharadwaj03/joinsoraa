@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import WaitlistForm from '@/components/WaitlistForm';
+import ScheduleForm from '@/components/ScheduleForm';
 
 export default function CreatorsPage() {
   return (
@@ -61,37 +62,27 @@ export default function CreatorsPage() {
             </motion.p>
           </div>
 
-          {/* Right column - Visual card */}
+          {/* Right column - Supporting card (no duplicate slogan) */}
           <motion.div
             initial={{ opacity: 0, x: 60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
             className="relative bg-gradient-to-br from-[#3a1515] to-[#4a1f1f] p-12 rounded-3xl border border-white/10 shadow-2xl overflow-hidden"
           >
-            {/* Top accent */}
             <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-600 to-pink-600 rounded-t-3xl" />
-
-            {/* Inner label */}
-            <div className="inline-block bg-white/10 rounded-full px-6 py-2 mb-8">
+            <div className="inline-block bg-white/10 rounded-full px-6 py-2 mb-6">
               <span className="text-white text-xs font-bold tracking-widest uppercase">
-                For Creators
+                Built For Creators
               </span>
             </div>
-
-            {/* Large text */}
-            <h2 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
-              <span className="bg-gradient-to-r from-red-400 to-pink-400 bg-clip-text text-transparent">
-                Create.
-                <br />
-                Collaborate.
-                <br />
-                Get Paid.
-              </span>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
+              Turn your influence into a real business
             </h2>
-
-            {/* Subtext */}
-            <p className="text-gray-300 text-lg leading-relaxed">
-              Soraa helps creators turn their influence into real opportunities. Work with brands you actually love — on your terms.
+            <p className="text-gray-300 text-lg leading-relaxed mb-4">
+              Soraa gives you a single home for brand collaborations, rates, and relationships so you can spend more time creating.
+            </p>
+            <p className="text-gray-400 text-base leading-relaxed">
+              Keep control of your voice and your value while we handle the matching, briefs, and logistics in the background.
             </p>
           </motion.div>
         </div>
@@ -140,7 +131,7 @@ export default function CreatorsPage() {
               {
                 icon: '✨',
                 title: 'Creative Freedom',
-                description: 'Create content in your own voice — no forced scripts.',
+                description: 'Create content in your own voice with no forced scripts.',
               },
               {
                 icon: '💰',
@@ -176,43 +167,22 @@ export default function CreatorsPage() {
         </div>
       </section>
 
-      {/* Monetize Your Influence */}
+      {/* Monetize Your Influence - text focused */} 
       <section className="py-20 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
         <div className="max-w-7xl mx-auto">
-          {/* Visual card with phone mockup */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="bg-gradient-to-br from-[#3a1515] to-[#4a1f1f] p-12 md:p-16 rounded-3xl border border-white/10 mb-12 text-center relative overflow-hidden"
-          >
-            <div className="w-48 h-96 mx-auto mb-8 bg-gradient-to-br from-red-900/20 to-pink-900/20 rounded-3xl border-4 border-white/10 flex items-center justify-center">
-              <span className="text-6xl">📱</span>
-            </div>
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-4">
+          <div className="text-center mb-10">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
               Discover paid brand collaborations
-            </h3>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto leading-relaxed">
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
               Browse campaigns from brands actively seeking creators like you. Filter by niche, budget, and timeline.
             </p>
-          </motion.div>
-
-          {/* Text + bullets */}
-          <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Everything you need to <span className="text-red-400">Monetize</span> your influence
-            </h2>
-            <p className="text-xl text-gray-300">
-              You create the influence. We handle the connections.
-            </p>
           </div>
-
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {[
-              'Discover paid brand collaborations',
-              'Negotiate campaigns directly',
-              'Showcase your content & analytics',
+              'Discover paid brand collaborations in your niche',
+              'Negotiate campaigns directly with brands',
+              'Showcase your best content and analytics',
               'Build credibility with verified partnerships',
             ].map((item, i) => (
               <motion.div
@@ -231,7 +201,7 @@ export default function CreatorsPage() {
         </div>
       </section>
 
-      {/* CTA + Waitlist */}
+      {/* CTA + Waitlist (email scheduling) */}
       <section id="waitlist" className="py-20 px-6 bg-[#1a0a0a]">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
@@ -240,11 +210,14 @@ export default function CreatorsPage() {
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Ready to turn your influence into income?
             </h2>
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 backdrop-blur mb-6">
-              <WaitlistForm />
+            <p className="text-lg text-gray-300 mb-6">
+              Share a few details and we will follow up from joinsoraa@gmail.com to help you get started.
+            </p>
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 backdrop-blur mb-6 text-left">
+              <ScheduleForm context="creators" />
             </div>
           </motion.div>
         </div>

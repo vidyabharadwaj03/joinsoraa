@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import ScheduleForm from '@/components/ScheduleForm';
 
 export default function BrandsPage() {
   return (
@@ -66,12 +67,15 @@ export default function BrandsPage() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all shadow-lg shadow-red-600/50"
                 onClick={() => {
-                  window.location.href = '/signup?type=brand';
+                  const element = document.getElementById('brand-schedule');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
                 }}
+                className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all shadow-lg shadow-red-600/50"
               >
-                Start Your First Campaign →
+                Schedule A Call
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -89,23 +93,7 @@ export default function BrandsPage() {
             </motion.div>
           </div>
 
-          {/* Right: Visual card */}
-          <motion.div
-            initial={{ opacity: 0, x: 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
-            className="bg-gradient-to-br from-[#3a1515] to-[#4a1f1f] p-12 rounded-3xl border border-white/10 shadow-2xl"
-          >
-            <div className="aspect-video bg-gradient-to-br from-red-900/20 to-orange-900/20 rounded-2xl flex items-center justify-center mb-6">
-              <span className="text-6xl">📊</span>
-            </div>
-            <h3 className="text-2xl font-bold text-white mb-4">
-              Real Results, Real ROI
-            </h3>
-            <p className="text-lg text-gray-300 leading-relaxed">
-              Track performance, measure impact, and scale what works.
-            </p>
-          </motion.div>
+          {/* Right column kept intentionally simple for now (no heavy visuals) */}
         </div>
       </section>
 
@@ -141,7 +129,7 @@ export default function BrandsPage() {
               {
                 icon: '⚡',
                 title: 'Streamlined Campaigns',
-                description: 'Discover creators, manage collaborations, track results — all in one place.',
+                description: 'Discover creators, manage collaborations, track results, all in one place.',
               },
               {
                 icon: '📊',
@@ -262,8 +250,8 @@ export default function BrandsPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
+      {/* CTA Section with scheduling form */}
+      <section id="brand-schedule" className="py-20 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
         <div className="max-w-4xl mx-auto text-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -271,33 +259,14 @@ export default function BrandsPage() {
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
               Ready to launch your first campaign?
             </h2>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => {
-                  window.location.href = '/signup?type=brand';
-                }}
-                className="bg-red-600 hover:bg-red-700 text-white px-12 py-5 rounded-full text-xl font-semibold hover:scale-105 transition-all shadow-2xl shadow-red-600/50"
-              >
-                Start Your First Campaign →
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => {
-                  const element = document.getElementById('why-choose-soraa');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className="border-2 border-white text-white hover:bg-white hover:text-black px-12 py-5 rounded-full text-xl font-semibold hover:scale-105 transition-all"
-              >
-                See How It Works
-              </motion.button>
+            <p className="text-lg text-gray-300 mb-6">
+              Share a few details and we will follow up from joinsoraa@gmail.com to help you get started.
+            </p>
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 backdrop-blur text-left">
+              <ScheduleForm context="brands" />
             </div>
           </motion.div>
         </div>
