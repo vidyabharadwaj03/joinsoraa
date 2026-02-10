@@ -22,10 +22,10 @@ export function Button({
       whileHover={whileHover}
       whileTap={whileTap}
       className={cn(
-        "rounded-2xl px-8 py-4 uppercase tracking-wide transition-colors font-display text-lg",
+        "rounded-full px-8 py-4 tracking-wide transition-colors font-sans text-lg font-semibold",
         variant === "primary"
-          ? "bg-brand-red text-brand-bone hover:bg-brand-rose"
-          : "border-2 border-brand-red text-brand-red hover:bg-brand-red hover:text-brand-bone",
+          ? "bg-black text-white hover:bg-gray-900"
+          : "border-2 border-black text-black hover:bg-black hover:text-white",
         className || ""
       )}
       {...props}

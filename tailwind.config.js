@@ -28,6 +28,13 @@ module.exports = {
           bg2: '#420b12',
           maroon: '#5a0f18',
           rose: '#d3505b',
+          // New dark burgundy palette
+          burgundy: {
+            light: '#4a1f1f',
+            dark: '#3a1515',
+            border: '#5a2525',
+            'border-hover': '#7a3535',
+          },
         },
       },
       fontFamily: {

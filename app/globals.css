@@ -39,6 +39,16 @@
   100% { transform: translate3d(-1%, 1%, 0) rotate(360deg); }
 }
 
+/* Marquee animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+
 /* Grain texture (SVG data URI) */
 @keyframes fx-grain {
   0% { transform: translate3d(0,0,0) }

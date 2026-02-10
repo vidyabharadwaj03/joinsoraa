@@ -137,7 +137,7 @@ export default function WaitlistForm() {
     };
     return (
       <motion.div {...divProps}>
-        <p className="text-brand-bone text-lg font-sans">
+        <p className="text-black text-lg font-sans">
           ✨ {message || "You're on the list! 🎉"}
         </p>
       </motion.div>
@@ -167,7 +167,7 @@ export default function WaitlistForm() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             className={`text-sm font-sans ${
-              status === 'error' ? 'text-brand-red' : 'text-brand-haze'
+              status === 'error' ? 'text-red-600' : 'text-gray-600'
             }`}
             role="status"
             aria-live="polite"
@@ -179,7 +179,7 @@ export default function WaitlistForm() {
       <Button type="submit" disabled={status === 'loading'} aria-busy={status === 'loading'}>
         {status === 'loading' ? 'Submitting...' : 'Get Early Access'}
       </Button>
-      <p className="text-brand-haze text-sm font-sans italic text-center">
+      <p className="text-gray-600 text-sm font-sans italic text-center">
         — one authentic connection at a time
       </p>
     </form>
