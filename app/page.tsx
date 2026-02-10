@@ -361,12 +361,14 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.9 }}
-            animate={{ scale: [1, 1.05, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
           >
-            <p className="text-3xl md:text-4xl font-bold text-white tracking-wide">
+            <motion.p
+              className="text-3xl md:text-4xl font-bold text-white tracking-wide"
+              animate={{ scale: [1, 1.05, 1] }}
+              transition={{ duration: 2, repeat: Infinity }}
+            >
               COMING SOON
-            </p>
+            </motion.p>
           </motion.div>
 
           {/* Subtitle */}
