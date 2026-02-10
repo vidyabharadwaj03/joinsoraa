@@ -11,130 +11,150 @@ export default function BrandsPage() {
     <main className="relative min-h-screen overflow-x-hidden font-sans bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
       <Navigation />
 
-      {/* Hero Section - Dark Burgundy */}
-      <section className="pt-20 md:pt-24 pb-16 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
-        <div className="max-w-4xl mx-auto space-y-6">
+      {/* Hero Section - full screen, impactful */}
+      <section className="relative min-h-screen flex items-center justify-center px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414] overflow-hidden">
+        {/* Background decorative blurs */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-red-500 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative z-10 max-w-6xl mx-auto text-center">
+          {/* Small label */}
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="inline-block"
+            transition={{ duration: 0.6 }}
+            className="inline-block mb-8"
           >
-            <div className="inline-block bg-white/10 rounded-full px-6 py-2">
-              <span className="text-white text-sm font-bold tracking-widest uppercase">
+            <div className="border-2 border-orange-500/50 rounded-full px-6 py-3 backdrop-blur-sm">
+              <span className="text-orange-400 text-sm font-bold tracking-widest uppercase">
                 For Brands
               </span>
             </div>
           </motion.div>
 
+          {/* Massive headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.05, ease: 'easeOut' }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-6xl md:text-8xl lg:text-9xl font-bold mb-8 leading-none"
           >
-            Turn Influence{' '}
-            <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
+            <span className="block text-white">Turn Influence</span>
+            <span className="block bg-gradient-to-r from-orange-400 via-red-400 to-orange-400 bg-clip-text text-transparent">
               Into Impact
             </span>
           </motion.h1>
 
+          {/* Subheadline */}
           <motion.p
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
-            className="text-xl text-gray-300 leading-relaxed max-w-2xl"
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="text-xl md:text-2xl text-gray-300 mb-16 max-w-4xl mx-auto leading-relaxed"
           >
-            Find creators who move culture and run campaigns with clear outcomes.
+            Soraa connects your brand with creators who actually move culture and conversions. We make influencer marketing simple, authentic, and performance-driven.
           </motion.p>
 
-          <div className="space-y-3 pt-2">
+          {/* Icon grid */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.7 }}
+            className="grid grid-cols-3 gap-8 max-w-3xl mx-auto mb-16"
+          >
             {[
-              { icon: BadgeCheck, text: 'Vetted creators with real audience trust' },
-              { icon: Zap, text: 'Fast sourcing and simple briefs' },
-              { icon: Sparkles, text: 'Performance tracking you can explain' },
-            ].map((item, index) => (
+              { icon: '🎯', label: 'Precise Targeting' },
+              { icon: '📊', label: 'Clear Analytics' },
+              { icon: '⚡', label: 'Fast Setup' },
+            ].map((item, i) => (
               <motion.div
-                key={item.text}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: 0.2 + index * 0.08, ease: 'easeOut' }}
-                className="flex items-center gap-3"
+                key={item.label}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.9 + i * 0.1, type: 'spring', stiffness: 200 }}
+                whileHover={{ scale: 1.1, y: -10 }}
+                className="group cursor-pointer"
               >
-                <item.icon className="w-5 h-5 text-gray-300" />
-                <span className="text-lg text-gray-300">{item.text}</span>
+                <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-3xl flex items-center justify-center border border-orange-500/30 group-hover:border-orange-500/60 transition-all group-hover:shadow-2xl group-hover:shadow-orange-500/50">
+                  <span className="text-5xl">{item.icon}</span>
+                </div>
+                <p className="text-white font-semibold text-lg">{item.label}</p>
               </motion.div>
             ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.45, ease: 'easeOut' }}
-            className="flex flex-col sm:flex-row gap-4 pt-2"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => {
-                const element = document.getElementById('brand-schedule');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-              className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all shadow-lg shadow-red-600/50"
-            >
-              Schedule A Call
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => {
-                const element = document.getElementById('brand-how');
-                if (element) {
-                  element.scrollIntoView({ behavior: 'smooth' });
-                }
-              }}
-              className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all"
-            >
-              See How It Works
-            </motion.button>
           </motion.div>
 
-          {/* Founding story callout */}
+          {/* Email CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.5, ease: 'easeOut' }}
-            className="mt-3 max-w-3xl border-l-2 border-orange-500/70 pl-4"
+            transition={{ duration: 0.6, delay: 1.2 }}
+            className="space-y-4"
           >
-            <p className="text-base md:text-lg text-gray-100 font-medium mb-1">
-              Built by marketers, for marketers.
-            </p>
-            <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-              We know how noisy influencer marketing can feel, so Soraa focuses on the creators and campaigns that actually move people, not just impressions.
-            </p>
+            <p className="text-gray-400 text-lg">Ready to launch your first campaign?</p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <a
+                href="mailto:joinsoraa@gmail.com?subject=Brand Interest - Schedule Call&body=Hi! I'm interested in working with SORAA.%0D%0A%0D%0ACompany name:%0D%0ACampaign goals:%0D%0ABudget range:%0D%0A%0D%0AThanks!"
+                className="inline-block bg-red-600 hover:bg-red-700 text-white px-10 py-5 rounded-full text-xl font-bold hover:scale-105 transition-all shadow-2xl shadow-red-600/50"
+              >
+                Send Email To Schedule
+              </a>
+              <button
+                onClick={() => {
+                  const element = document.getElementById('brand-how');
+                  if (element) {
+                    element.scrollIntoView({ behavior: 'smooth' });
+                  }
+                }}
+                className="border-2 border-white/50 text-white hover:bg-white hover:text-black px-10 py-5 rounded-full text-xl font-bold hover:scale-105 transition-all"
+              >
+                See How It Works
+              </button>
+            </div>
+            <p className="text-sm text-gray-500">We&apos;ll follow up from joinsoraa@gmail.com</p>
+          </motion.div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.5 }}
+            className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          >
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="text-gray-500"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Why Choose Soraa Section */}
-      <section id="why-choose-soraa" className="py-20 px-6 bg-[#1a0a0a]">
+      {/* Why Choose SORAA */}
+      <section id="why-choose-soraa" className="py-24 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
         <div className="max-w-7xl mx-auto">
-          {/* Section heading */}
-          <div className="text-center mb-16">
-            <div className="text-red-400 text-sm font-bold tracking-widest uppercase mb-4">
-              Why Choose Soraa
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Built for brands who want results, not just reach
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
+              Why Choose SORAA
             </h2>
-            <p className="text-xl text-gray-400">
-              We've reimagined influencer marketing from the ground up.
+            <p className="text-2xl text-white font-semibold mb-2">
+              Built for brands who want results, not just reach
             </p>
-          </div>
+            <p className="text-xl text-gray-400">
+              We&apos;ve reimagined influencer marketing from the ground up.
+            </p>
+          </motion.div>
 
-          {/* Bullet points grid */}
           <div className="grid md:grid-cols-2 gap-8">
             {[
               {
@@ -162,21 +182,17 @@ export default function BrandsPage() {
                 key={item.title}
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.6, delay: 0.1 * (index + 1), ease: 'easeOut' }}
-                className="space-y-4"
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * (index + 1) }}
+                className="bg-gradient-to-br from-[#3a1515] to-[#4a1f1f] p-8 rounded-3xl border border-orange-500/20 hover:border-orange-500/40 transition-all group"
               >
                 <div className="flex items-start gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center">
-                    <span className="text-2xl">{item.icon}</span>
+                  <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-red-500 rounded-xl flex items-center justify-center flex-shrink-0 text-2xl group-hover:scale-110 transition-all">
+                    {item.icon}
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-white mb-2">
-                      {item.title}
-                    </h4>
-                    <p className="text-gray-300 leading-relaxed">
-                      {item.description}
-                    </p>
+                    <h3 className="text-2xl font-bold text-white mb-3">{item.title}</h3>
+                    <p className="text-lg text-gray-300 leading-relaxed">{item.description}</p>
                   </div>
                 </div>
               </motion.div>

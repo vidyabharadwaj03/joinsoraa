@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Sparkles, ShieldCheck, CreditCard } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ScheduleForm from '@/components/ScheduleForm';
@@ -11,153 +10,245 @@ export default function CreatorsPage() {
     <main className="relative min-h-screen overflow-x-hidden font-sans bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
       <Navigation />
 
-      {/* Hero Section */}
-      <section className="pt-20 md:pt-24 pb-16 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
-        <div className="max-w-4xl mx-auto space-y-6">
-          {/* Label */}
+      {/* Hero Section - full screen, impactful */}
+      <section className="relative min-h-screen flex items-center justify-center px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414] overflow-hidden">
+        {/* Background decorative blurs */}
+        <div className="absolute inset-0 opacity-10 pointer-events-none">
+          <div className="absolute top-20 left-10 w-72 h-72 bg-pink-500 rounded-full blur-3xl" />
+          <div className="absolute bottom-20 right-10 w-96 h-96 bg-red-500 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative z-10 max-w-6xl mx-auto text-center">
+          {/* Small label */}
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="inline-block"
+            transition={{ duration: 0.6 }}
+            className="inline-block mb-8"
           >
-            <div className="inline-block border-2 border-white/30 rounded-full px-6 py-2">
-              <span className="text-white text-sm font-bold tracking-widest uppercase">
+            <div className="border-2 border-pink-500/50 rounded-full px-6 py-3 backdrop-blur-sm">
+              <span className="text-pink-400 text-sm font-bold tracking-widest uppercase">
                 For Creators
               </span>
             </div>
           </motion.div>
 
-          {/* Headline */}
+          {/* Massive headline */}
           <motion.h1
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.55, delay: 0.05, ease: 'easeOut' }}
-            className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight"
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="text-6xl md:text-8xl lg:text-9xl font-bold mb-8 leading-none"
           >
-            <span className="bg-gradient-to-r from-red-400 via-pink-400 to-red-400 bg-clip-text text-transparent block max-w-3xl">
-              Create. Collaborate.
-              <br className="hidden sm:block" />
-              <span className="whitespace-nowrap">Get Paid.</span>
+            <span className="block bg-gradient-to-r from-pink-400 via-red-400 to-pink-400 bg-clip-text text-transparent">
+              Create.
+            </span>
+            <span className="block text-white">
+              Collaborate.
+            </span>
+            <span className="block bg-gradient-to-r from-red-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
+              Get Paid.
             </span>
           </motion.h1>
 
-          {/* Subcopy */}
+          {/* Subheadline */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
-            className="text-xl text-gray-300 leading-relaxed max-w-2xl"
+            transition={{ duration: 0.6, delay: 0.5 }}
+            className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed"
           >
-            One home for brand deals, rates, and relationships, on your terms.
+            Soraa helps creators turn their influence into real opportunities. Work with brands you actually love, on your terms.
           </motion.p>
 
-          {/* Bullets */}
-          <div className="space-y-3 pt-2">
+          {/* Founded by creators line */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.7 }}
+            className="text-2xl md:text-3xl font-semibold text-white mb-16 max-w-3xl mx-auto"
+          >
+            Founded by creators, for creators.
+          </motion.p>
+
+          {/* Icon grid */}
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.9 }}
+            className="grid grid-cols-3 gap-8 max-w-3xl mx-auto mb-16"
+          >
             {[
-              { icon: Sparkles, text: 'Get matched with brands that fit' },
-              { icon: ShieldCheck, text: 'Keep your voice and pricing' },
-              { icon: CreditCard, text: 'Get paid with clear terms' },
-            ].map((item, index) => (
+              { icon: '🎯', label: 'Perfect Matches' },
+              { icon: '💰', label: 'Fair Pay' },
+              { icon: '⚡', label: 'Zero Hassle' },
+            ].map((item, i) => (
               <motion.div
-                key={item.text}
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.45, delay: 0.2 + index * 0.08, ease: 'easeOut' }}
-                className="flex items-center gap-3"
+                key={item.label}
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 1.1 + i * 0.1, type: 'spring', stiffness: 200 }}
+                whileHover={{ scale: 1.1, y: -10 }}
+                className="group cursor-pointer"
               >
-                <item.icon className="w-5 h-5 text-gray-300" />
-                <span className="text-lg text-gray-300">{item.text}</span>
+                <div className="w-24 h-24 mx-auto mb-4 bg-gradient-to-br from-pink-500/20 to-red-500/20 rounded-3xl flex items-center justify-center border border-pink-500/30 group-hover:border-pink-500/60 transition-all group-hover:shadow-2xl group-hover:shadow-pink-500/50">
+                  <span className="text-5xl">{item.icon}</span>
+                </div>
+                <p className="text-white font-semibold text-lg">{item.label}</p>
               </motion.div>
             ))}
-          </div>
+          </motion.div>
 
-          {/* Founding story callout */}
+          {/* Email CTA */}
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.45, ease: 'easeOut' }}
-            className="mt-3 max-w-3xl border-l-2 border-red-500/60 pl-4"
+            transition={{ duration: 0.6, delay: 1.4 }}
+            className="space-y-4"
           >
-            <p className="text-base md:text-lg text-gray-100 font-medium mb-1">
-              Founded by creators, for creators.
+            <p className="text-gray-400 text-lg">
+              Ready to turn your influence into income?
             </p>
-            <p className="text-sm md:text-base text-gray-300 leading-relaxed">
-              We know how hard it can be to get a foot in the door on both sides of the brief, so we built a smarter, more equitable way to connect creators and brands.
+            <a
+              href="mailto:joinsoraa@gmail.com?subject=Creator Interest - Join Waitlist&body=Hi! I'm interested in joining SORAA as a creator.%0D%0A%0D%0AMy name:%0D%0AMy platforms:%0D%0AMy niche:%0D%0A%0D%0AThanks!"
+              className="inline-block bg-red-600 hover:bg-red-700 text-white px-12 py-5 rounded-full text-xl font-bold hover:scale-105 transition-all shadow-2xl shadow-red-600/50"
+            >
+              Send Email To Schedule
+            </a>
+            <p className="text-sm text-gray-500">We&apos;ll reply from joinsoraa@gmail.com</p>
+          </motion.div>
+
+          {/* Scroll indicator */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 1.7 }}
+            className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          >
+            <motion.div
+              animate={{ y: [0, 10, 0] }}
+              transition={{ duration: 2, repeat: Infinity }}
+              className="text-gray-500"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+              </svg>
+            </motion.div>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Mission Statement */}
+      <section className="py-20 px-6 bg-[#1a0a0a]">
+        <div className="max-w-5xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="bg-gradient-to-br from-[#3a1515] to-[#4a1f1f] p-12 rounded-3xl border border-white/10 text-center"
+          >
+            <p className="text-xl text-gray-300 leading-relaxed">
+              We know how hard it can be to get a foot in the door, so we built a smarter, more equitable way to connect creators and brands, designed to benefit both sides.
             </p>
           </motion.div>
         </div>
       </section>
 
-      {/* How It Works (3 steps) */}
-      <section className="py-16 px-6 bg-[#1a0a0a]">
+      {/* Why Creators Love SORAA */}
+      <section className="py-24 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
         <div className="max-w-7xl mx-auto">
           <motion.h2
-            initial={{ opacity: 0, y: 24 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
-            className="text-4xl md:text-5xl font-bold text-white mb-10 text-center"
+            viewport={{ once: true }}
+            className="text-5xl md:text-6xl font-bold text-white mb-16 text-center"
           >
-            How It Works
+            Why Creators Love SORAA
           </motion.h2>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 mb-16">
             {[
               {
-                icon: Sparkles,
-                title: 'Set up your profile',
-                desc: 'Share your niches, platforms, and starting rates.',
+                icon: '🎯',
+                title: 'Brand Deals That Fit You',
+                desc: 'Get matched with brands that align with your content and audience.',
               },
               {
-                icon: ShieldCheck,
-                title: 'Match with brands',
-                desc: 'Review briefs that fit your content and audience.',
+                icon: '✨',
+                title: 'Creative Freedom',
+                desc: 'Create content in your own voice, no forced scripts.',
               },
               {
-                icon: CreditCard,
-                title: 'Create and get paid',
-                desc: 'Agree on terms, deliver content, and get paid.',
+                icon: '💰',
+                title: 'Get Paid Fairly & On Time',
+                desc: 'Transparent pricing and smooth payments.',
+              },
+              {
+                icon: '📈',
+                title: 'Grow Your Personal Brand',
+                desc: 'Build long-term relationships, not one-off posts.',
               },
             ].map((item, index) => (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 28 }}
+                initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: '-50px' }}
-                transition={{ duration: 0.5, delay: index * 0.12, ease: 'easeOut' }}
-                className="text-center space-y-3"
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * (index + 1) }}
+                className="bg-gradient-to-br from-[#3a1515] to-[#4a1f1f] p-8 rounded-3xl border border-pink-500/20 hover:border-pink-500/40 transition-all group"
               >
-                <div className="flex justify-center mb-2">
-                  <item.icon className="w-8 h-8 text-red-400" />
+                <div className="flex items-start gap-4">
+                  <div className="w-14 h-14 bg-gradient-to-br from-pink-500 to-red-500 rounded-xl flex items-center justify-center flex-shrink-0 text-2xl group-hover:scale-110 transition-all">
+                    {item.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-white mb-3">{item.title}</h3>
+                    <p className="text-lg text-gray-300 leading-relaxed">{item.desc}</p>
+                  </div>
                 </div>
-                <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-                <p className="text-sm text-gray-300 leading-relaxed">{item.desc}</p>
               </motion.div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA + Schedule (email) */}
-      <section id="waitlist" className="py-18 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
-        <div className="max-w-4xl mx-auto text-center">
+      {/* Monetize Your Influence */}
+      <section className="py-24 px-6 bg-[#1a0a0a]">
+        <div className="max-w-7xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 28 }}
+            initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: '-50px' }}
-            transition={{ duration: 0.5, ease: 'easeOut' }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
           >
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-              Ready to turn your influence into income?
+              Everything you need to <span className="text-pink-400">Monetize</span> your influence
             </h2>
-            <p className="text-lg text-gray-300 mb-6">
-              Share a few details and we will reply from joinsoraa@gmail.com to help you get started.
+            <p className="text-xl text-gray-300">
+              You create the influence. We handle the connections.
             </p>
-            <div className="bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 backdrop-blur mb-4 text-left">
-              <ScheduleForm context="creators" />
-            </div>
           </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {[
+              'Discover paid brand collaborations',
+              'Negotiate campaigns directly',
+              'Showcase your content and analytics',
+              'Build credibility with verified partnerships',
+            ].map((item, i) => (
+              <motion.div
+                key={item}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="flex items-center gap-4"
+              >
+                <div className="w-3 h-3 bg-gradient-to-r from-pink-500 to-red-500 rounded-full flex-shrink-0" />
+                <span className="text-lg text-gray-300">{item}</span>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
 
