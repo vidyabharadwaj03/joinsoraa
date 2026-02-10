@@ -77,9 +77,9 @@ export async function POST(req: NextRequest) {
 
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
-      console.error('RESEND_API_KEY is not set');
+      console.error('CONTACT_API_ERROR Missing RESEND_API_KEY');
       return NextResponse.json(
-        { ok: false, error: 'Email service is not configured.' },
+        { ok: false, error: 'Missing RESEND_API_KEY' },
         { status: 500 }
       );
     }
@@ -93,9 +93,9 @@ export async function POST(req: NextRequest) {
       text,
     });
 
-    return NextResponse.json({ ok: true });
+    return NextResponse.json({ ok: true }, { status: 200 });
   } catch (error) {
-    console.error('Error in /api/contact', error);
+    console.error('CONTACT_API_ERROR', error);
     return NextResponse.json(
       { ok: false, error: 'Failed to send email.' },
       { status: 500 }

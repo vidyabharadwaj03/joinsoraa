@@ -43,7 +43,15 @@ export default function ScheduleForm({ context }: ScheduleFormProps) {
       const data = await res.json().catch(() => null);
 
       if (!res.ok || !data?.ok) {
-        throw new Error(data?.error || 'Something went wrong.');
+        const apiError = data?.error as string | undefined;
+        const baseMessage = 'Unable to submit right now. Please try again.';
+        const detailedMessage =
+          process.env.NODE_ENV !== 'production' && apiError
+            ? `${baseMessage} (${apiError})`
+            : baseMessage;
+
+        setError(detailedMessage);
+        return;
       }
 
       setSubmitted(true);
@@ -53,7 +61,9 @@ export default function ScheduleForm({ context }: ScheduleFormProps) {
       setTimeWindow('');
       setMessage('');
     } catch (err) {
-      setError('Something went wrong. Please try again.');
+      if (!error) {
+        setError('Unable to submit right now. Please try again.');
+      }
     } finally {
       setSubmitting(false);
     }

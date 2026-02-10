@@ -40,7 +40,15 @@ export default function CreatorsPage() {
       const data = await res.json().catch(() => null);
 
       if (!res.ok || !data?.ok) {
-        throw new Error(data?.error || 'Something went wrong.');
+        const apiError = data?.error as string | undefined;
+        const baseMessage = 'Unable to submit right now. Please try again.';
+        const detailedMessage =
+          process.env.NODE_ENV !== 'production' && apiError
+            ? `${baseMessage} (${apiError})`
+            : baseMessage;
+
+        setCreatorError(detailedMessage);
+        return;
       }
 
       setCreatorSubmitted(true);
@@ -50,7 +58,9 @@ export default function CreatorsPage() {
       setCreatorNiche('');
       setCreatorMessage('');
     } catch (err) {
-      setCreatorError('Something went wrong. Please try again.');
+      if (!creatorError) {
+        setCreatorError('Unable to submit right now. Please try again.');
+      }
     } finally {
       setCreatorSubmitting(false);
     }
