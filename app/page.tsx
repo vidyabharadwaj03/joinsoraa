@@ -74,7 +74,7 @@ export default function Home() {
       </section>
 
       {/* Enhanced Ticker/Marquee Section */}
-      <section className="relative bg-black py-8 md:py-12 overflow-hidden border-y border-red-900/30">
+      <section className="relative bg-gradient-to-r from-black via-[#190909] to-black py-6 md:py-8 overflow-hidden border-y border-red-800/40 -mt-4">
         {/* Noise texture overlay */}
         <div className="absolute inset-0 opacity-5 pointer-events-none">
           <div className="w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZmlsdGVyIGlkPSJub2lzZSI+PGZlVHVyYnVsZW5jZSB0eXBlPSJmcmFjdGFsTm9pc2UiIGJhc2VGcmVxdWVuY3k9IjAuOSIgbnVtT2N0YXZlcz0iNCIvPjwvZmlsdGVyPjxyZWN0IHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbHRlcj0idXJsKCNub2lzZSkiIG9wYWNpdHk9IjAuNSIvPjwvc3ZnPg==')] bg-repeat"></div>
@@ -85,7 +85,7 @@ export default function Home() {
           {[...Array(6)].map((_, i) => (
             <span 
               key={i} 
-              className="mx-12 text-2xl md:text-4xl font-bold tracking-wider text-white"
+              className="mx-10 text-xl md:text-3xl font-bold tracking-wider text-white"
               style={{ textShadow: '0 0 20px rgba(239, 68, 68, 0.5)' }}
             >
               MICROINFLUENCERS × SMALL BRANDS •
