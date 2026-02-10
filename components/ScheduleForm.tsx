@@ -17,56 +17,47 @@ export default function ScheduleForm({ context }: ScheduleFormProps) {
   const [timeWindow, setTimeWindow] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
 
-  const onSubmit = async (e: React.FormEvent) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email) return;
 
-    try {
-      setSubmitting(true);
-      setError(null);
+    setSubmitting(true);
 
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: context === 'brands' ? 'brand' : 'creator',
-          name,
-          email,
-          company: company || undefined,
-          preferredTimeWindow: timeWindow || undefined,
-          message,
-        }),
-      });
+    const isBrand = context === 'brands';
+    const subject = encodeURIComponent(
+      isBrand ? 'New Brand Inquiry' : 'New Creator Signup'
+    );
 
-      const data = await res.json().catch(() => null);
+    const lines: string[] = [];
 
-      if (!res.ok || !data?.ok) {
-        const apiError = data?.error as string | undefined;
-        const baseMessage = 'Unable to submit right now. Please try again.';
-        const detailedMessage =
-          process.env.NODE_ENV !== 'production' && apiError
-            ? `${baseMessage} (${apiError})`
-            : baseMessage;
-
-        setError(detailedMessage);
-        return;
-      }
-
-      setSubmitted(true);
-      setName('');
-      setEmail('');
-      setCompany('');
-      setTimeWindow('');
-      setMessage('');
-    } catch (err) {
-      if (!error) {
-        setError('Unable to submit right now. Please try again.');
-      }
-    } finally {
-      setSubmitting(false);
+    if (isBrand) {
+      lines.push('Type: Brand');
+      lines.push(`Name: ${name}`);
+      lines.push(`Email: ${email}`);
+      lines.push(`Company/Brand: ${company || '(not provided)'}`);
+      lines.push(
+        `Preferred time window: ${timeWindow || '(not provided)'}`
+      );
+    } else {
+      lines.push('Type: Creator');
+      lines.push(`Name: ${name}`);
+      lines.push(`Email: ${email}`);
+      lines.push(`Company / Brand: ${company || '(not provided)'}`);
+      lines.push(
+        `Preferred time window: ${timeWindow || '(not provided)'}`
+      );
     }
+
+    lines.push('');
+    lines.push('Message:');
+    lines.push(message || '(no additional message)');
+
+    const body = encodeURIComponent(lines.join('\n'));
+    window.location.href = `mailto:joinsoraa@gmail.com?subject=${subject}&body=${body}`;
+
+    setSubmitted(true);
+    setSubmitting(false);
   };
 
   if (submitted) {
@@ -76,7 +67,9 @@ export default function ScheduleForm({ context }: ScheduleFormProps) {
         animate={{ opacity: 1, y: 0 }}
         className="text-center space-y-2"
       >
-        <p className="text-lg text-white">Submitted. We will follow up soon.</p>
+        <p className="text-lg text-white">
+          Your email draft is ready. Send it to schedule a time.
+        </p>
       </motion.div>
     );
   }
@@ -119,11 +112,6 @@ export default function ScheduleForm({ context }: ScheduleFormProps) {
           {submitting ? 'Submitting...' : 'Send Email To Schedule'}
         </Button>
       </div>
-      {error && (
-        <p className="mt-2 text-sm text-red-400">
-          {error}
-        </p>
-      )}
     </form>
   );
 }

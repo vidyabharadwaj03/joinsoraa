@@ -13,57 +13,26 @@ export default function CreatorsPage() {
   const [creatorNiche, setCreatorNiche] = useState('');
   const [creatorMessage, setCreatorMessage] = useState('');
   const [creatorSubmitted, setCreatorSubmitted] = useState(false);
-  const [creatorSubmitting, setCreatorSubmitting] = useState(false);
-  const [creatorError, setCreatorError] = useState<string | null>(null);
 
-  const handleCreatorSubmit = async (e: React.FormEvent) => {
+  const handleCreatorSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!creatorName || !creatorEmail || !creatorPlatforms || !creatorNiche) return;
 
-    try {
-      setCreatorSubmitting(true);
-      setCreatorError(null);
+    const subject = encodeURIComponent('New Creator Signup');
+    const bodyLines = [
+      'Type: Creator',
+      `Name: ${creatorName}`,
+      `Email: ${creatorEmail}`,
+      `Platforms: ${creatorPlatforms}`,
+      `Niche: ${creatorNiche}`,
+      '',
+      'Message:',
+      creatorMessage || '(no additional message)',
+    ];
 
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          type: 'creator',
-          name: creatorName,
-          email: creatorEmail,
-          platforms: creatorPlatforms,
-          niche: creatorNiche,
-          message: creatorMessage,
-        }),
-      });
-
-      const data = await res.json().catch(() => null);
-
-      if (!res.ok || !data?.ok) {
-        const apiError = data?.error as string | undefined;
-        const baseMessage = 'Unable to submit right now. Please try again.';
-        const detailedMessage =
-          process.env.NODE_ENV !== 'production' && apiError
-            ? `${baseMessage} (${apiError})`
-            : baseMessage;
-
-        setCreatorError(detailedMessage);
-        return;
-      }
-
-      setCreatorSubmitted(true);
-      setCreatorName('');
-      setCreatorEmail('');
-      setCreatorPlatforms('');
-      setCreatorNiche('');
-      setCreatorMessage('');
-    } catch (err) {
-      if (!creatorError) {
-        setCreatorError('Unable to submit right now. Please try again.');
-      }
-    } finally {
-      setCreatorSubmitting(false);
-    }
+    const body = encodeURIComponent(bodyLines.join('\n'));
+    window.location.href = `mailto:joinsoraa@gmail.com?subject=${subject}&body=${body}`;
+    setCreatorSubmitted(true);
   };
 
   return (
@@ -357,19 +326,13 @@ export default function CreatorsPage() {
               />
               <button
                 type="submit"
-                disabled={creatorSubmitting}
-                className="mt-2 inline-flex items-center justify-center bg-red-600 hover:bg-red-700 disabled:opacity-60 disabled:hover:scale-100 text-white px-10 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all shadow-xl shadow-red-600/50"
+                className="mt-2 inline-flex items-center justify-center bg-red-600 hover:bg-red-700 text-white px-10 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all shadow-xl shadow-red-600/50"
               >
-                {creatorSubmitting ? 'Submitting...' : 'Join The Waitlist'}
+                Schedule a time
               </button>
-              {creatorSubmitted && !creatorError && (
+              {creatorSubmitted && (
                 <p className="mt-2 text-sm text-gray-400">
-                  Submitted. We will follow up soon.
-                </p>
-              )}
-              {creatorError && (
-                <p className="mt-2 text-sm text-red-400">
-                  {creatorError}
+                  Your email draft is ready. Send it to schedule a time.
                 </p>
               )}
             </form>
