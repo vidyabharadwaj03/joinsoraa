@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import Image from 'next/image';
 
 export default function CreatorsPage() {
   const [creatorName, setCreatorName] = useState('');
@@ -171,9 +172,16 @@ export default function CreatorsPage() {
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-5xl md:text-6xl font-bold text-white mb-16 text-center"
+            className="text-5xl md:text-6xl font-bold text-white mb-16 text-center flex flex-col items-center gap-4"
           >
-            Why Creators Love SORAA
+            <span>Why Creators Love</span>
+            <Image
+              src="/NewSoraaLogo.png"
+              alt="SORAA logo"
+              width={260}
+              height={80}
+              className="h-14 md:h-16 w-auto object-contain"
+            />
           </motion.h2>
 
           <div className="grid md:grid-cols-2 gap-8 mb-16">

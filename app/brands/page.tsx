@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ScheduleForm from '@/components/ScheduleForm';
+import Image from 'next/image';
 
 export default function BrandsPage() {
   const [brandName, setBrandName] = useState('');
@@ -142,8 +143,15 @@ export default function BrandsPage() {
             viewport={{ once: true }}
             className="text-center mb-16"
           >
-            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
-              Why Choose SORAA
+            <h2 className="text-5xl md:text-6xl font-bold text-white mb-6 flex flex-col items-center gap-4">
+              <span>Why Choose</span>
+              <Image
+                src="/NewSoraaLogo.png"
+                alt="SORAA logo"
+                width={260}
+                height={80}
+                className="h-14 md:h-16 w-auto object-contain"
+              />
             </h2>
             <p className="text-2xl text-white font-semibold mb-2">
               Built for brands who want results, not just reach
