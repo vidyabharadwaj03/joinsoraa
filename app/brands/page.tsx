@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Sparkles, BadgeCheck, Zap } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ScheduleForm from '@/components/ScheduleForm';
@@ -11,7 +12,7 @@ export default function BrandsPage() {
       <Navigation />
 
       {/* Hero Section - Dark Burgundy */}
-      <section className="pt-24 md:pt-28 pb-16 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
+      <section className="pt-20 md:pt-24 pb-16 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
         <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
           {/* Left: Text content */}
           <div className="space-y-6">
@@ -43,20 +44,30 @@ export default function BrandsPage() {
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
-              className="text-xl text-gray-300 leading-relaxed"
+              transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
+              className="text-xl text-gray-300 leading-relaxed max-w-2xl"
             >
-              Soraa connects your brand with creators who actually move culture and conversions. We make influencer marketing simple, authentic, and performance-driven.
+              Find creators who move culture and run campaigns with clear outcomes.
             </motion.p>
 
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
-              className="text-lg text-gray-400 leading-relaxed"
-            >
-              Some of our creators may be smaller. But that's by design. In a world driven by noise, authenticity is irreplaceable. Every creator on Soraa is thoughtfully vetted to ensure they bring real influence, trust, and a genuine connection with their audience.
-            </motion.p>
+            <div className="space-y-3 pt-2">
+              {[
+                { icon: BadgeCheck, text: 'Vetted creators with real audience trust' },
+                { icon: Zap, text: 'Fast sourcing and simple briefs' },
+                { icon: Sparkles, text: 'Performance tracking you can explain' },
+              ].map((item, index) => (
+                <motion.div
+                  key={item.text}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.45, delay: 0.2 + index * 0.08, ease: 'easeOut' }}
+                  className="flex items-center gap-3"
+                >
+                  <item.icon className="w-5 h-5 text-gray-300" />
+                  <span className="text-lg text-gray-300">{item.text}</span>
+                </motion.div>
+              ))}
+            </div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
