@@ -43,7 +43,7 @@ export default function Home() {
               transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
               className="text-xl md:text-2xl text-gray-300 mb-10 leading-relaxed max-w-4xl"
             >
-              SORAA automatically matches your business with micro-creators and manages the entire collaboration using AI. No outreach. No guesswork. No huge budgets. Just results.
+              SORAA connects brands and micro-creators, and manages the collaboration end to end with AI. No outreach. No guesswork. Just results.
             </motion.p>
 
             <motion.div
