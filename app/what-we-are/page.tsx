@@ -19,6 +19,7 @@ import {
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/Button';
+import Link from 'next/link';
 
 const fadeUp = (delay = 0) => ({
   initial: { opacity: 0, y: 40 },
@@ -401,22 +402,19 @@ export default function WhatWeArePage() {
               Whether you are a creator or a brand, SORAA is here to make your next collaboration easier to start and better to run.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Button
-                as="a"
+              <Link
                 href="/creators"
-                className="flex items-center gap-2"
+                className="inline-flex items-center gap-2 rounded-full px-8 py-4 tracking-wide transition-all duration-300 font-sans text-lg font-semibold bg-red-600 text-white hover:bg-red-700 hover:scale-105"
               >
                 For Creators
                 <ArrowRight className="w-4 h-4" />
-              </Button>
-              <Button
-                as="a"
+              </Link>
+              <Link
                 href="/brands"
-                variant="ghost"
-                className="flex items-center gap-2"
+                className="inline-flex items-center gap-2 rounded-full px-8 py-4 tracking-wide transition-all duration-300 font-sans text-lg font-semibold border-2 border-white text-white hover:bg-white hover:text-gray-900 hover:scale-105"
               >
                 For Brands
-              </Button>
+              </Link>
             </div>
           </motion.div>
         </div>
