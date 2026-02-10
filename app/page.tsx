@@ -105,45 +105,37 @@ export default function Home() {
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-4xl"
+            className="max-w-5xl"
           >
-            <h1 className="font-display text-[56px] md:text-[120px] leading-none tracking-tight text-brand-bone mb-6">
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                join the collective.
-              </motion.div>
-              <motion.div
-                initial={{ opacity: 0, x: -30 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
-                skip the pitch.
-              </motion.div>
-            </h1>
+            <motion.h1
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="font-display text-4xl md:text-6xl lg:text-7xl leading-tight tracking-tight text-brand-bone mb-6"
+            >
+              Gen Z Is the Future of Your Brand. Don't Get Left Behind.
+            </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
-              className="text-xl md:text-2xl text-brand-haze mb-10 font-sans leading-relaxed"
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="text-lg md:text-xl lg:text-2xl text-brand-haze mb-10 font-sans leading-relaxed max-w-4xl"
             >
-              Your agency, your brands, all AI automated with SORAA.
+              SORAA automatically matches your business with micro-creators and manages the entire collaboration using AI. No outreach. No guesswork. No huge budgets. Just results.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.8 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
               className="flex flex-col sm:flex-row gap-4"
             >
               <Button onClick={() => scrollToSection('waitlist')}>
                 Get Early Access
               </Button>
-              <Button variant="ghost" onClick={() => scrollToSection('how-it-works')}>
-                See how it works
+              <Button variant="ghost" onClick={() => scrollToSection('what-is-soraa')}>
+                Learn More
               </Button>
             </motion.div>
           </motion.div>
@@ -151,6 +143,62 @@ export default function Home() {
 
         {/* Diagonal Marquee Stripe */}
         <MarqueeStripe />
+      </section>
+
+      {/* WHAT IS SORAA Section */}
+      <section id="what-is-soraa" className="relative py-32 px-6">
+        <div className="max-w-7xl mx-auto">
+          <motion.div
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.8 }}
+            className="text-center mb-16"
+          >
+            <h2 className="font-display text-5xl md:text-6xl lg:text-7xl text-brand-bone mb-6 tracking-tight">
+              WHAT IS SORAA
+            </h2>
+            <p className="text-lg md:text-xl text-brand-haze font-sans leading-relaxed max-w-3xl mx-auto">
+              SORAA is the platform connecting local brands with micro-creators who actually influence their communities. We use AI to match the right creators to the right businesses, turning authentic content into real local growth.
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+            {/* For Creators Column */}
+            <motion.div
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="bg-gradient-to-br from-brand-maroon/60 to-brand-maroon/40 backdrop-blur-sm rounded-2xl p-8 lg:p-12 border border-brand-maroon hover:border-brand-red/40 transition-all cursor-pointer"
+            >
+              <h3 className="font-display text-4xl md:text-5xl text-brand-bone mb-4 tracking-tight">
+                For Creators
+              </h3>
+              <p className="text-brand-haze font-sans text-lg leading-relaxed">
+                Turn your authentic content into consistent income. SORAA connects you with local brands that align with your values and audience. Set your rates, define your niche, and let AI handle the matching. No more cold pitches or negotiating—just create and get paid.
+              </p>
+            </motion.div>
+
+            {/* For Brands Column */}
+            <motion.div
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              whileHover={{ y: -8, scale: 1.02 }}
+              className="bg-gradient-to-br from-brand-maroon/60 to-brand-maroon/40 backdrop-blur-sm rounded-2xl p-8 lg:p-12 border border-brand-maroon hover:border-brand-red/40 transition-all cursor-pointer"
+            >
+              <h3 className="font-display text-4xl md:text-5xl text-brand-bone mb-4 tracking-tight">
+                For Brands
+              </h3>
+              <p className="text-brand-haze font-sans text-lg leading-relaxed">
+                Reach Gen Z where they actually pay attention. SORAA finds micro-creators in your area who have real influence with your target audience. AI-powered matching ensures authentic partnerships that drive local growth—without the agency markup or guesswork.
+              </p>
+            </motion.div>
+          </div>
+        </div>
       </section>
 
       {/* Split Cards: For Creators / For Brands */}
