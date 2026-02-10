@@ -23,10 +23,10 @@ export default function Home() {
   };
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden">
+    <main className="relative min-h-screen overflow-x-hidden font-sans">
       {/* Fixed Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-black/40 border-b border-[#5a2525]">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <nav className="fixed top-0 left-0 right-0 z-50 backdrop-blur-md bg-[#1a0a0acc] border-b border-white/10">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
           <button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             className="flex items-center cursor-pointer hover:opacity-80 transition-opacity"
@@ -42,7 +42,7 @@ export default function Home() {
             />
           </button>
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-8 font-sans text-sm">
+          <div className="hidden md:flex items-center gap-8 text-sm text-white">
             <a 
               href="#what-is-soraa" 
               onClick={(e) => {
@@ -65,9 +65,9 @@ export default function Home() {
             </a>
             <button
               onClick={() => scrollToSection('waitlist')}
-              className="bg-black text-white px-6 py-2 rounded-full font-sans text-sm hover:bg-gray-900 transition-colors"
+              className="bg-red-600 text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-red-700 hover:scale-105 transition-all duration-300"
             >
-              Join Waitlist
+              join waitlist
             </button>
           </div>
           {/* Mobile Menu Button */}
@@ -87,8 +87,8 @@ export default function Home() {
         </div>
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="md:hidden border-t border-[#5a2525] bg-black/95 backdrop-blur-md">
-            <div className="px-6 py-4 flex flex-col gap-4 font-sans text-sm">
+          <div className="md:hidden border-t border-white/10 bg-[#1a0a0eff] backdrop-blur-md">
+            <div className="px-4 py-4 flex flex-col gap-4 text-sm text-white">
               <a 
                 href="#what-is-soraa" 
                 onClick={(e) => {
@@ -111,18 +111,18 @@ export default function Home() {
               </a>
               <button
                 onClick={() => scrollToSection('waitlist')}
-                className="bg-black text-white px-6 py-2 rounded-full font-sans text-sm hover:bg-gray-900 transition-colors text-left w-fit"
+                className="bg-red-600 text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-red-700 hover:scale-105 transition-all duration-300 text-left w-fit"
               >
-                Join Waitlist
+                join waitlist
               </button>
             </div>
           </div>
         )}
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 pt-20">
-        <div className="max-w-7xl mx-auto w-full">
+      {/* Hero Section (dark burgundy) */}
+      <section className="relative min-h-screen flex items-center justify-center pt-24 pb-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
+        <div className="max-w-6xl mx-auto w-full">
           <motion.div
             initial={{ opacity: 0, y: 60 }}
             animate={{ opacity: 1, y: 0 }}
@@ -132,17 +132,17 @@ export default function Home() {
             <motion.h1
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="font-display text-4xl md:text-6xl lg:text-7xl leading-tight tracking-tight text-white mb-6 font-bold"
+              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+              className="text-5xl md:text-6xl lg:text-7xl leading-tight tracking-tight text-white mb-6 font-bold lowercase"
             >
-              Gen Z Is the Future of Your Brand. Don't Get Left Behind.
+              gen z is the future of your brand. don't get left behind.
             </motion.h1>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="text-lg md:text-xl lg:text-2xl text-gray-300 mb-10 font-sans leading-relaxed max-w-4xl"
+              transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
+              className="text-lg md:text-2xl text-gray-300 mb-10 leading-relaxed max-w-3xl"
             >
               SORAA automatically matches your business with micro-creators and manages the entire collaboration using AI. No outreach. No guesswork. No huge budgets. Just results.
             </motion.p>
@@ -150,24 +150,24 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.6 }}
+              transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
               className="flex flex-col sm:flex-row gap-4"
             >
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => scrollToSection('waitlist')}
-                className="bg-black text-white px-8 py-4 rounded-full font-sans text-lg font-semibold hover:bg-gray-900 transition-colors"
+                className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300"
               >
-                Get Early Access
+                get early access
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => scrollToSection('how-it-works')}
-                className="border-2 border-white text-white px-8 py-4 rounded-full font-sans text-lg font-semibold hover:bg-white hover:text-black transition-colors"
+                className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-gray-900 transition-all duration-300"
               >
-                See How It Works
+                see how it works
               </motion.button>
             </motion.div>
           </motion.div>
@@ -177,16 +177,16 @@ export default function Home() {
       {/* Ticker/Marquee Section */}
       <section className="relative bg-black text-white py-4 overflow-hidden">
         <div className="flex whitespace-nowrap">
-          <div className="text-2xl font-display tracking-wider uppercase animate-marquee flex-shrink-0">
+          <div className="text-lg tracking-wider uppercase animate-marquee flex-shrink-0">
             {'MICROINFLUENCERS × SMALL BRANDS • '.repeat(10)}
             {'MICROINFLUENCERS × SMALL BRANDS • '.repeat(10)}
           </div>
         </div>
       </section>
 
-      {/* WHAT IS SORAA Section */}
-      <section id="what-is-soraa" className="relative py-32 px-6 bg-gradient-to-b from-[#2a1414] to-[#1a0a0a]">
-        <div className="max-w-7xl mx-auto">
+      {/* WHAT IS SORAA Section (dark burgundy) */}
+      <section id="what-is-soraa" className="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
+        <div className="max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -194,11 +194,14 @@ export default function Home() {
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <p className="text-sm uppercase tracking-widest text-gray-400 mb-4 font-sans">
+            <p className="text-sm uppercase tracking-widest text-gray-400 mb-4">
               WHAT IS SORAA
             </p>
-            <p className="text-lg md:text-xl text-gray-300 font-sans leading-relaxed max-w-3xl mx-auto">
-              SORAA is the platform connecting local brands with micro-creators who actually influence their communities. We use AI to match the right creators to the right businesses, turning authentic content into real local growth.
+            <h2 className="text-3xl md:text-4xl text-white font-bold mb-6">
+              the platform connecting local brands with the creators who actually move their communities.
+            </h2>
+            <p className="text-lg text-gray-300 leading-relaxed max-w-3xl mx-auto">
+              we use ai to match the right creators to the right businesses, turning authentic content into real local growth.
             </p>
           </motion.div>
 
@@ -208,27 +211,27 @@ export default function Home() {
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="bg-gradient-to-br from-[#4a1f1f] to-[#3a1515] rounded-3xl p-10 border border-[#5a2525] hover:border-[#7a3535] transition-all cursor-pointer relative overflow-hidden group shadow-lg hover:shadow-red-900/20"
+              className="bg-gradient-to-br from-[#3a1515] to-[#4a1f1f] rounded-3xl p-10 border border-white/10 hover:border-white/20 transition-all cursor-pointer relative overflow-hidden group shadow-2xl hover:shadow-red-900/20"
             >
               {/* Top accent bar */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-red-500 to-pink-500"></div>
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-red-500 to-red-600"></div>
               
               {/* Icon in gradient circle */}
               <div className="mb-6 flex items-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-red-500 to-pink-500 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
                   </svg>
                 </div>
               </div>
 
-              <h3 className="font-display text-3xl text-white mb-4 tracking-tight font-bold uppercase">
-                FOR CREATORS
+              <h3 className="text-3xl text-white mb-4 tracking-tight font-bold uppercase">
+                for creators
               </h3>
-              <p className="text-gray-300 font-sans text-lg leading-relaxed mb-6">
-                Turn your authentic content into consistent income. SORAA connects you with local brands that align with your values and audience. Set your rates, define your niche, and let AI handle the matching. No more cold pitches or negotiating—just create and get paid.
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                turn your authentic content into consistent income. soraa connects you with local brands that align with your values and audience. set your rates, define your niche, and let ai handle the matching. no more cold pitches or negotiating—just create and get paid.
               </p>
               <a 
                 href="#waitlist"
@@ -236,7 +239,7 @@ export default function Home() {
                   e.preventDefault();
                   scrollToSection('waitlist');
                 }}
-                className="inline-flex items-center text-red-400 hover:text-red-300 font-sans text-sm font-medium group-hover:translate-x-1 transition-transform"
+                className="inline-flex items-center text-red-400 hover:text-red-300 text-sm font-medium group-hover:translate-x-1 transition-transform"
               >
                 Learn more →
               </a>
@@ -247,27 +250,27 @@ export default function Home() {
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-100px' }}
-              transition={{ duration: 0.8, delay: 0.4 }}
+              transition={{ duration: 0.6, delay: 0.3, ease: 'easeOut' }}
               whileHover={{ y: -8, scale: 1.02 }}
-              className="bg-gradient-to-br from-[#4a1f1f] to-[#3a1515] rounded-3xl p-10 border border-[#5a2525] hover:border-[#7a3535] transition-all cursor-pointer relative overflow-hidden group shadow-lg hover:shadow-red-900/20"
+              className="bg-gradient-to-br from-[#3a1515] to-[#4a1f1f] rounded-3xl p-10 border border-white/10 hover:border-white/20 transition-all cursor-pointer relative overflow-hidden group shadow-2xl hover:shadow-red-900/20"
             >
               {/* Top accent bar */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-orange-500 to-red-500"></div>
+              <div className="absolute top-0 left-0 right-0 h-0.5 bg-gradient-to-r from-red-500 to-red-600"></div>
               
               {/* Icon in gradient circle */}
               <div className="mb-6 flex items-center">
-                <div className="w-16 h-16 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-red-500 to-red-600 flex items-center justify-center">
                   <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </div>
               </div>
 
-              <h3 className="font-display text-3xl text-white mb-4 tracking-tight font-bold uppercase">
-                FOR BRANDS
+              <h3 className="text-3xl text-white mb-4 tracking-tight font-bold uppercase">
+                for brands
               </h3>
-              <p className="text-gray-300 font-sans text-lg leading-relaxed mb-6">
-                Reach Gen Z where they actually pay attention. SORAA finds micro-creators in your area who have real influence with your target audience. AI-powered matching ensures authentic partnerships that drive local growth—without the agency markup or guesswork.
+              <p className="text-gray-300 text-lg leading-relaxed mb-6">
+                reach gen z where they actually pay attention. soraa finds micro-creators in your area who have real influence with your target audience. ai-powered matching ensures authentic partnerships that drive local growth—without the agency markup or guesswork.
               </p>
               <a 
                 href="#waitlist"
@@ -275,7 +278,7 @@ export default function Home() {
                   e.preventDefault();
                   scrollToSection('waitlist');
                 }}
-                className="inline-flex items-center text-orange-400 hover:text-orange-300 font-sans text-sm font-medium group-hover:translate-x-1 transition-transform"
+                className="inline-flex items-center text-red-400 hover:text-red-300 text-sm font-medium group-hover:translate-x-1 transition-transform"
               >
                 Learn more →
               </a>
@@ -284,15 +287,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Turn Content into Contracts Section */}
-      <section className="relative py-32 px-6 bg-gray-50">
-        <div className="max-w-7xl mx-auto">
+      {/* Turn content into contracts (light) */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
+        <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8 }}
-            className="font-display text-4xl md:text-5xl text-black mb-12 tracking-tight lowercase"
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="text-4xl md:text-5xl text-gray-900 mb-16 font-bold tracking-tight lowercase"
           >
             turn content into contracts.
           </motion.h2>
@@ -307,10 +310,10 @@ export default function Home() {
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="flex items-center gap-4 text-xl text-gray-800 font-sans"
+                transition={{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }}
+                className="flex items-center gap-4 text-xl text-gray-700"
               >
-                <span className="text-3xl">{item.icon}</span>
+                <span className="text-2xl text-red-600">{item.icon}</span>
                 <span>{item.text}</span>
               </motion.div>
             ))}
@@ -318,15 +321,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Turn Fans into Champions Section */}
-      <section className="relative py-32 px-6 bg-white">
-        <div className="max-w-7xl mx-auto">
+      {/* Turn fans into champions (dark) */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
+        <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8 }}
-            className="font-display text-4xl md:text-5xl text-black mb-12 tracking-tight lowercase"
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="text-4xl md:text-5xl text-white mb-16 font-bold tracking-tight lowercase"
           >
             turn fans into champions.
           </motion.h2>
@@ -341,10 +344,10 @@ export default function Home() {
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                className="flex items-center gap-4 text-xl text-gray-800 font-sans"
+                transition={{ duration: 0.6, delay: index * 0.1, ease: 'easeOut' }}
+                className="flex items-center gap-4 text-xl text-gray-300"
               >
-                <span className="text-3xl">{item.icon}</span>
+                <span className="text-2xl text-red-400">{item.icon}</span>
                 <span>{item.text}</span>
               </motion.div>
             ))}
@@ -352,18 +355,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How It Works Section */}
+      {/* How it works (light) */}
       <section
         id="how-it-works"
-        className="relative py-32 px-6 bg-gradient-to-b from-gray-50 to-white"
+        className="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white"
       >
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-6xl mx-auto">
           <motion.h2
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8 }}
-            className="font-display text-4xl md:text-5xl text-black mb-20 text-center tracking-tight lowercase"
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="text-4xl md:text-5xl text-gray-900 mb-16 text-center font-bold tracking-tight lowercase"
           >
             how it works
           </motion.h2>
@@ -379,16 +382,16 @@ export default function Home() {
                 initial={{ opacity: 0, y: 40 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-100px' }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
+                transition={{ duration: 0.6, delay: index * 0.2, ease: 'easeOut' }}
                 className="text-center"
               >
-                <div className="w-16 h-16 rounded-full bg-black text-white flex items-center justify-center font-display text-2xl font-bold mx-auto mb-6">
+                <div className="w-16 h-16 rounded-full bg-red-600 text-white flex items-center justify-center text-2xl font-bold mx-auto mb-6">
                   {item.step}
                 </div>
-                <h3 className="font-display text-2xl text-black mb-4 tracking-tight font-bold">
-                  {item.title}
+                <h3 className="text-2xl text-gray-900 mb-4 tracking-tight font-bold lowercase">
+                  {item.title.toLowerCase()}
                 </h3>
-                <p className="text-gray-600 font-sans text-lg">
+                <p className="text-gray-600 text-lg leading-relaxed">
                   {item.desc}
                 </p>
               </motion.div>
@@ -397,16 +400,16 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Breaking News Banner */}
-      <section className="relative py-32 px-6 bg-black text-white">
+      {/* Breaking news (black) */}
+      <section className="relative py-24 px-4 sm:px-6 lg:px-8 bg-black text-white">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-100px' }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
           className="max-w-4xl mx-auto text-center"
         >
-          <p className="text-sm uppercase tracking-widest font-bold mb-6 font-sans">
+          <p className="text-sm uppercase tracking-widest font-bold mb-6">
             BREAKING NEWS:
           </p>
           <div className="flex flex-col items-center gap-6">
@@ -417,47 +420,49 @@ export default function Home() {
               height={80}
               className="h-20 w-auto object-contain brightness-0 invert"
             />
-            <p className="font-display text-2xl font-bold tracking-tight">
+            <p className="text-2xl font-bold tracking-tight">
               — COMING SOON
             </p>
           </div>
         </motion.div>
       </section>
 
-      {/* Waitlist Section */}
-      <section id="waitlist" className="relative py-32 px-6 bg-gradient-to-b from-white to-gray-50">
+      {/* Waitlist (dark burgundy) */}
+      <section id="waitlist" className="relative py-24 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
         <div className="max-w-2xl mx-auto">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
             className="text-center mb-12"
           >
-            <h2 className="font-display text-4xl md:text-5xl text-black mb-8 tracking-tight lowercase">
+            <h2 className="text-4xl md:text-5xl text-white mb-8 font-bold tracking-tight lowercase">
               join the waitlist
             </h2>
-            <WaitlistForm />
+            <div className="bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 backdrop-blur">
+              <WaitlistForm />
+            </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="relative py-12 px-6 bg-black text-white">
-        <div className="max-w-7xl mx-auto text-center">
-          <p className="text-xl text-gray-300 font-sans mb-6 font-light">
+      {/* Footer (black) */}
+      <footer className="relative py-12 px-4 sm:px-6 lg:px-8 bg-black text-white">
+        <div className="max-w-6xl mx-auto text-center">
+          <p className="text-xl text-gray-300 mb-6 font-light">
             — one authentic connection at a time
           </p>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 font-sans text-sm text-gray-400 mb-4">
-            <a href="https://joinsoraa.com" className="hover:text-white transition-colors">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-4 text-sm text-gray-400 mb-4">
+            <a href="https://joinsoraa.com" className="hover:text-gray-300 transition-colors">
               joinsoraa.com
             </a>
             <span className="hidden md:inline">•</span>
-            <a href="mailto:joinsoraa@gmail.com" className="hover:text-white transition-colors">
+            <a href="mailto:joinsoraa@gmail.com" className="hover:text-gray-300 transition-colors">
               joinsoraa@gmail.com
             </a>
           </div>
-          <p className="text-sm text-gray-400 font-sans">
+          <p className="text-sm text-gray-500">
             Copyright © 2025 SORAA
           </p>
         </div>
