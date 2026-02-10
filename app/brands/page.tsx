@@ -239,7 +239,7 @@ export default function BrandsPage() {
                 Launch campaigns in minutes
               </h3>
               <p className="text-lg text-gray-300 leading-relaxed">
-                Set your goals, budget, and target audience. Our platform instantly surfaces creators who match your criteria.
+                Set your goals and target audience. Our platform instantly surfaces creators who match your criteria.
               </p>
             </motion.div>
 

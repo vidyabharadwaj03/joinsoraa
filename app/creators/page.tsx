@@ -13,25 +13,47 @@ export default function CreatorsPage() {
   const [creatorNiche, setCreatorNiche] = useState('');
   const [creatorMessage, setCreatorMessage] = useState('');
   const [creatorSubmitted, setCreatorSubmitted] = useState(false);
+  const [creatorSubmitting, setCreatorSubmitting] = useState(false);
+  const [creatorError, setCreatorError] = useState<string | null>(null);
 
-  const handleCreatorSubmit = (e: React.FormEvent) => {
+  const handleCreatorSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!creatorName || !creatorEmail || !creatorPlatforms || !creatorNiche) return;
 
-    const subject = encodeURIComponent('New Creator Signup');
-    const bodyLines = [
-      `Name: ${creatorName}`,
-      `Email: ${creatorEmail}`,
-      `Platforms: ${creatorPlatforms}`,
-      `Niche: ${creatorNiche}`,
-      '',
-      'Message:',
-      creatorMessage || '(no additional message)',
-    ];
-    const body = encodeURIComponent(bodyLines.join('\n'));
+    try {
+      setCreatorSubmitting(true);
+      setCreatorError(null);
 
-    window.location.href = `mailto:joinsoraa@gmail.com?subject=${subject}&body=${body}`;
-    setCreatorSubmitted(true);
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: 'creator',
+          name: creatorName,
+          email: creatorEmail,
+          platforms: creatorPlatforms,
+          niche: creatorNiche,
+          message: creatorMessage,
+        }),
+      });
+
+      const data = await res.json().catch(() => null);
+
+      if (!res.ok || !data?.ok) {
+        throw new Error(data?.error || 'Something went wrong.');
+      }
+
+      setCreatorSubmitted(true);
+      setCreatorName('');
+      setCreatorEmail('');
+      setCreatorPlatforms('');
+      setCreatorNiche('');
+      setCreatorMessage('');
+    } catch (err) {
+      setCreatorError('Something went wrong. Please try again.');
+    } finally {
+      setCreatorSubmitting(false);
+    }
   };
 
   return (
@@ -283,7 +305,7 @@ export default function CreatorsPage() {
               Ready to turn your influence into income?
             </h2>
             <p className="text-lg text-gray-300 mb-6">
-              Share a few details and we will reply from joinsoraa@gmail.com to help you get started.
+              Share a few details so we can learn a bit about you and your work.
             </p>
             <form onSubmit={handleCreatorSubmit} className="space-y-4 text-left bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 backdrop-blur">
               <div className="grid md:grid-cols-2 gap-4">
@@ -325,13 +347,19 @@ export default function CreatorsPage() {
               />
               <button
                 type="submit"
-                className="mt-2 inline-flex items-center justify-center bg-red-600 hover:bg-red-700 text-white px-10 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all shadow-xl shadow-red-600/50"
+                disabled={creatorSubmitting}
+                className="mt-2 inline-flex items-center justify-center bg-red-600 hover:bg-red-700 disabled:opacity-60 disabled:hover:scale-100 text-white px-10 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all shadow-xl shadow-red-600/50"
               >
-                Join The Waitlist
+                {creatorSubmitting ? 'Submitting...' : 'Join The Waitlist'}
               </button>
-              {creatorSubmitted && (
+              {creatorSubmitted && !creatorError && (
                 <p className="mt-2 text-sm text-gray-400">
-                  Your email draft is ready. Send it to join the waitlist.
+                  Submitted. We will follow up soon.
+                </p>
+              )}
+              {creatorError && (
+                <p className="mt-2 text-sm text-red-400">
+                  {creatorError}
                 </p>
               )}
             </form>

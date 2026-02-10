@@ -16,32 +16,47 @@ export default function ScheduleForm({ context }: ScheduleFormProps) {
   const [message, setMessage] = useState('');
   const [timeWindow, setTimeWindow] = useState('');
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const onSubmit = (e: React.FormEvent) => {
+  const onSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !email) return;
 
-    const subject =
-      context === 'brands'
-        ? 'SORAA, Campaign setup request'
-        : 'SORAA, Creator partnership inquiry';
+    try {
+      setSubmitting(true);
+      setError(null);
 
-    const bodyLines = [
-      `Name: ${name}`,
-      `Email: ${email}`,
-      `Company / Brand: ${company || '(not provided)'}`,
-      `Preferred time window: ${timeWindow || '(not provided)'}`,
-      '',
-      'Message:',
-      message || '(no additional message)',
-    ];
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          type: context === 'brands' ? 'brand' : 'creator',
+          name,
+          email,
+          company: company || undefined,
+          preferredTimeWindow: timeWindow || undefined,
+          message,
+        }),
+      });
 
-    const mailto = `mailto:joinsoraa@gmail.com?subject=${encodeURIComponent(
-      subject
-    )}&body=${encodeURIComponent(bodyLines.join('\n'))}`;
+      const data = await res.json().catch(() => null);
 
-    window.location.href = mailto;
-    setSubmitted(true);
+      if (!res.ok || !data?.ok) {
+        throw new Error(data?.error || 'Something went wrong.');
+      }
+
+      setSubmitted(true);
+      setName('');
+      setEmail('');
+      setCompany('');
+      setTimeWindow('');
+      setMessage('');
+    } catch (err) {
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   if (submitted) {
@@ -51,12 +66,7 @@ export default function ScheduleForm({ context }: ScheduleFormProps) {
         animate={{ opacity: 1, y: 0 }}
         className="text-center space-y-2"
       >
-        <p className="text-lg text-white">
-          Got it, we will reply from <span className="font-semibold">joinsoraa@gmail.com</span>.
-        </p>
-        <p className="text-sm text-gray-300">
-          You can also reach out directly at any time.
-        </p>
+        <p className="text-lg text-white">Submitted. We will follow up soon.</p>
       </motion.div>
     );
   }
@@ -95,10 +105,15 @@ export default function ScheduleForm({ context }: ScheduleFormProps) {
         className="w-full min-h-[120px] rounded-2xl border-2 border-gray-700 bg-transparent text-gray-200 placeholder-gray-500 px-4 py-3 text-base focus:outline-none focus:border-red-600 transition-all"
       />
       <div className="pt-2">
-        <Button type="submit" variant="primary">
-          Send Email To Schedule
+        <Button type="submit" variant="primary" disabled={submitting}>
+          {submitting ? 'Submitting...' : 'Send Email To Schedule'}
         </Button>
       </div>
+      {error && (
+        <p className="mt-2 text-sm text-red-400">
+          {error}
+        </p>
+      )}
     </form>
   );
 }
