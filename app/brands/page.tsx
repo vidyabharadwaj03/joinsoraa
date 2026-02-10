@@ -38,7 +38,7 @@ export default function BrandsPage() {
       <Navigation />
 
       {/* Hero Section - full screen, impactful */}
-      <section className="relative min-h-screen flex items-center justify-center px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414] overflow-hidden">
+      <section className="relative min-h-screen flex items-center justify-center px-6 pt-24 md:pt-32 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414] overflow-hidden">
         {/* Background decorative blurs */}
         <div className="absolute inset-0 opacity-10 pointer-events-none">
           <div className="absolute top-20 left-10 w-72 h-72 bg-orange-500 rounded-full blur-3xl" />
