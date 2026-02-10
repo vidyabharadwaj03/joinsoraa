@@ -127,67 +127,7 @@ export default function CreatorsPage() {
             ))}
           </motion.div>
 
-          {/* Hero contact form (mailto) */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.4 }}
-            className="mt-4 max-w-3xl mx-auto"
-          >
-            <p className="text-gray-400 text-lg mb-4">
-              Ready to turn your influence into income?
-            </p>
-            <form onSubmit={handleCreatorSubmit} className="space-y-4 text-left">
-              <div className="grid md:grid-cols-2 gap-4">
-                <input
-                  required
-                  value={creatorName}
-                  onChange={(e) => setCreatorName(e.target.value)}
-                  placeholder="Name"
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-all"
-                />
-                <input
-                  type="email"
-                  required
-                  value={creatorEmail}
-                  onChange={(e) => setCreatorEmail(e.target.value)}
-                  placeholder="Email"
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-all"
-                />
-              </div>
-              <input
-                required
-                value={creatorPlatforms}
-                onChange={(e) => setCreatorPlatforms(e.target.value)}
-                placeholder="Your Platforms (Instagram, TikTok, etc.)"
-                className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-all"
-              />
-              <input
-                required
-                value={creatorNiche}
-                onChange={(e) => setCreatorNiche(e.target.value)}
-                placeholder="Your Niche (Fashion, Tech, Lifestyle, etc.)"
-                className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-all"
-              />
-              <textarea
-                value={creatorMessage}
-                onChange={(e) => setCreatorMessage(e.target.value)}
-                placeholder="Tell us about yourself (optional)"
-                className="w-full min-h-[120px] bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-all"
-              />
-              <button
-                type="submit"
-                className="mt-2 inline-flex items-center justify-center bg-red-600 hover:bg-red-700 text-white px-10 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all shadow-xl shadow-red-600/50"
-              >
-                Join The Waitlist
-              </button>
-              {creatorSubmitted && (
-                <p className="mt-2 text-sm text-gray-400">
-                  Your email draft is ready. Send it to join the waitlist.
-                </p>
-              )}
-            </form>
-          </motion.div>
+          {/* Hero CTA intentionally kept text-only, form lives in bottom section */}
 
           {/* Scroll indicator */}
           <motion.div
