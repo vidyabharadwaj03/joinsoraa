@@ -33,10 +33,12 @@ export default function CreatorsPage() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.05, ease: 'easeOut' }}
-            className="text-6xl md:text-7xl font-bold"
+            className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight"
           >
-            <span className="bg-gradient-to-r from-red-400 via-pink-400 to-red-400 bg-clip-text text-transparent">
-              Create. Collaborate. Get Paid.
+            <span className="bg-gradient-to-r from-red-400 via-pink-400 to-red-400 bg-clip-text text-transparent block max-w-3xl">
+              Create. Collaborate.
+              <br className="hidden sm:block" />
+              <span className="whitespace-nowrap">Get Paid.</span>
             </span>
           </motion.h1>
 
@@ -70,15 +72,20 @@ export default function CreatorsPage() {
             ))}
           </div>
 
-          {/* Supporting line */}
-          <motion.p
+          {/* Founding story callout */}
+          <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 0.45, ease: 'easeOut' }}
-            className="text-sm text-gray-400 pt-1"
+            className="mt-3 max-w-3xl border-l-2 border-red-500/60 pl-4"
           >
-            Built by creators who have been on both sides of the brief.
-          </motion.p>
+            <p className="text-base md:text-lg text-gray-100 font-medium mb-1">
+              Founded by creators, for creators.
+            </p>
+            <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+              We know how hard it can be to get a foot in the door on both sides of the brief, so we built a smarter, more equitable way to connect creators and brands.
+            </p>
+          </motion.div>
         </div>
       </section>
 

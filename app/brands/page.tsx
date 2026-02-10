@@ -13,98 +13,108 @@ export default function BrandsPage() {
 
       {/* Hero Section - Dark Burgundy */}
       <section className="pt-20 md:pt-24 pb-16 px-6 bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-          {/* Left: Text content */}
-          <div className="space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-              className="inline-block"
-            >
-              <div className="inline-block bg-white/10 rounded-full px-6 py-2">
-                <span className="text-white text-sm font-bold tracking-widest uppercase">
-                  For Brands
-                </span>
-              </div>
-            </motion.div>
-
-            <motion.h1
-              initial={{ opacity: 0, y: 40 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1, ease: 'easeOut' }}
-              className="text-6xl md:text-7xl font-bold text-white leading-tight"
-            >
-              Turn Influence{' '}
-              <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
-                Into Impact
+        <div className="max-w-4xl mx-auto space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, ease: 'easeOut' }}
+            className="inline-block"
+          >
+            <div className="inline-block bg-white/10 rounded-full px-6 py-2">
+              <span className="text-white text-sm font-bold tracking-widest uppercase">
+                For Brands
               </span>
-            </motion.h1>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
-              className="text-xl text-gray-300 leading-relaxed max-w-2xl"
-            >
-              Find creators who move culture and run campaigns with clear outcomes.
-            </motion.p>
-
-            <div className="space-y-3 pt-2">
-              {[
-                { icon: BadgeCheck, text: 'Vetted creators with real audience trust' },
-                { icon: Zap, text: 'Fast sourcing and simple briefs' },
-                { icon: Sparkles, text: 'Performance tracking you can explain' },
-              ].map((item, index) => (
-                <motion.div
-                  key={item.text}
-                  initial={{ opacity: 0, y: 16 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.45, delay: 0.2 + index * 0.08, ease: 'easeOut' }}
-                  className="flex items-center gap-3"
-                >
-                  <item.icon className="w-5 h-5 text-gray-300" />
-                  <span className="text-lg text-gray-300">{item.text}</span>
-                </motion.div>
-              ))}
             </div>
+          </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4, ease: 'easeOut' }}
-              className="flex flex-col sm:flex-row gap-4 pt-2"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => {
-                  const element = document.getElementById('brand-schedule');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all shadow-lg shadow-red-600/50"
+          <motion.h1
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.55, delay: 0.05, ease: 'easeOut' }}
+            className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight"
+          >
+            Turn Influence{' '}
+            <span className="bg-gradient-to-r from-orange-400 to-red-400 bg-clip-text text-transparent">
+              Into Impact
+            </span>
+          </motion.h1>
+
+          <motion.p
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15, ease: 'easeOut' }}
+            className="text-xl text-gray-300 leading-relaxed max-w-2xl"
+          >
+            Find creators who move culture and run campaigns with clear outcomes.
+          </motion.p>
+
+          <div className="space-y-3 pt-2">
+            {[
+              { icon: BadgeCheck, text: 'Vetted creators with real audience trust' },
+              { icon: Zap, text: 'Fast sourcing and simple briefs' },
+              { icon: Sparkles, text: 'Performance tracking you can explain' },
+            ].map((item, index) => (
+              <motion.div
+                key={item.text}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.45, delay: 0.2 + index * 0.08, ease: 'easeOut' }}
+                className="flex items-center gap-3"
               >
-                Schedule A Call
-              </motion.button>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => {
-                  const element = document.getElementById('why-choose-soraa');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all"
-              >
-                See How It Works
-              </motion.button>
-            </motion.div>
+                <item.icon className="w-5 h-5 text-gray-300" />
+                <span className="text-lg text-gray-300">{item.text}</span>
+              </motion.div>
+            ))}
           </div>
 
-          {/* Right column kept intentionally simple for now (no heavy visuals) */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.45, ease: 'easeOut' }}
+            className="flex flex-col sm:flex-row gap-4 pt-2"
+          >
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => {
+                const element = document.getElementById('brand-schedule');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="bg-red-600 hover:bg-red-700 text-white px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all shadow-lg shadow-red-600/50"
+            >
+              Schedule A Call
+            </motion.button>
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => {
+                const element = document.getElementById('brand-how');
+                if (element) {
+                  element.scrollIntoView({ behavior: 'smooth' });
+                }
+              }}
+              className="border-2 border-white text-white hover:bg-white hover:text-black px-8 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all"
+            >
+              See How It Works
+            </motion.button>
+          </motion.div>
+
+          {/* Founding story callout */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.45, delay: 0.5, ease: 'easeOut' }}
+            className="mt-3 max-w-3xl border-l-2 border-orange-500/70 pl-4"
+          >
+            <p className="text-base md:text-lg text-gray-100 font-medium mb-1">
+              Built by marketers, for marketers.
+            </p>
+            <p className="text-sm md:text-base text-gray-300 leading-relaxed">
+              We know how noisy influencer marketing can feel, so Soraa focuses on the creators and campaigns that actually move people, not just impressions.
+            </p>
+          </motion.div>
         </div>
       </section>
 
