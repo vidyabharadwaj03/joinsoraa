@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import Link from 'next/link';
 import WaitlistForm from '@/components/WaitlistForm';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -120,6 +121,7 @@ export default function Home() {
           <div className="grid md:grid-cols-2 gap-8 mt-12">
             {/* For Creators Card */}
             <motion.div
+              onClick={() => (window.location.href = '/creators')}
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
@@ -172,6 +174,7 @@ export default function Home() {
 
             {/* For Brands Card */}
             <motion.div
+              onClick={() => (window.location.href = '/brands')}
               initial={{ opacity: 0, y: 60 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
