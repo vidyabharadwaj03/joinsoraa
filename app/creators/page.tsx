@@ -6,6 +6,33 @@ import Footer from '@/components/Footer';
 import ScheduleForm from '@/components/ScheduleForm';
 
 export default function CreatorsPage() {
+  const [creatorName, setCreatorName] = React.useState('');
+  const [creatorEmail, setCreatorEmail] = React.useState('');
+  const [creatorPlatforms, setCreatorPlatforms] = React.useState('');
+  const [creatorNiche, setCreatorNiche] = React.useState('');
+  const [creatorMessage, setCreatorMessage] = React.useState('');
+  const [creatorSubmitted, setCreatorSubmitted] = React.useState(false);
+
+  const handleCreatorSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!creatorName || !creatorEmail || !creatorPlatforms || !creatorNiche) return;
+
+    const subject = encodeURIComponent('New Creator Signup');
+    const bodyLines = [
+      `Name: ${creatorName}`,
+      `Email: ${creatorEmail}`,
+      `Platforms: ${creatorPlatforms}`,
+      `Niche: ${creatorNiche}`,
+      '',
+      'Message:',
+      creatorMessage || '(no additional message)',
+    ];
+    const body = encodeURIComponent(bodyLines.join('\n'));
+
+    window.location.href = `mailto:joinsoraa@gmail.com?subject=${subject}&body=${body}`;
+    setCreatorSubmitted(true);
+  };
+
   return (
     <main className="relative min-h-screen overflow-x-hidden font-sans bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
       <Navigation />
@@ -99,23 +126,66 @@ export default function CreatorsPage() {
             ))}
           </motion.div>
 
-          {/* Email CTA */}
+          {/* Hero contact form (mailto) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.4 }}
-            className="space-y-4"
+            className="mt-4 max-w-3xl mx-auto"
           >
-            <p className="text-gray-400 text-lg">
+            <p className="text-gray-400 text-lg mb-4">
               Ready to turn your influence into income?
             </p>
-            <a
-              href="mailto:joinsoraa@gmail.com?subject=Creator Interest - Join Waitlist&body=Hi! I'm interested in joining SORAA as a creator.%0D%0A%0D%0AMy name:%0D%0AMy platforms:%0D%0AMy niche:%0D%0A%0D%0AThanks!"
-              className="inline-block bg-red-600 hover:bg-red-700 text-white px-12 py-5 rounded-full text-xl font-bold hover:scale-105 transition-all shadow-2xl shadow-red-600/50"
-            >
-              Send Email To Schedule
-            </a>
-            <p className="text-sm text-gray-500">We&apos;ll reply from joinsoraa@gmail.com</p>
+            <form onSubmit={handleCreatorSubmit} className="space-y-4 text-left">
+              <div className="grid md:grid-cols-2 gap-4">
+                <input
+                  required
+                  value={creatorName}
+                  onChange={(e) => setCreatorName(e.target.value)}
+                  placeholder="Name"
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-all"
+                />
+                <input
+                  type="email"
+                  required
+                  value={creatorEmail}
+                  onChange={(e) => setCreatorEmail(e.target.value)}
+                  placeholder="Email"
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-all"
+                />
+              </div>
+              <input
+                required
+                value={creatorPlatforms}
+                onChange={(e) => setCreatorPlatforms(e.target.value)}
+                placeholder="Your Platforms (Instagram, TikTok, etc.)"
+                className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-all"
+              />
+              <input
+                required
+                value={creatorNiche}
+                onChange={(e) => setCreatorNiche(e.target.value)}
+                placeholder="Your Niche (Fashion, Tech, Lifestyle, etc.)"
+                className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-all"
+              />
+              <textarea
+                value={creatorMessage}
+                onChange={(e) => setCreatorMessage(e.target.value)}
+                placeholder="Tell us about yourself (optional)"
+                className="w-full min-h-[120px] bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-all"
+              />
+              <button
+                type="submit"
+                className="mt-2 inline-flex items-center justify-center bg-red-600 hover:bg-red-700 text-white px-10 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all shadow-xl shadow-red-600/50"
+              >
+                Join The Waitlist
+              </button>
+              {creatorSubmitted && (
+                <p className="mt-2 text-sm text-gray-400">
+                  Your email draft is ready. Send it to join the waitlist.
+                </p>
+              )}
+            </form>
           </motion.div>
 
           {/* Scroll indicator */}

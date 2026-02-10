@@ -7,6 +7,32 @@ import Footer from '@/components/Footer';
 import ScheduleForm from '@/components/ScheduleForm';
 
 export default function BrandsPage() {
+  const [brandName, setBrandName] = React.useState('');
+  const [brandEmail, setBrandEmail] = React.useState('');
+  const [brandCompany, setBrandCompany] = React.useState('');
+  const [brandTimeWindow, setBrandTimeWindow] = React.useState('');
+  const [brandMessage, setBrandMessage] = React.useState('');
+  const [brandSubmitted, setBrandSubmitted] = React.useState(false);
+
+  const handleBrandSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!brandName || !brandEmail || !brandCompany) return;
+
+    const subject = encodeURIComponent('New Brand Inquiry');
+    const bodyLines = [
+      `Name: ${brandName}`,
+      `Email: ${brandEmail}`,
+      `Company/Brand: ${brandCompany}`,
+      `Preferred time window: ${brandTimeWindow || '(not provided)'}`,
+      '',
+      'Message:',
+      brandMessage || '(no additional message)',
+    ];
+    const body = encodeURIComponent(bodyLines.join('\n'));
+
+    window.location.href = `mailto:joinsoraa@gmail.com?subject=${subject}&body=${body}`;
+    setBrandSubmitted(true);
+  };
   return (
     <main className="relative min-h-screen overflow-x-hidden font-sans bg-gradient-to-b from-[#1a0a0a] to-[#2a1414]">
       <Navigation />
@@ -85,34 +111,65 @@ export default function BrandsPage() {
             ))}
           </motion.div>
 
-          {/* Email CTA */}
+          {/* Hero contact form (mailto) */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 1.2 }}
-            className="space-y-4"
+            className="mt-4 max-w-3xl mx-auto"
           >
-            <p className="text-gray-400 text-lg">Ready to launch your first campaign?</p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a
-                href="mailto:joinsoraa@gmail.com?subject=Brand Interest - Schedule Call&body=Hi! I'm interested in working with SORAA.%0D%0A%0D%0ACompany name:%0D%0ACampaign goals:%0D%0ABudget range:%0D%0A%0D%0AThanks!"
-                className="inline-block bg-red-600 hover:bg-red-700 text-white px-10 py-5 rounded-full text-xl font-bold hover:scale-105 transition-all shadow-2xl shadow-red-600/50"
-              >
-                Send Email To Schedule
-              </a>
+            <p className="text-gray-400 text-lg mb-4">
+              Ready to launch your first campaign?
+            </p>
+            <form onSubmit={handleBrandSubmit} className="space-y-4 text-left">
+              <div className="grid md:grid-cols-2 gap-4">
+                <input
+                  required
+                  value={brandName}
+                  onChange={(e) => setBrandName(e.target.value)}
+                  placeholder="Name"
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-all"
+                />
+                <input
+                  type="email"
+                  required
+                  value={brandEmail}
+                  onChange={(e) => setBrandEmail(e.target.value)}
+                  placeholder="Email"
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-all"
+                />
+              </div>
+              <input
+                required
+                value={brandCompany}
+                onChange={(e) => setBrandCompany(e.target.value)}
+                placeholder="Company / Brand name"
+                className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-all"
+              />
+              <input
+                value={brandTimeWindow}
+                onChange={(e) => setBrandTimeWindow(e.target.value)}
+                placeholder="Preferred time window (optional)"
+                className="w-full bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-all"
+              />
+              <textarea
+                value={brandMessage}
+                onChange={(e) => setBrandMessage(e.target.value)}
+                placeholder="Tell us a bit about what you need (optional)"
+                className="w-full min-h-[120px] bg-white/5 border border-white/10 rounded-2xl px-4 py-3 text-white placeholder-gray-500 focus:outline-none transition-all"
+              />
               <button
-                onClick={() => {
-                  const element = document.getElementById('brand-how');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
-                className="border-2 border-white/50 text-white hover:bg-white hover:text-black px-10 py-5 rounded-full text-xl font-bold hover:scale-105 transition-all"
+                type="submit"
+                className="mt-2 inline-flex items-center justify-center bg-red-600 hover:bg-red-700 text-white px-10 py-4 rounded-full text-lg font-semibold hover:scale-105 transition-all shadow-xl shadow-red-600/50"
               >
-                See How It Works
+                Schedule A Call
               </button>
-            </div>
-            <p className="text-sm text-gray-500">We&apos;ll follow up from joinsoraa@gmail.com</p>
+              {brandSubmitted && (
+                <p className="mt-2 text-sm text-gray-400">
+                  Your email draft is ready. Send it and we will follow up.
+                </p>
+              )}
+            </form>
           </motion.div>
 
           {/* Scroll indicator */}
