@@ -53,7 +53,7 @@ export default function Navigation() {
             }}
             className="bg-red-600 text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-red-700 transition-all duration-200 shadow-lg hover:shadow-red-600/50"
           >
-            Join Waitlist
+            Join Now
           </motion.button>
         </div>
         {/* Mobile Menu Button */}
@@ -109,7 +109,7 @@ export default function Navigation() {
                 }}
                 className="bg-red-600 text-white px-6 py-2 rounded-full text-sm font-semibold hover:bg-red-700 transition-all duration-200 shadow-lg hover:shadow-red-600/50 text-left w-fit"
               >
-                Join Waitlist
+                Join Now
               </motion.button>
             </div>
           </motion.div>
