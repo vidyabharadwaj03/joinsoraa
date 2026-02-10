@@ -86,12 +86,33 @@ export async function POST(req: NextRequest) {
 
     const resend = new Resend(apiKey);
 
-    await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: 'SORAA <onboarding@resend.dev>',
       to: 'joinsoraa@gmail.com',
       subject,
       text,
     });
+
+    if (error) {
+      console.error('RESEND_SEND_ERROR', {
+        name: (error as any)?.name,
+        message: (error as any)?.message,
+        statusCode: (error as any)?.statusCode,
+        raw: error,
+      });
+
+      const message =
+        process.env.NODE_ENV !== 'production' && (error as any)?.message
+          ? (error as any).message
+          : 'Email service returned an error.';
+
+      return NextResponse.json(
+        { ok: false, error: message },
+        { status: 502 }
+      );
+    }
+
+    console.log('CONTACT_API_SUCCESS', { id: (data as any)?.id || null });
 
     return NextResponse.json({ ok: true }, { status: 200 });
   } catch (error) {
