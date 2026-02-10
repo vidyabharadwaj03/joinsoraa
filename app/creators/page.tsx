@@ -1,17 +1,18 @@
 'use client';
 
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ScheduleForm from '@/components/ScheduleForm';
 
 export default function CreatorsPage() {
-  const [creatorName, setCreatorName] = React.useState('');
-  const [creatorEmail, setCreatorEmail] = React.useState('');
-  const [creatorPlatforms, setCreatorPlatforms] = React.useState('');
-  const [creatorNiche, setCreatorNiche] = React.useState('');
-  const [creatorMessage, setCreatorMessage] = React.useState('');
-  const [creatorSubmitted, setCreatorSubmitted] = React.useState(false);
+  const [creatorName, setCreatorName] = useState('');
+  const [creatorEmail, setCreatorEmail] = useState('');
+  const [creatorPlatforms, setCreatorPlatforms] = useState('');
+  const [creatorNiche, setCreatorNiche] = useState('');
+  const [creatorMessage, setCreatorMessage] = useState('');
+  const [creatorSubmitted, setCreatorSubmitted] = useState(false);
 
   const handleCreatorSubmit = (e: React.FormEvent) => {
     e.preventDefault();

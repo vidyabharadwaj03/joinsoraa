@@ -1,18 +1,18 @@
 'use client';
 
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, BadgeCheck, Zap } from 'lucide-react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import ScheduleForm from '@/components/ScheduleForm';
 
 export default function BrandsPage() {
-  const [brandName, setBrandName] = React.useState('');
-  const [brandEmail, setBrandEmail] = React.useState('');
-  const [brandCompany, setBrandCompany] = React.useState('');
-  const [brandTimeWindow, setBrandTimeWindow] = React.useState('');
-  const [brandMessage, setBrandMessage] = React.useState('');
-  const [brandSubmitted, setBrandSubmitted] = React.useState(false);
+  const [brandName, setBrandName] = useState('');
+  const [brandEmail, setBrandEmail] = useState('');
+  const [brandCompany, setBrandCompany] = useState('');
+  const [brandTimeWindow, setBrandTimeWindow] = useState('');
+  const [brandMessage, setBrandMessage] = useState('');
+  const [brandSubmitted, setBrandSubmitted] = useState(false);
 
   const handleBrandSubmit = (e: React.FormEvent) => {
     e.preventDefault();
