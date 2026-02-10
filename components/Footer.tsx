@@ -26,7 +26,7 @@ export default function Footer() {
           </a>
         </div>
         <p className="text-sm text-gray-500">
-          Copyright © 2025 SORAA
+          Copyright © 2026 SORAA
         </p>
       </div>
     </footer>

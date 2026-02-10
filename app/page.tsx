@@ -102,9 +102,16 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-50px' }}
             transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="text-5xl md:text-6xl font-bold text-white mb-8 text-center"
+            className="text-5xl md:text-6xl font-bold text-white mb-8 text-center flex flex-col items-center gap-4"
           >
-            What Is SORAA
+            <span>What Is</span>
+            <Image
+              src="/NewSoraaLogo.png"
+              alt="SORAA logo"
+              width={260}
+              height={80}
+              className="h-14 md:h-16 w-auto object-contain"
+            />
           </motion.h2>
           
           <motion.p
